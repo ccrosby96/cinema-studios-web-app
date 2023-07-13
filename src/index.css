@@ -1,0 +1,489 @@
+@import "https://unpkg.com/open-props";
+@import "https://unpkg.com/open-props/normalize.min.css";
+
+body {
+  margin: 0;
+
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+.a1-bg-celtics {
+  background-color: #048349;
+}
+
+.a1-bg-nets {
+  background-color: #222222;
+}
+
+.a1-bg-mavericks {
+  background-color: #0263B1;
+}
+
+.a1-bg-spurs {
+  background-color: #000000;
+}
+
+.a1-bg-pelicans {
+  background-color: #B3975A;
+}
+
+.a1-bg-grizzles {
+  background-color: #11173F;
+}
+
+.a1-bg-rockets {
+  background-color: #000000;
+}
+
+.a1-bg-warriors {
+  background-color: #E3AC30;
+}
+
+.a1-bg-clippers {
+  background-color: #1A428A;
+}
+
+.a1-bg-kings {
+  background-color: #592B81;
+}
+
+.a1-bg-suns {
+  background-color: #E56636;
+}
+
+.a1-bg-lakers {
+  background-color: #FCB723;
+}
+
+.a1-bg-t-wolfs {
+  background-color: #A0A1A2;
+}
+
+.a1-bg-okc {
+  background-color: #EF3B24;
+}
+
+.a1-bg-jazz {
+  background-color: #014319;
+}
+
+.a1-bg-nuggets {
+  background-color: #0D2340;
+}
+
+.a1-bg-blazers {
+  background-color: #000000;
+}
+
+.a1-bg-wizards {
+  background-color: #002B5C;
+}
+
+.a1-bg-bulls {
+  background-color: #C92343;
+}
+
+.a1-bg-hawks {
+  background-color: #C7112F;
+}
+
+.a1-bg-magic {
+  background-color: #0476C0;
+}
+
+.a1-bg-heat {
+  background-color: #F8A01B;
+}
+
+.a1-bg-hornets {
+  background-color: #250F54;
+}
+
+.a1-bg-knicks {
+  background-color: #F38326;
+}
+
+.a1-bg-bucks {
+  background-color: #00481C;
+}
+
+.a1-bg-pacers {
+  background-color: #FCB524;
+}
+
+.a1-bg-pistons {
+  background-color: #0B2340;
+}
+
+.a1-bg-cavs {
+  background-color: #850138;
+}
+
+.a1-bg-raptors {
+  background-color: #000000;
+}
+
+.a1-bg-76ers {
+  background-color: #003DA6;
+}
+
+.a1-bg-newteam {
+  background-color: #FEBF00
+}
+
+
+
+
+
+
+
+
+
+
+
+
+.a1-bg-blue {
+  background-color: #253A73;
+}
+
+.wd-bg-off-white {
+  background-color: #EEF3F4;
+}
+
+.a1-text-blue {
+  color: #253A73;
+}
+
+.a1-bg-red-light {
+  background-color: #DF4D5A;
+}
+
+.a1-bg-red {
+  background-color: #B42532;
+}
+
+.a1-text-red {
+  color: #B42532;
+}
+
+.a1-fill-black {
+  fill: black;
+}
+
+.a1-bg-blue-lighter {
+  background-color: #253A73;
+  opacity: 80%;
+}
+
+
+.dropdown-item:hover {
+  background-color: black;
+}
+
+.a1-team-page-image {
+  width: 90px;
+  height: 100px;
+}
+
+.a1-player-image {
+  width: 60px;
+  height: 50px;
+}
+
+
+.a1-logo-image {
+  width: 20px;
+  height: 20px;
+}
+
+.a1-logo-image-2 {
+  width: 30px;
+  height: 30px;
+}
+
+.a1-link-image-2 {
+  width: 20px;
+  height: 30px;
+}
+
+.a1-link-image-3 {
+  width: 25px;
+  height: 25px;
+}
+
+.a1-link-image-4 {
+  width: 40px;
+  height: 40px;
+}
+
+.a1-link-image-5 {
+  width: 35px;
+  height: 30px;
+}
+
+.a1-link-image-6 {
+  width: 45px;
+  height: 40px;
+}
+
+.a1-post-image {
+  width: auto;
+  height: auto;
+  border-radius: 15px;
+}
+.white-font {
+  color: white;
+}
+.small-image {
+  width: 50%;
+  height: auto;
+}
+.movies-navbar-color {
+  color: #99c2ff
+}
+
+
+.navbar-toggler:focus,
+.navbar-toggler:active,
+.navbar-toggler:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+.a1-width-600px {
+  width: 440px;
+}
+
+.a1-profile-pic {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+}
+
+.a1-no-bullet-pts {
+  list-style-type: none;
+}
+
+.a1-font-family {
+  font-family: Roboto, arial, sans-serif;
+}
+
+.a1-font-size-12px {
+  font-size: 11px;
+}
+
+.a1-fill-white {
+  filter: invert(99%) sepia(100%) saturate(2%) hue-rotate(138deg) brightness(103%) contrast(100%);
+}
+.a1-fill-blue {
+  filter: invert(19%) sepia(74%) saturate(975%) hue-rotate(197deg) brightness(90%) contrast(92%)
+}
+
+.a1-filter-black {
+  filter: invert(0%) sepia(4%) saturate(0%) hue-rotate(309deg) brightness(100%) contrast(107%);
+}
+
+.a1-no_underline {
+  text-decoration: none;
+}
+
+
+
+
+.a1-title-login-pos {
+  position: absolute;
+  top: 15%;
+  left: 18%;
+
+}
+
+.a1-login-section {
+  background-image: linear-gradient(to right, #B42532 ,  #253A73);
+  opacity: .9;
+}
+
+.a1-login-block-shift {
+  bottom: 100px
+}
+
+.center_box {
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+
+.a1-image_team_page {
+  width: 85px;
+  height: 85px;
+}
+
+.a1-text-gradeient {
+  font-size: 50px;
+  background: -webkit-linear-gradient(#1AA0BC, #BC1F1A);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+
+.a1-width-content {
+  width: max-content;
+}
+
+.a1-text-area {
+  height: 200px;
+  min-height: 200px;
+  outline: none;
+}
+
+.a1-banner {
+  height: 300px;
+}
+
+.a1-font-16px {
+  font-size: 16px;
+}
+.a1-font-32px {
+  font-size: 32px;
+}
+.a1-font-25px{
+  font-size: 25px;
+}
+.bg-color {
+  background-color: #2f3338; /* Replace with your desired color value */
+}
+ul.no-bullets {
+  list-style-type: none; /* Remove bullets */
+  padding: 0; /* Remove padding */
+  margin: 0; /* Remove margins */
+}
+.a1-image_146_round {
+  width: 146px;
+  height: 146px;
+  border-radius: 50%;
+}
+
+.a1-pos-profile {
+  top: -73px;
+  left: 20px;
+}
+
+.a1-image_100{
+  width: 100px;
+  height: 100px;
+}
+
+.a1-image_player{
+  width: 120px;
+  height: 120px;
+}
+
+.a1-player-page-image {
+  width: 45px;
+  height: 45px;
+}
+
+.a1-align-text {
+  padding-top: 60px
+}
+/* Horizontal Scroll Stuff */
+
+
+
+.scroll_media-scroller {
+  --_spacer: var(--size-3);
+  display: grid;
+  gap: var(--_spacer);
+  grid-auto-flow: column;
+  grid-auto-columns: 21%;
+
+  padding: 0 var(--_spacer) var(--_spacer);
+
+  overflow-x: auto;
+  overscroll-behavior-inline: contain;
+}
+
+.scroll_media-scroller--with-groups {
+  grid-auto-columns: 80%;
+}
+
+.scroll_media-group {
+  display: grid;
+  gap: var(--_spacer);
+  grid-auto-flow: column;
+}
+
+.scroll_media-element {
+  display: grid;
+  grid-template-rows: min-content;
+  gap: var(--_spacer);
+  padding: var(--_spacer);
+  background: var(--surface-2);
+  border-radius: var(--radius-2);
+  box-shadow: var(--shadow-2);
+}
+
+.scroll_media-element > img {
+  inline-size: 100%;
+  aspect-ratio: 16 / 16;
+  object-fit: cover;
+}
+
+.scroll_snaps-inline {
+  scroll-snap-type: inline mandatory;
+  scroll-padding-inline: var(--_spacer, 1rem);
+}
+
+.scroll_snaps-inline > * {
+  scroll-snap-align: start;
+}
+
+/* general styling */
+
+.scroll_scroll_container {
+  inline-size: min(100% - 4rem, 70rem);
+  margin-inline: auto;
+}
+
+.scroll_flow {
+  display: grid;
+  gap: var(--size-3);
+}
+.movies-circle-img {
+  border-radius: 50%;
+}
+
+.scroll_page-header {
+  padding-block: var(--size-9);
+  margin-block-end: var(--size-9);
+  background: var(--gradient-16);
+  color: var(--gray-0);
+  box-shadow: var(--shadow-2);
+}
+
+.scroll_page-title {
+  font-size: var(--font-size-fluid-3);
+}
+
+.scroll_page-subtitle {
+  font-size: var(--font-size-fluid-1);
+}
+
+.scroll_section-title {
+  padding-inline-start: var(--size-6);
+  margin-block: var(--size-9) var(--size-3);
+}
+
+

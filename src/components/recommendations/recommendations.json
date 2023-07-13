@@ -1,0 +1,442 @@
+{
+  "page": 1,
+  "results": [
+    {
+      "adult": false,
+      "backdrop_path": "/hiHGRbyTcbZoLsYYkO4QiCLYe34.jpg",
+      "id": 758323,
+      "title": "The Pope's Exorcist",
+      "original_language": "en",
+      "original_title": "The Pope's Exorcist",
+      "overview": "Father Gabriele Amorth, Chief Exorcist of the Vatican, investigates a young boy's terrifying possession and ends up uncovering a centuries-old conspiracy the Vatican has desperately tried to keep hidden.",
+      "poster_path": "/gNPqcv1tAifbN7PRNgqpzY8sEJZ.jpg",
+      "media_type": "movie",
+      "genre_ids": [
+        27,
+        53
+      ],
+      "popularity": 600.969,
+      "release_date": "2023-04-05",
+      "video": false,
+      "vote_average": 7.217,
+      "vote_count": 1567
+    },
+    {
+      "adult": false,
+      "backdrop_path": "/sPIh2OcF7uhSLYH43W9UyQ4vEt4.jpg",
+      "id": 726239,
+      "title": "Dead",
+      "original_language": "en",
+      "original_title": "Dead",
+      "overview": "Dane ‘Marbles’ Marbeck can see ghosts, thanks to a homemade drug: his late father’s neurological medication mixed with marijuana.  Officer Jayson Tagg, a wannabe super-cop on the trail of a serial killer, ends up murdered.  So when Marbles’ mum plans to sell the family farm, and the only way of buying the house off her is taking the money offered by Tagg in exchange for his help, Marbles accepts.  The unlikely duo of stoner medium and ghost cop struggle to reconcile their differences while they navigate their way through ghouls, perverts, a mysterious hooded figure, and an unexpected shot at love.  It becomes clear the only way Marbles and Tagg will solve the case with their souls intact is to confront their deepest regrets and overcome their prejudices.",
+      "poster_path": "/eu40V59ULl92GIWfRGLAuzu5EYb.jpg",
+      "media_type": "movie",
+      "genre_ids": [
+        35,
+        27,
+        9648
+      ],
+      "popularity": 4.278,
+      "release_date": "2020-10-22",
+      "video": false,
+      "vote_average": 5.8,
+      "vote_count": 39
+    },
+    {
+      "adult": false,
+      "backdrop_path": "/9n2tJBplPbgR2ca05hS5CKXwP2c.jpg",
+      "id": 502356,
+      "title": "The Super Mario Bros. Movie",
+      "original_language": "en",
+      "original_title": "The Super Mario Bros. Movie",
+      "overview": "While working underground to fix a water main, Brooklyn plumbers—and brothers—Mario and Luigi are transported down a mysterious pipe and wander into a magical new world. But when the brothers are separated, Mario embarks on an epic quest to find Luigi.",
+      "poster_path": "/qNBAXBIQlnOThrVvA6mA2B5ggV6.jpg",
+      "media_type": "movie",
+      "genre_ids": [
+        16,
+        10751,
+        12,
+        14,
+        35
+      ],
+      "popularity": 1303.351,
+      "release_date": "2023-04-05",
+      "video": false,
+      "vote_average": 7.8,
+      "vote_count": 5512
+    },
+    {
+      "adult": false,
+      "backdrop_path": "/n5NSF8wZeWQHHZtuWgbRAVpqXFR.jpg",
+      "id": 552688,
+      "title": "The Mother",
+      "original_language": "en",
+      "original_title": "The Mother",
+      "overview": "A deadly female assassin comes out of hiding to protect the daughter that she gave up years before, while on the run from dangerous men.",
+      "poster_path": "/vnRthEZz16Q9VWcP5homkHxyHoy.jpg",
+      "media_type": "movie",
+      "genre_ids": [
+        28,
+        53
+      ],
+      "popularity": 274.958,
+      "release_date": "2023-05-04",
+      "video": false,
+      "vote_average": 6.773,
+      "vote_count": 874
+    },
+    {
+      "adult": false,
+      "backdrop_path": "/m8JTwHFwX7I7JY5fPe4SjqejWag.jpg",
+      "id": 640146,
+      "title": "Ant-Man and the Wasp: Quantumania",
+      "original_language": "en",
+      "original_title": "Ant-Man and the Wasp: Quantumania",
+      "overview": "Super-Hero partners Scott Lang and Hope van Dyne, along with with Hope's parents Janet van Dyne and Hank Pym, and Scott's daughter Cassie Lang, find themselves exploring the Quantum Realm, interacting with strange new creatures and embarking on an adventure that will push them beyond the limits of what they thought possible.",
+      "poster_path": "/qnqGbB22YJ7dSs4o6M7exTpNxPz.jpg",
+      "media_type": "movie",
+      "genre_ids": [
+        28,
+        12,
+        878
+      ],
+      "popularity": 556.451,
+      "release_date": "2023-02-15",
+      "video": false,
+      "vote_average": 6.481,
+      "vote_count": 3545
+    },
+    {
+      "adult": false,
+      "backdrop_path": "/sh9hpEfg9WLxNZwJgQBMvozrO4v.jpg",
+      "id": 1014747,
+      "title": "DeAD",
+      "original_language": "ka",
+      "original_title": "DeAD",
+      "overview": "Man dies, but his family members can't notice this.",
+      "poster_path": "/wSIqaIvNtKS0r4yBnqYfQ3n2LBa.jpg",
+      "media_type": "movie",
+      "genre_ids": [
+        18,
+        35
+      ],
+      "popularity": 1.097,
+      "release_date": "2019-08-29",
+      "video": false,
+      "vote_average": 5,
+      "vote_count": 6
+    },
+    {
+      "adult": false,
+      "backdrop_path": "/54IXMMEQKlkPXHqPExWy98UBmtE.jpg",
+      "id": 1008005,
+      "title": "The Communion Girl",
+      "original_language": "es",
+      "original_title": "La niña de la comunión",
+      "overview": "Spain, late 1980s. Newcomer Sara tries to fit in with the other teens in this tight-knit small town in the province of Tarragona. If only she were more like her extroverted best friend, Rebe. They go out one night at a nightclub, on the way home, they come upon a little girl holding a doll, dressed for her first communion. And that's when the nightmare begins.",
+      "poster_path": "/uYxrWr9o44yO0HvVfFFHGu01gfX.jpg",
+      "media_type": "movie",
+      "genre_ids": [
+        27
+      ],
+      "popularity": 152.999,
+      "release_date": "2023-02-10",
+      "video": false,
+      "vote_average": 6.194,
+      "vote_count": 134
+    },
+    {
+      "adult": false,
+      "backdrop_path": "/sp7MPK2K60LLd7A6zjHKsfgjFil.jpg",
+      "id": 296271,
+      "title": "The Devil Conspiracy",
+      "original_language": "en",
+      "original_title": "The Devil Conspiracy",
+      "overview": "The hottest biotech company in the world has discovered they can clone history’s most influential people from the dead. Now, they are auctioning clones of Michelangelo, Galileo, Vivaldi, and others for tens of millions of dollars to the world’s ultra-rich. But when they steal the Shroud of Turin and clone the DNA of Jesus Christ, all hell breaks loose.",
+      "poster_path": "/2lUYbD2C3XSuwqMUbDVDQuz9mqz.jpg",
+      "media_type": "movie",
+      "genre_ids": [
+        27,
+        14,
+        878,
+        53
+      ],
+      "popularity": 183.553,
+      "release_date": "2023-01-13",
+      "video": false,
+      "vote_average": 6.374,
+      "vote_count": 199
+    },
+    {
+      "adult": false,
+      "backdrop_path": "/3uHDuQCoJQ6DhRlI3frd7p9WSE2.jpg",
+      "id": 868985,
+      "title": "¡Que Viva México!",
+      "original_language": "es",
+      "original_title": "¡Que Viva México!",
+      "overview": "After his grandfather's death, a man travels with his wife and kids to his hometown, where chaos ensues with his relatives over the inheritance.",
+      "poster_path": "/ieyUpr5ES9QEz1cn4clCnBf9XJl.jpg",
+      "media_type": "movie",
+      "genre_ids": [
+        18,
+        35
+      ],
+      "popularity": 61.424,
+      "release_date": "2023-03-23",
+      "video": false,
+      "vote_average": 7.345,
+      "vote_count": 113
+    },
+    {
+      "adult": false,
+      "backdrop_path": "/4tdV5AeojEdbvn6VpeQrbuDlmzs.jpg",
+      "id": 916224,
+      "title": "Suzume",
+      "original_language": "ja",
+      "original_title": "すずめの戸締まり",
+      "overview": "Suzume, 17, lost her mother as a little girl. On her way to school, she meets a mysterious young man. But her curiosity unleashes a calamity that endangers the entire population of Japan, and so Suzume embarks on a journey to set things right.",
+      "poster_path": "/vIeu8WysZrTSFb2uhPViKjX9EcC.jpg",
+      "media_type": "movie",
+      "genre_ids": [
+        16,
+        18,
+        12,
+        14
+      ],
+      "popularity": 313.552,
+      "release_date": "2022-11-11",
+      "video": false,
+      "vote_average": 7.878,
+      "vote_count": 497
+    },
+    {
+      "adult": false,
+      "backdrop_path": "/5YZbUmjbMa3ClvSW1Wj3D6XGolb.jpg",
+      "id": 447365,
+      "title": "Guardians of the Galaxy Vol. 3",
+      "original_language": "en",
+      "original_title": "Guardians of the Galaxy Vol. 3",
+      "overview": "Peter Quill, still reeling from the loss of Gamora, must rally his team around him to defend the universe along with protecting one of their own. A mission that, if not completed successfully, could quite possibly lead to the end of the Guardians as we know them.",
+      "poster_path": "/r2J02Z2OpNTctfOSN1Ydgii51I3.jpg",
+      "media_type": "movie",
+      "genre_ids": [
+        878,
+        12,
+        28
+      ],
+      "popularity": 4389.774,
+      "release_date": "2023-05-03",
+      "video": false,
+      "vote_average": 8.2,
+      "vote_count": 2726
+    },
+    {
+      "adult": false,
+      "backdrop_path": "/nBEFrdcVhwceGSFw83RksxY9Blg.jpg",
+      "id": 649609,
+      "title": "Renfield",
+      "original_language": "en",
+      "original_title": "Renfield",
+      "overview": "Having grown sick and tired of his centuries as Dracula's lackey, Renfield finds a new lease on life — and maybe even redemption — when he falls for feisty, perennially angry traffic cop Rebecca Quincy.",
+      "poster_path": "/2OaprROMZZeiWsydjGUIkXrv2Z3.jpg",
+      "media_type": "movie",
+      "genre_ids": [
+        35,
+        27,
+        14
+      ],
+      "popularity": 162.664,
+      "release_date": "2023-04-07",
+      "video": false,
+      "vote_average": 6.836,
+      "vote_count": 770
+    },
+    {
+      "adult": false,
+      "backdrop_path": "/b9UCfDzwiWw7mIFsIQR9ZJUeh7q.jpg",
+      "id": 868759,
+      "title": "Ghosted",
+      "original_language": "en",
+      "original_title": "Ghosted",
+      "overview": "Salt-of-the-earth Cole falls head over heels for enigmatic Sadie — but then makes the shocking discovery that she’s a secret agent. Before they can decide on a second date, Cole and Sadie are swept away on an international adventure to save the world.",
+      "poster_path": "/liLN69YgoovHVgmlHJ876PKi5Yi.jpg",
+      "media_type": "movie",
+      "genre_ids": [
+        28,
+        35,
+        10749
+      ],
+      "popularity": 285.768,
+      "release_date": "2023-04-18",
+      "video": false,
+      "vote_average": 7.09,
+      "vote_count": 1088
+    },
+    {
+      "adult": false,
+      "backdrop_path": null,
+      "id": 628030,
+      "title": "Henze: The Young Lord (Deutsche Oper Berlin)",
+      "original_language": "de",
+      "original_title": "Henze: Der junge Lord",
+      "overview": "A 1968 production of Hans-Werner Henze's comic opera filmed at Berlin's Deutsche Oper. With the plot centering around how a whole town is deceived into taking a dressed monkey as a young lord, the work features performances from, among others, Edith Mathis, Donald Grobe and Barry McDaniel. Christoph von Dohnányi conducts.",
+      "poster_path": "/AMix43ANivtgOXQAr7dTwk3iTa.jpg",
+      "media_type": "movie",
+      "genre_ids": [],
+      "popularity": 0.6,
+      "release_date": "1968-01-01",
+      "video": false,
+      "vote_average": 0,
+      "vote_count": 0
+    },
+    {
+      "adult": false,
+      "backdrop_path": "/4XM8DUTQb3lhLemJC51Jx4a2EuA.jpg",
+      "id": 385687,
+      "title": "Fast X",
+      "original_language": "en",
+      "original_title": "Fast X",
+      "overview": "Over many missions and against impossible odds, Dom Toretto and his family have outsmarted, out-nerved and outdriven every foe in their path. Now, they confront the most lethal opponent they've ever faced: A terrifying threat emerging from the shadows of the past who's fueled by blood revenge, and who is determined to shatter this family and destroy everything—and everyone—that Dom loves, forever.",
+      "poster_path": "/fiVW06jE7z9YnO4trhaMEdclSiC.jpg",
+      "media_type": "movie",
+      "genre_ids": [
+        28,
+        80,
+        53
+      ],
+      "popularity": 3114.78,
+      "release_date": "2023-05-17",
+      "video": false,
+      "vote_average": 7.364,
+      "vote_count": 2557
+    },
+    {
+      "adult": false,
+      "backdrop_path": "/44immBwzhDVyjn87b3x3l9mlhAD.jpg",
+      "id": 934433,
+      "title": "Scream VI",
+      "original_language": "en",
+      "original_title": "Scream VI",
+      "overview": "Following the latest Ghostface killings, the four survivors leave Woodsboro behind and start a fresh chapter.",
+      "poster_path": "/wDWwtvkRRlgTiUr6TyLSMX8FCuZ.jpg",
+      "media_type": "movie",
+      "genre_ids": [
+        27,
+        9648,
+        53
+      ],
+      "popularity": 349.531,
+      "release_date": "2023-03-08",
+      "video": false,
+      "vote_average": 7.241,
+      "vote_count": 1471
+    },
+    {
+      "adult": false,
+      "backdrop_path": null,
+      "id": 168626,
+      "title": "DeAD",
+      "original_language": "en",
+      "original_title": "DeAD",
+      "overview": "Patrick feels absolutely lonely when he decides to search for his supposable genitor after the suicide of his mother. He doesn’t have a plan, a goal or hopes. He just wants to meet the phantom that he thinks is the reason for his mother’s death.",
+      "poster_path": null,
+      "media_type": "movie",
+      "genre_ids": [
+        35,
+        18,
+        53
+      ],
+      "popularity": 0.6,
+      "release_date": "2013-02-10",
+      "video": false,
+      "vote_average": 9,
+      "vote_count": 1
+    },
+    {
+      "adult": false,
+      "backdrop_path": "/h8gHn0OzBoaefsYseUByqsmEDMY.jpg",
+      "id": 603692,
+      "title": "John Wick: Chapter 4",
+      "original_language": "en",
+      "original_title": "John Wick: Chapter 4",
+      "overview": "With the price on his head ever increasing, John Wick uncovers a path to defeating The High Table. But before he can earn his freedom, Wick must face off against a new enemy with powerful alliances across the globe and forces that turn old friends into foes.",
+      "poster_path": "/vZloFAK7NmvMGKE7VkF5UHaz0I.jpg",
+      "media_type": "movie",
+      "genre_ids": [
+        28,
+        53,
+        80
+      ],
+      "popularity": 1471.478,
+      "release_date": "2023-03-22",
+      "video": false,
+      "vote_average": 7.858,
+      "vote_count": 3591
+    },
+    {
+      "adult": false,
+      "backdrop_path": "/AdBXP8e6K3FYdDrMx3Wr6WZqCYF.jpg",
+      "id": 493529,
+      "title": "Dungeons & Dragons: Honor Among Thieves",
+      "original_language": "en",
+      "original_title": "Dungeons & Dragons: Honor Among Thieves",
+      "overview": "A charming thief and a band of unlikely adventurers undertake an epic heist to retrieve a lost relic, but things go dangerously awry when they run afoul of the wrong people.",
+      "poster_path": "/A7AoNT06aRAc4SV89Dwxj3EYAgC.jpg",
+      "media_type": "movie",
+      "genre_ids": [
+        12,
+        14,
+        35
+      ],
+      "popularity": 240.095,
+      "release_date": "2023-03-23",
+      "video": false,
+      "vote_average": 7.4,
+      "vote_count": 1885
+    },
+    {
+      "adult": false,
+      "backdrop_path": "/eTvN54pd83TrSEOz6wbsXEJktCV.jpg",
+      "id": 882569,
+      "title": "Guy Ritchie's The Covenant",
+      "original_language": "en",
+      "original_title": "Guy Ritchie's The Covenant",
+      "overview": "During the war in Afghanistan, a local interpreter risks his own life to carry an injured sergeant across miles of grueling terrain.",
+      "poster_path": "/kVG8zFFYrpyYLoHChuEeOGAd6Ru.jpg",
+      "media_type": "movie",
+      "genre_ids": [
+        10752,
+        28,
+        53
+      ],
+      "popularity": 565.917,
+      "release_date": "2023-04-19",
+      "video": false,
+      "vote_average": 7.834,
+      "vote_count": 993
+    },
+    {
+      "adult": false,
+      "backdrop_path": "/w26FmegnHL8BykasYNHADIEURBW.jpg",
+      "id": 1037644,
+      "title": "Battle for Saipan",
+      "original_language": "en",
+      "original_title": "Battle for Saipan",
+      "overview": "On July 7, 1944, a U.S. Army hospital on the remote island of Saipan is overrun by Japanese forces during a relentless attack. Outgunned and surrounded by the enemy, a lone medic puts it all on the line to lead a band of wounded soldiers to safety.",
+      "poster_path": "/9N3KwhzBCcqmFcqHpPCsjqfym9M.jpg",
+      "media_type": "movie",
+      "genre_ids": [
+        10752,
+        36,
+        28
+      ],
+      "popularity": 150.998,
+      "release_date": "2022-11-25",
+      "video": false,
+      "vote_average": 5.79,
+      "vote_count": 50
+    }
+  ],
+  "total_pages": 2,
+  "total_results": 40
+}
