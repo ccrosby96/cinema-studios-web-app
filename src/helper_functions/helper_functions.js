@@ -30,5 +30,19 @@ function grabOriginalLanguage(movie) {
 
 
 }
+function calculateAge(birthdate) {
+    const birthDate = new Date(birthdate);
+    const currentDate = new Date();
 
-export {grabGenres, grabRuntime, grabOriginalLanguage}
+    let age = currentDate.getFullYear() - birthDate.getFullYear();
+    const birthMonth = birthDate.getMonth();
+    const currentMonth = currentDate.getMonth();
+
+    if (currentMonth < birthMonth || (currentMonth === birthMonth && currentDate.getDate() < birthDate.getDate())) {
+        age--;
+    }
+
+    return age;
+}
+
+export {grabGenres, grabRuntime, grabOriginalLanguage, calculateAge}

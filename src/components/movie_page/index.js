@@ -140,7 +140,7 @@ function MoviePage(
                             </div>
 
                         </div>
-                        <div className= "col-8">
+                        <div className= "col-8 bg-dark">
                             <span className="fw-bold a1-font-32px white-font"> {movie.movie.title}</span> <span className="a1-font-32px white-font"> ({year})</span>
                             <br></br>
                             <span  className= "fst-italic white-font"> {dateString}</span> . <span className= "white-font" > {genres}</span> .

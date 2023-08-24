@@ -2,7 +2,7 @@
 
 
 
-function MovieRecTile(
+function MovieTile(
     movie =  {
         "adult": false,
         "backdrop_path": "/hiHGRbyTcbZoLsYYkO4QiCLYe34.jpg",
@@ -28,7 +28,7 @@ function MovieRecTile(
     let poster_path = url + movie.movie.poster_path;
     const title = movie.movie.title;
     const vote_average = movie.movie.vote_average;
-    //console.log("In actor card, headshot_url is ", poster_path);
+    console.log("In actor card, headshot_url is ", poster_path);
     const percent = (vote_average / 10 * 100).toPrecision(2)
 
 
@@ -48,4 +48,4 @@ function MovieRecTile(
     );
 }
 
-export default MovieRecTile;
+export default MovieTile;

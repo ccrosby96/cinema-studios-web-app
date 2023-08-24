@@ -6,6 +6,7 @@ import NavigationSidebar from "./components/navigation";
 import Home from "./components/home/index.html";
 import MoviePage from "./components/movie_page";
 import movie_data from "./components/movie_page/movie.json"
+import ActorPage from "./components/actor_page";
 
 
 function App() {
@@ -15,6 +16,7 @@ function App() {
             <Route index element={<Home/>}/>
             <Route path="search" element={<NavigationSidebar/>}/>
             <Route path = "movie" element = {<MoviePage movie = {movie_data}/>}/>
+            <Route path = "actors/*" element = {<ActorPage/>}/>
 
         </Routes>
 
