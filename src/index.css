@@ -486,4 +486,19 @@ ul.no-bullets {
   margin-block: var(--size-9) var(--size-3);
 }
 
+.providers-custom-image {
+  width: 40%; /* Make the image half the width of its parent container */
+  max-width: 40%; /* Ensure the image doesn't exceed its original size */
+}
+.providers-custom-card {
+  width: 50%; /* Make the card half the width of its parent column */
+}
+.provider-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center; /* Center the cards horizontally */
+}
+
+
+
 

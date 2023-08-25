@@ -26,8 +26,16 @@ function grabOriginalLanguage(movie) {
         }
     }
     return abrev
-
-
+}
+function extractOriginalLanguage(movie) {
+    let abrev = movie.original_language;
+    let languages = movie.spoken_languages;
+    for (const obj of languages){
+        if (obj.iso_639_1 === abrev) {
+            return obj.name
+        }
+    }
+    return abrev
 
 }
 function calculateAge(birthdate) {
@@ -45,4 +53,4 @@ function calculateAge(birthdate) {
     return age;
 }
 
-export {grabGenres, grabRuntime, grabOriginalLanguage, calculateAge}
+export {grabGenres, grabRuntime, grabOriginalLanguage, calculateAge, extractOriginalLanguage}

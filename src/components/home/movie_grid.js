@@ -1,6 +1,7 @@
 
 import MovieTile from "./movie_tile";
 import MovieRecTile from "../recommendations/movie_rec_tile";
+import {Link} from "react-router-dom";
 const MovieGrid = (movies = [
     {
         "adult": false,
@@ -46,15 +47,19 @@ const MovieGrid = (movies = [
 
     console.log("in movie grid, movies ->", movies);
     return (
+
         <div className="container justify-content-center">
             <div className="row">
                 {movies.movies.map((element, index) => (
-                    <div key={index} className="col-lg-2 col-md-6">
-                        <MovieRecTile movie = {element}/>
-                    </div>
+                    <Link to={`/movies/movie/${element.id}`} className= "text-decoration-none col-lg-2 col-md-6">
+                        <div key={index} className="">
+                            <MovieRecTile movie = {element}/>
+                        </div>
+                    </Link>
                 ))}
             </div>
         </div>
+
     );
 };
 

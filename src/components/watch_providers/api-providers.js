@@ -1,6 +1,6 @@
 
-
-function WatchProviders(
+import providers from "./providers.json"
+function ApiWatchProviders(
     data = {
         "link": "https://www.themoviedb.org/movie/713704-evil-dead-rise/watch?locale=US",
         "flatrate": [
@@ -81,7 +81,7 @@ function WatchProviders(
         ]
     }
 ) {
-    const info = data.data;
+    const info = providers.results.US;
 
     console.log("provider data: ", info )
     const url = "http://image.tmdb.org/t/p/w500";
@@ -100,9 +100,9 @@ function WatchProviders(
                     <div key={item.id} className="col-md-6 mb-3 m-0 p-0 float-end ">
                         <div className="card providers-custom-card" >
                             <img src={url + item.logo_path} className="img fluid" alt="..."/>
-                                <div className="card-body">
-                                    <p className="card-text">{item.provider_name}</p>
-                                </div>
+                            <div className="card-body">
+                                <p className="card-text">{item.provider_name}</p>
+                            </div>
                         </div>
                     </div>
                 ))}
@@ -113,4 +113,4 @@ function WatchProviders(
     );
 }
 
-export default WatchProviders;
+export default ApiWatchProviders;

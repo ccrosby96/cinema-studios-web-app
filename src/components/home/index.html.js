@@ -7,7 +7,8 @@ import popular from "./popular.json"
 import MovieGrid from "./movie_grid";
 import {useState} from "react";
 import ToggleButton from "./toggle_button";
-function Home() {
+import Slider from "../rating_scroll_bar/scrollable_bar";
+function MovieHome() {
     const data = trending.results;
     const pop = popular.results;
     //console.log("movie scroll data", data);
@@ -38,6 +39,13 @@ function Home() {
         Western:false
 
     });
+    const [sliderValue, setSliderValue] = useState(50); // Initial value
+
+    const handleSliderChange = (event) => {
+        const newValue = parseInt(event.target.value);
+        setSliderValue(newValue);
+    };
+
 
     const handleToggle = (option) => {
         setOptions((prevOptions) => ({
@@ -180,6 +188,10 @@ function Home() {
                                     onToggle={() => handleCertToggle('NC17')}
                                 />
                             </ul>
+                            <h5>User Rating</h5>
+
+                            <Slider value={sliderValue} onChange={handleSliderChange} />
+                            <div className="slider-value">Rating: {sliderValue}%</div>
 
 
                         </div>
@@ -210,4 +222,4 @@ function Home() {
     );
 }
 
-export default Home;
+export default MovieHome;

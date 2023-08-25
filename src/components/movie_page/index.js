@@ -172,12 +172,6 @@ function MoviePage(
                                 }
 
                             </div>
-
-
-
-
-
-
                         </div>
 
                         <div className= "col-4">
@@ -205,8 +199,6 @@ function MoviePage(
                             </ul>
 
                         </div>
-
-
                     </div>
                     <div className="row">
                         <div className = "col-8">
