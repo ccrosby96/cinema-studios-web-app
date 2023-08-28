@@ -6,7 +6,6 @@ const api = axios.create({
     withCredentials: false,
 });
 
-
 export const findMovieDetailsById = async (mid) => {
     const response  = await api.get(`${Movies_URL}/details/${mid}`)
     console.log("are we getting here? line 12 findmoviedetails service function")
