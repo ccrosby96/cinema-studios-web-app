@@ -96,7 +96,7 @@ function IndividualMoviePage  () {
         };
 
         fetchData();
-    }, []); // Empty dependency array ensures this runs only once on mount
+    }, [movieId]); // Empty dependency array ensures this runs only once on mount
 
     console.log("individual movie details ", details)
 

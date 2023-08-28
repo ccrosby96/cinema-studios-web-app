@@ -1,5 +1,6 @@
 import MovieTile from "./movie_tile";
 import MovieRecTile from "../recommendations/movie_rec_tile";
+import {Link} from "react-router-dom";
 
 function MovieScrollBar(
     movies = [
@@ -55,8 +56,9 @@ function MovieScrollBar(
                      movies.movies.map((movie, i) => {
 
                         return (
-
-                            <MovieRecTile movie={movie}/>
+                            <Link to = {`/movies/movie/${movie.id}`} className = "text-decoration-none">
+                                <MovieRecTile movie={movie}/>
+                            </Link>
                         )
                     })
                 }

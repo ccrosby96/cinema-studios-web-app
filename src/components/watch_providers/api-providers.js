@@ -83,12 +83,12 @@ function ApiWatchProviders(
 ) {
     const info = providers.results.US;
 
-    console.log("provider data: ", info )
+    //console.log("provider data: ", info )
     const url = "http://image.tmdb.org/t/p/w500";
     let streamers = info.buy;
     let renters = info.rent
-    console.log("streamers: ", streamers)
-    console.log("renters: ", renters)
+    //console.log("streamers: ", streamers)
+    //console.log("renters: ", renters)
 
 
 
