@@ -62,7 +62,7 @@ function MovieHome() {
         //console.log(options);
     };
     //console.log(options)
-    console.log(certOptions)
+    //console.log(certOptions)
     return (
         <>
             <div className="row p-0 m-0 bg-color">

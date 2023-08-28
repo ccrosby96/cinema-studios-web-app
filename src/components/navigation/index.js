@@ -20,7 +20,7 @@ const NavigationSidebar = (
                     </li>
                     <li className="nav-item mt-1">
                         <button clasName = "rounded-pill">
-                            <Link  className="text-decoration-none" to = "/movie">
+                            <Link  className="text-decoration-none" to = "/">
                                 <span className="text-light"> Movies</span>
 
                             </Link>

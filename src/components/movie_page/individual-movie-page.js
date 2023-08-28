@@ -7,6 +7,7 @@ import providers from "../watch_providers/providers.json"
 import {grabGenres,grabRuntime, grabOriginalLanguage, extractOriginalLanguage} from "../../helper_functions/helper_functions";
 import CastScrollBar from "../actor_scroll_bar";
 import WatchProviders from "../watch_providers";
+import ApiCastScrollBar from "../actor_scroll_bar/api-cast-scroll-bar";
 import RecommendationsScrollBar from "../recommendations";
 import {useParams} from "react-router";
 import {useEffect, useState} from "react";
@@ -22,7 +23,7 @@ function IndividualMoviePage  () {
     const url = "http://image.tmdb.org/t/p/w500";
     const mid = useParams();
     const movieId = mid.mid
-    console.log("movieID", movieId)
+    console.log("grabbed movieID from url", movieId)
     const [isLoading, setLoading] = useState(true);
     const [dataStatus,setDataStatus] = useState({
         details: false,
@@ -62,20 +63,20 @@ function IndividualMoviePage  () {
                     setCast(b)
                     setLoading(false)
                     handleSetStatus('cast')
-                    console.log('individual movie cast: ', b);
+                    //console.log('individual movie cast: ', b);
                 }
                 const grabProviders = async () => {
                     const c = await providers;
                     setProviders(c)
                     handleSetStatus('providers')
-                    console.log('individual movie providers: ', c)
+                    //console.log('individual movie providers: ', c)
 
                 }
                 const grabRecs = async () => {
                     const d = await recommendations;
                     setRecs(d)
                     handleSetStatus('recs')
-                    console.log('indiv recs', d)
+                    //console.log('indiv recs', d)
                 }
                 grabDetails();
                 grabCast();
@@ -88,7 +89,7 @@ function IndividualMoviePage  () {
 
                 //setCast(cast);
                 //setProviders(providers);
-                console.log("logging details: ", details)
+                //console.log("logging details: ", details)
             } catch (error) {
                 console.error('Error fetching data:', error);
             }
@@ -146,7 +147,7 @@ function IndividualMoviePage  () {
                         <div>
 
                             {
-                                <CastScrollBar cast={cast.cast}/>
+                                <ApiCastScrollBar cast={cast.cast}/>
                             }
                         </div>
                     </div>

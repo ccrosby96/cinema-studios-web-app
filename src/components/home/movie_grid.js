@@ -45,7 +45,7 @@ const MovieGrid = (movies = [
         "vote_count": 39
     }]) => {
 
-    console.log("in movie grid, movies ->", movies);
+   // console.log("in movie grid, movies ->", movies);
     return (
 
         <div className="container justify-content-center">

@@ -8,6 +8,7 @@ import MoviePage from "./components/movie_page";
 import movie_data from "./components/movie_page/movie.json"
 import ActorPage from "./components/actor_page";
 import MovieRouting from "./components/home/movie-routing";
+import ActorRouting from "./routing/actor-routing";
 
 
 function App() {
@@ -16,11 +17,9 @@ function App() {
         <Routes>
             <Route index element={<MovieHome/>}/>
             <Route path = "movies/*" element = {<MovieRouting/>}/>
-            <Route path = "actors/*" element = {<ActorPage/>}/>
+            <Route path = "actors/*" element = {<ActorRouting/>}/>
 
         </Routes>
-
-
 
       </BrowserRouter>
 

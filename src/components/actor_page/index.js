@@ -21,10 +21,6 @@ function ActorPage () {
 
                 <ActorDetails/>
 
-
-
-
-
             </div>
 
         </>
