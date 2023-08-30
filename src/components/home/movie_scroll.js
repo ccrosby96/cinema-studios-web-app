@@ -48,7 +48,7 @@ function MovieScrollBar(
 
 ) {
 
-    console.log("films in movieScrollBar component",movies);
+    //console.log("films in movieScrollBar component",movies);
     return (
         <>
             <div className="scroll_media-scroller snaps-inline">

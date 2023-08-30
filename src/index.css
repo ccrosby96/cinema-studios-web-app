@@ -499,6 +499,13 @@ ul.no-bullets {
   justify-content: center; /* Center the cards horizontally */
 }
 
+/* GenreFilterButtons.css */
+button.active {
+  background-color: blue;
+  color: white;
+  /* Add any other styling you want for the active state */
+}
+
 
 
 

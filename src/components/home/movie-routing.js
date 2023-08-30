@@ -1,5 +1,5 @@
 import {Route, Routes} from "react-router";
-import MovieHome from "./index.html";
+import MovieHome from "./index";
 import MoviePage from "../movie_page";
 import IndividualMoviePage from "../movie_page/individual-movie-page";
 
