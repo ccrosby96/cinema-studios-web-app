@@ -1,4 +1,3 @@
-import logo from './logo.svg';
 import './App.css';
 import {BrowserRouter} from "react-router-dom";
 import {Routes, Route} from "react-router";
@@ -10,15 +9,20 @@ import filtersReducer from "./reducers/filters-reducer";
 import ratingsReducer from "./reducers/ratings-filter-reducer";
 import releaseYearsReducer from "./reducers/filter-release-years-reducer";
 import audienceScoreReducer from "./reducers/filter-score-reducer";
+import searchResultsReducer from "./reducers/search-results-reducer";
 import {configureStore} from "@reduxjs/toolkit";
 import {Provider} from "react-redux";
 
 const rootReducer = combineReducers({
-    genreFilters: filtersReducer,
-    ratingsFilters: ratingsReducer,
-    yearFilters: releaseYearsReducer,
-    scoreFilter: audienceScoreReducer
-});
+        filters: combineReducers({
+            genre: filtersReducer,
+            ratings: ratingsReducer,
+            years: releaseYearsReducer,
+            score: audienceScoreReducer
+        }),
+        searchResults: searchResultsReducer
+    }
+);
 const store = configureStore({reducer: rootReducer})
 function App() {
   return (

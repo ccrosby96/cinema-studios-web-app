@@ -10,6 +10,8 @@ function MovieRouting(){
         <Routes>
             <Route index element = {<MovieHome/>}/>
             <Route path = {"/movie/:mid"} element = {<IndividualMoviePage/>}/>
+            <Route path = {"/discover"} element = {<MovieHome/>}/>
+            <Route path = {"/discover/:pid"} element = {<MovieHome/>}/>
         </Routes>
     )
 }

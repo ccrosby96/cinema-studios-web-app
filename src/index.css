@@ -505,6 +505,10 @@ button.active {
   color: white;
   /* Add any other styling you want for the active state */
 }
+.centralize-button {
+  display: flex;
+  justify-content: center;
+}
 
 
 

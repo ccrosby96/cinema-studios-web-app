@@ -96,7 +96,7 @@ function IndividualMoviePage  () {
         };
 
         fetchData();
-    }, [movieId]); // Empty dependency array ensures this runs only once on mount
+    }, [movieId]); // if we have a new movie id we want to re-render
 
     console.log("individual movie details ", details)
 
