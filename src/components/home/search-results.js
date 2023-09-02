@@ -3,6 +3,7 @@ import {Link} from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux';
 import {fetchMovieSearchNextPage} from "../../thunks/movie-thunks";
 import {useParams} from "react-router";
+import InitialMovies from "./initial-movies-display";
 
 function SearchResults () {
         const params = useParams()
@@ -27,6 +28,9 @@ function SearchResults () {
         }
         if (loading) {
                 return (<span> Loading Page</span>)
+        }
+        else if (Number.isNaN(pageNumber)){
+                return (<InitialMovies/>)
         }
         else if (searchResults.length >= pageNumber){
                 return (

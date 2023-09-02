@@ -12,7 +12,7 @@ const NavigationSidebar = (
             <div className="collapse navbar-collapse" id="navbarNav">
                 <ul className="navbar-nav">
                     <li className="nav-item active mt-1">
-                        <Link  className="text-decoration-none" to = "/">
+                        <Link  className="text-decoration-none" to = "/movies/discover">
                             <span className="text-light"> Home</span>
 
                         </Link>
@@ -20,7 +20,7 @@ const NavigationSidebar = (
                     </li>
                     <li className="nav-item mt-1">
                         <button clasName = "rounded-pill">
-                            <Link  className="text-decoration-none" to = "/">
+                            <Link  className="text-decoration-none" to = "/movies/discover">
                                 <span className="text-light"> Movies</span>
 
                             </Link>
