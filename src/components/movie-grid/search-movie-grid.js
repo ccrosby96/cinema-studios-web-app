@@ -1,7 +1,8 @@
-import MovieTile from "./movie_tile";
+
+import SearchMovieTile from "./movie-tile.js";
 import MovieRecTile from "../recommendations/movie_rec_tile";
 import {Link} from "react-router-dom";
-const MovieGrid = (movies = [
+const SearchMovieGrid = (movies = [
     {
         "adult": false,
         "backdrop_path": "/hiHGRbyTcbZoLsYYkO4QiCLYe34.jpg",
@@ -44,15 +45,15 @@ const MovieGrid = (movies = [
         "vote_count": 39
     }]) => {
 
-   // console.log("in movie grid, movies ->", movies);
+    // console.log("in movie grid, movies ->", movies);
     return (
 
         <div className="container justify-content-center">
             <div className="row">
                 {movies.movies.map((element, index) => (
-                    <Link to={`/movies/movie/${element.id}`} className= "text-decoration-none col-lg-2 col-md-6 scroll_media-element m-1">
+                    <Link to={`/movies/movie/${element.id}`} className= "text-decoration-none col-lg-2 col-md-6 scroll_media-element m-2">
                         <div key={index} className="">
-                            <MovieRecTile movie = {element}/>
+                            <SearchMovieTile movie = {element}/>
                         </div>
                     </Link>
                 ))}
@@ -62,4 +63,4 @@ const MovieGrid = (movies = [
     );
 };
 
-export default MovieGrid;
+export default SearchMovieGrid;

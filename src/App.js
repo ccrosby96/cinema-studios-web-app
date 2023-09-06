@@ -10,6 +10,7 @@ import ratingsReducer from "./reducers/ratings-filter-reducer";
 import releaseYearsReducer from "./reducers/filter-release-years-reducer";
 import audienceScoreReducer from "./reducers/filter-score-reducer";
 import searchResultsReducer from "./reducers/search-results-reducer";
+import LandingSearchPage from "./components/search";
 import {configureStore} from "@reduxjs/toolkit";
 import {Provider} from "react-redux";
 
@@ -29,6 +30,7 @@ function App() {
       <BrowserRouter>
           <Provider store={store}>
             <Routes>
+                <Route path = "/search" element = {<LandingSearchPage/>}/>
                 <Route index element={<MovieHome/>}/>
                 <Route path = "movies/*" element = {<MovieRouting/>}/>
                 <Route path = "actors/*" element = {<ActorRouting/>}/>
