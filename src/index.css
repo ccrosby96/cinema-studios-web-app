@@ -509,7 +509,31 @@ button.active {
   display: flex;
   justify-content: center;
 }
+.card-deck-flex {
+  display: inline-flex;
+  flex-wrap: nowrap;
+}
+.list-group-item-full-width {
+  width: 100%;
+}
+.list-group {
+  /* Reset padding and margin */
+  padding: 0;
+  margin: 0;
+}
 
+.list-group-item {
+  /* Reset padding and margin for list items */
+  padding: 0;
+  margin: 0;
+
+  /* Set width to 100% to stretch horizontally */
+  width: 100%;
+}
+.movie-list-item-img {
+  max-width: 150px; /* Adjust the value to your desired maximum width */
+  max-height: 220px; /* Adjust the value to your desired maximum height */
+}
 
 
 

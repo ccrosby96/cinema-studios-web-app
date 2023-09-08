@@ -11,6 +11,7 @@ import trending from "../home/trending.json"
 import MovieScrollBar from "../home/movie_scroll";
 
 function LandingSearchPage () {
+
     const handleSearch = () => {
         // Implement your search functionality here
         alert('Searching...');
