@@ -5,6 +5,8 @@ import MovieHome from "./components/home";
 import MovieRouting from "./components/home/movie-routing";
 import ActorRouting from "./routing/actor-routing";
 import MultiSearchRouting from "./routing/search-routing";
+import SeriesPage from "./components/tv/series-page";
+import TvRouting from "./routing/TvRouting";
 import {combineReducers} from "redux";
 import filtersReducer from "./reducers/filters-reducer";
 import ratingsReducer from "./reducers/ratings-filter-reducer";
@@ -38,6 +40,7 @@ function App() {
                 <Route index element={<MovieHome/>}/>
                 <Route path = "movies/*" element = {<MovieRouting/>}/>
                 <Route path = "actors/*" element = {<ActorRouting/>}/>
+                <Route path = "tv/*" element = {<TvRouting/>}/>
             </Routes>
           </Provider>
       </BrowserRouter>

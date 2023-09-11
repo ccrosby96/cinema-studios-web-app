@@ -52,7 +52,7 @@ function TvResultsList (shows = [
                     shows.shows.map((show, i) => {
 
                         return (
-                            <Link to = {`/tv/show/${show.id}`} className = "text-decoration-none">
+                            <Link to = {`/tv/series/${show.id}`} className = "text-decoration-none">
                                 <TVListItem show={show}/>
                             </Link>
                         )

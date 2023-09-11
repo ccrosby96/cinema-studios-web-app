@@ -534,6 +534,30 @@ button.active {
   max-width: 150px; /* Adjust the value to your desired maximum width */
   max-height: 220px; /* Adjust the value to your desired maximum height */
 }
+.episode-list-item-img {
+  max-width: 275px;
+  max-height: 300px;
+}
+.full-column-paragraph {
+  margin: 0; /* Remove any margin */
+  padding: 10px; /* Add padding for spacing within the <p> tag */
+}
+.grey-text {
+  color: grey;
+  font-size: 14px; /* Adjust the font size to your preference */
+}
+.episode-overview-text {
+  font-size: 16px;
+}
+.network-logo-small {
+  max-width: 100px;
+  max-height: 100px;
+}
+.watch-provider-logo {
+  max-width: 100px;
+  max-height: 100px;
+
+}
 
 
 

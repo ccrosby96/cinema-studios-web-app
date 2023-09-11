@@ -1,4 +1,4 @@
-
+import languageMap from "./languages-dictionary.json"
 function grabGenres(arr) {
     let s = "";
     for (const obj of arr) {
@@ -53,4 +53,33 @@ function calculateAge(birthdate) {
     return age;
 }
 
-export {grabGenres, grabRuntime, grabOriginalLanguage, calculateAge, extractOriginalLanguage}
+function formatDate(inputDate) {
+    const options = { year: 'numeric', month: 'long', day: 'numeric' };
+    const date = new Date(inputDate);
+    return date.toLocaleDateString(undefined, options);
+}
+
+function grabSeriesCreators(data) {
+    const creatorNames = data.map(creator => creator.name);
+
+    const formattedNames = creatorNames.join(', ');
+    return formattedNames;
+}
+function convertScoreToPercent(score) {
+    const floatVal = parseFloat(score);
+    const percentVal = floatVal * 10;
+    const rounded = Math.round(percentVal);
+    return rounded.toString();
+}
+function generateImageUrl(url) {
+    const imageUrl = "http://image.tmdb.org/t/p/w500";
+    const full = imageUrl + url;
+    return full;
+}
+function extractLanguageName(code) {
+    const name = languageMap[code];
+    return name;
+
+}
+export {grabGenres, grabRuntime, grabOriginalLanguage, calculateAge,
+    extractOriginalLanguage, formatDate, grabSeriesCreators, convertScoreToPercent, generateImageUrl, extractLanguageName}

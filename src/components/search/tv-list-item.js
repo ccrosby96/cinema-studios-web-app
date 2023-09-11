@@ -1,4 +1,4 @@
-
+import {convertScoreToPercent, formatDate} from "../../helper_functions/helper_functions";
 function TVListItem (show = {
     "adult": false,
     "backdrop_path": "/vlG182ZY2WMzD5bjFZNnhyvv5V4.jpg",
@@ -25,6 +25,8 @@ function TVListItem (show = {
     let poster_path = url + show.show.poster_path;
     const title = show.show.name;
     const overview = show.show.overview;
+    const score = show.show.vote_average;
+    const airDate = show.show.first_air_date;
 
     return (
         <div className ="list-group-item m-1">
@@ -34,7 +36,8 @@ function TVListItem (show = {
                 </div>
                 <div className="col-8 m-0 p-0">
                     <div className="m-0 p-0">
-                        <h5 className="">{title}</h5>
+                        <h5 className="mb-0 pb-0">{title}</h5>
+                        <span className = "grey-text mt-0 pt-0">{formatDate(airDate)}</span>
                         <p className="">{overview}</p>
 
                     </div>
