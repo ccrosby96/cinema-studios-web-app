@@ -3,6 +3,7 @@ import NavigationSidebar from "../navigation";
 import {useParams} from "react-router";
 import ApiActorDetails from "./api-actor-details";
 import {findActorDetailsById, findActorKnownFilmsById} from "../../services/actor-service";
+import {grabPersonGender} from "../../helper_functions/helper_functions";
 
 function IndividualActorPage () {
     const aid = useParams();

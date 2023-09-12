@@ -99,6 +99,36 @@ function generateTrailerUrl(trailers) {
     // no trailers from YouTube or Vimeo
     return ""
 }
+function grabPersonGender(num){
+    if (num === 1) {
+        return "Female"
+    }
+    else if (num === 2){
+        return "Male"
+    }
+    else if (num === 3){
+        return "Non-Binary"
+    }
+    return "Not specified"
+}
+function extractMovieCertification(details) {
+    const prodCountry = details.production_countries[0].iso_3166_1;
+    console.log('country found in movie details', prodCountry);
+
+    // now iterate over release dates
+    const releaseDates = details.release_dates.results;
+    for (const release of releaseDates) {
+        if (release.iso_3166_1 === "US") {
+            for (const item of release.release_dates){
+                if (item.type === 1 || item.type === 2 || item.type === 3){
+                    return item.certification
+                }
+            }
+        }
+    }
+    return "None";
+}
 export {grabGenres, grabRuntime, grabOriginalLanguage, calculateAge,
     extractOriginalLanguage, formatDate, grabSeriesCreators, convertScoreToPercent,
-    generateImageUrl, extractLanguageName, generateTrailerUrl}
+    generateImageUrl, extractLanguageName,
+    generateTrailerUrl, grabPersonGender, extractMovieCertification}

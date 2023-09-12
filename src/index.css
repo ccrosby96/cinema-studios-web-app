@@ -566,3 +566,7 @@ button.active {
   margin-left: 5px; /* Adjust the spacing between the span and icon */
 }
 
+button-no-style {
+  all: unset;
+}
+

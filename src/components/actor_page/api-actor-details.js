@@ -1,5 +1,6 @@
 import MovieScrollBar from "../home/movie_scroll";
 import {calculateAge} from "../../helper_functions/helper_functions";
+import {grabPersonGender} from "../../helper_functions/helper_functions";
 
 function ApiActorDetails (props) {
     let actor = props.actor;
@@ -25,7 +26,7 @@ function ApiActorDetails (props) {
 
                         </li>
                         <li className="m-3">
-                            <b>Gender</b>: {actor.gender}
+                            <b>Gender</b>: {grabPersonGender(actor.gender)}
 
                         </li>
                         <li className="m-3">

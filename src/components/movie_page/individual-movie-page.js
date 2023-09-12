@@ -1,6 +1,7 @@
 import NavigationSidebar from "../navigation";
 import '@fortawesome/fontawesome-free/css/all.css';
 import providers from "../watch_providers/providers.json"
+import {convertScoreToPercent, formatDate, extractMovieCertification} from "../../helper_functions/helper_functions";
 import {
     grabGenres,
     grabRuntime,
@@ -8,6 +9,7 @@ import {
     extractOriginalLanguage,
     generateTrailerUrl
 } from "../../helper_functions/helper_functions";
+
 import ApiCastScrollBar from "../actor_scroll_bar/api-cast-scroll-bar";
 import RecommendationsScrollBar from "../recommendations";
 import {useParams} from "react-router";
@@ -110,7 +112,7 @@ function IndividualMoviePage  () {
     }, [movieId]); // if we have a new movie id we want to re-render
 
 
-    console.log('movie trailer', trailers);
+    console.log(details)
 
     if (!dataStatus.details || !dataStatus.cast || !dataStatus.recs || !dataStatus.providers) {
         return <div className="App">Loading...</div>;
@@ -134,9 +136,10 @@ function IndividualMoviePage  () {
                         <span className="fw-bold a1-font-32px white-font"> {details.title}</span> <span
                         className="a1-font-32px white-font"> </span>
                         <br></br>
-                        <span className="fst-italic white-font"> {details.release_date}</span> . <span
+                        <span className="fst-italic white-font"> {formatDate(details.release_date)}</span> . <span
                         className="white-font"> ({(grabGenres(details.genres))})</span> .
-                        <span className="white-font"> {grabRuntime(details.runtime)}</span>
+                        <span className="white-font"> {grabRuntime(details.runtime)}, </span>
+                        <span className="white-font"> rated {extractMovieCertification(details)}</span>
 
                         <br></br>
                         <br></br>
@@ -144,9 +147,9 @@ function IndividualMoviePage  () {
                         <p className="fst-italic a1-font-16px white-font"> {details.tagline}</p>
                         <div className = "trailer-icon float-right">
                             {trailers !== '' && (
-                                <div onClick={openVideoInNewWindow}>
+                                <button className = "bg-dark" onClick={openVideoInNewWindow}>
                                     <i className="fa-solid fa-play fa-2x trailer-icon" style={{color: "#f5f5f5"}}></i>
-                                </div>
+                                </button>
                             )}
                         </div>
                         <p className="fw-bold a1-font-25px white-font"> Overview</p>
@@ -156,8 +159,8 @@ function IndividualMoviePage  () {
                         <br></br>
                         <i className="fa-brands fa-twitter"></i>
                         <i className="fa fa-search"></i>
-                        <p className="fw-bold a1-font-16px white-font"> User Score </p>
-                        <span className="white-font">{details.vote_average} / 10</span>
+                        <p className="fw-bold a1-font-16px white-font mb-0 pb-0"> User Score </p>
+                        <span className="white-font mt-0 pt-0">{convertScoreToPercent(details.vote_average)}%</span>
 
 
 

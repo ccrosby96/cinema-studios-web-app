@@ -4,18 +4,18 @@ import {useSelector} from "react-redux";
 import MovieResultsList from "../search/movie-results-list";
 import NavigationSidebar from "../navigation";
 import TvResultsList from "../search/tv-results-list";
+import PeopleResultsList from "../search/people-results-list";
 
 function MultiSearchResultsPage() {
     const MultiResults = useSelector(state => state.multiSearch)
     const movieResults = useSelector(state => state.multiSearch.results.movies)
     const tvResults = useSelector(state => state.multiSearch.results.tv)
     const peopleResults = useSelector(state => state.multiSearch.results.people)
-    console.log(movieResults)
-    console.log(tvResults)
+
     const  q  = useParams();
     const [searchResults, setSearchResults] = useState([]);
     console.log("In multi search landing page")
-    console.log(q)
+    console.log(peopleResults)
     const query = q.q;
     console.log(query);
     const [selectedItem, setSelectedItem] = useState('Movie');
@@ -56,14 +56,19 @@ function MultiSearchResultsPage() {
                         </ul>
                     </div>
                 </div>
-                <div className = "col-10">
+                <div className="col-10">
                     <h2>Search Results for: {query}</h2>
                     {selectedItem === 'Movie' ? (
-                        <MovieResultsList movies = {movieResults} />
+                        <MovieResultsList movies={movieResults} />
                     ) : selectedItem === 'TV' ? (
-                        <TvResultsList shows = {tvResults} />
-                    ) : null}
+                        <TvResultsList shows={tvResults} />
+                    ) : selectedItem === 'People' ? (
+                        <PeopleResultsList people={peopleResults} />
+                    ) : (
+                        <p>No results found for the selected item.</p> // Fallback for other cases
+                    )}
                 </div>
+
             </div>
             </div>
 

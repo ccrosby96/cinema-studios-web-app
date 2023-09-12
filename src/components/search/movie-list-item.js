@@ -1,4 +1,4 @@
-
+import {formatDate} from "../../helper_functions/helper_functions";
 function MovieListItem (movie = {
     "adult": false,
     "backdrop_path": "/xgU3KkqiME9pGe5gGCNpUYkoSWg.jpg",
@@ -24,6 +24,7 @@ function MovieListItem (movie = {
     let poster_path = url + movie.movie.poster_path;
     const title = movie.movie.title;
     const overview = movie.movie.overview;
+    const releaseDate = movie.movie.release_date;
 
     return (
     <div className ="list-group-item m-1">
@@ -33,7 +34,8 @@ function MovieListItem (movie = {
             </div>
             <div className="col-8 m-0 p-0">
                 <div className="m-0 p-0">
-                    <h5 className="">{title}</h5>
+                    <h5 className="mb-0 pb-0">{title}</h5>
+                    <span className = "grey-text mt-0 pt-0">{formatDate(releaseDate)}</span>
                     <p className="">{overview}</p>
 
                 </div>

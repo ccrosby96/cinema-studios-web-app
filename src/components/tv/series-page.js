@@ -36,6 +36,14 @@ function SeriesPage () {
             [property]: true
         }));
     };
+    function clearState () {
+        setSeasonEpisodeData({})
+        setDataStatus({
+            details: false,
+            recs: false,
+            cast: false
+        })
+    }
 
     const [SeasonEpisodeData,setSeasonEpisodeData] = useState({})
     useEffect(() => {
@@ -63,14 +71,7 @@ function SeriesPage () {
         console.error('Error fetching season data:', error);
         }
     }
-    function clearState () {
-        setSeasonEpisodeData({})
-        setDataStatus({
-            details: false,
-            recs: false,
-            cast: false
-        })
-    }
+
 
     useEffect(() => {
         const fetchSeriesData = async () => {

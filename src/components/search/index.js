@@ -34,11 +34,6 @@ function LandingSearchPage () {
           </div>
       </div>
 
-
-
-
-
     );
-
 }
 export default LandingSearchPage;
