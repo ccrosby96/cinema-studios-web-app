@@ -90,20 +90,17 @@ function ApiWatchProviders(
     //console.log("streamers: ", streamers)
     //console.log("renters: ", renters)
 
-
-
     return (
         <>
-
+            <h5 className = "fw-bold">Where to Watch</h5>
             {
                 streamers.map((item, i) => (
-                    <div key={item.id} className="col-md-6 mb-3 m-0 p-0 float-end ">
-                        <div className="card providers-custom-card" >
+                    <div key={item.id} className="col-md-6 mb-1 m-0 p-0 float-end ">
                             <img src={url + item.logo_path} className="img fluid watch-provider-logo" alt="..."/>
                             <div className="card-body">
                                 <p className="card-text">{item.provider_name}</p>
                             </div>
-                        </div>
+
                     </div>
                 ))}
 
