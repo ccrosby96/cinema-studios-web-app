@@ -4,6 +4,12 @@ const Movies_URL = "http://localhost:4000/api/movie"
 const api = axios.create({
     withCredentials: false,
 });
+export const fetchMovieVideosById = async (mid) => {
+    console.log("movieId in fetchMovieVideosById", mid);
+    const response  = await api.get(`${Movies_URL}/${mid}/videos`)
+    const ret = response.data;
+    return ret;
+}
 export const movieDiscoverSearch = async (searchParams) => {
     try {
         // Make a POST request to your backend API

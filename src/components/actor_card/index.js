@@ -23,7 +23,9 @@ function ActorCard(
 
     let character = actor.actor.character;
     let actor_name = actor.actor.name;
-
+    if ("roles" in actor.actor) {
+        character = actor.actor.roles[0].character;
+    }
     const alt_actor = "https://www.pngall.com/wp-content/uploads/4/Brad-Pitt-PNG-File.png"
 
     return (

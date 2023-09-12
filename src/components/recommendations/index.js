@@ -47,7 +47,7 @@ function RecommendationsScrollBar(
 
 ) {
     const data = recs.data;
-    console.log("recs in recomendationscrollbar_component",data);
+
     return (
         <>
             <div className="scroll_media-scroller snaps-inline">

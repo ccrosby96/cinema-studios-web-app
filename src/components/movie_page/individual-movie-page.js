@@ -1,35 +1,38 @@
 import NavigationSidebar from "../navigation";
-import MovieBox from "../movie_box";
-import movie from "./movie.json";
-import ActorCard from "../actor_card";
-import credits from "../actor_card/credits.json"
+import '@fortawesome/fontawesome-free/css/all.css';
 import providers from "../watch_providers/providers.json"
-import {grabGenres,grabRuntime, grabOriginalLanguage, extractOriginalLanguage} from "../../helper_functions/helper_functions";
-import CastScrollBar from "../actor_scroll_bar";
-import WatchProviders from "../watch_providers";
+import {
+    grabGenres,
+    grabRuntime,
+    grabOriginalLanguage,
+    extractOriginalLanguage,
+    generateTrailerUrl
+} from "../../helper_functions/helper_functions";
 import ApiCastScrollBar from "../actor_scroll_bar/api-cast-scroll-bar";
 import RecommendationsScrollBar from "../recommendations";
 import {useParams} from "react-router";
 import {useEffect, useState} from "react";
-import {findMovieDetailsById, findMovieCastById, findMovieProvidersById, findMovieRecommendationsById} from "../../services/movie-service";
+import {findMovieDetailsById, findMovieCastById, findMovieProvidersById,
+    findMovieRecommendationsById, fetchMovieVideosById} from "../../services/movie-service";
 import ApiWatchProviders from "../watch_providers/api-providers";
-
-
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {Link} from "react-router-dom";
 /*
 cinema studios - name idea by jake fredo
  */
 function IndividualMoviePage  () {
-    console.log("individual movie page called!")
+
     const url = "http://image.tmdb.org/t/p/w500";
     const mid = useParams();
     const movieId = mid.mid
-    console.log("grabbed movieID from url", movieId)
+
     const [isLoading, setLoading] = useState(true);
     const [dataStatus,setDataStatus] = useState({
         details: false,
         cast: false,
         providers: false,
-        recs: false
+        recs: false,
+        trailers: false
 
     })
     const handleSetStatus = (property) => {
@@ -38,10 +41,16 @@ function IndividualMoviePage  () {
             [property]: true
         }));
     };
+    const openVideoInNewWindow = () => {
+        if (trailers !== '') {
+            window.open(trailers, '_blank', 'width=600,height=400'); // Adjust width and height as needed
+        }
+    };
     const [details, setDetails] = useState(null);
     const [cast, setCast] = useState(null);
     const [providers, setProviders] = useState(null);
-    const [recs, setRecs] = useState(null)
+    const [recs, setRecs] = useState(null);
+    const [trailers, setTrailers] = useState(null);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -51,12 +60,13 @@ function IndividualMoviePage  () {
                 const cast = findMovieCastById(movieId);
                 const providers = findMovieProvidersById(movieId);
                 const recommendations = findMovieRecommendationsById(movieId);
+                const trailers = fetchMovieVideosById(movieId);
                 const grabDetails = async () => {
                     const a = await details;
                     setDetails(a)
                     setLoading(false);
                     handleSetStatus('details')
-                    console.log(a);
+
                 };
                 const grabCast = async () => {
                     const b = await cast;
@@ -70,7 +80,6 @@ function IndividualMoviePage  () {
                     setProviders(c)
                     handleSetStatus('providers')
                     //console.log('individual movie providers: ', c)
-
                 }
                 const grabRecs = async () => {
                     const d = await recommendations;
@@ -78,18 +87,20 @@ function IndividualMoviePage  () {
                     handleSetStatus('recs')
                     //console.log('indiv recs', d)
                 }
+                const grabTrailers = async () => {
+                    const t = await trailers;
+                    const data = t.trailers;
+                    console.log('trailer data', data);
+                    const trailerUrl = generateTrailerUrl(data)
+                    setTrailers(trailerUrl);
+                    handleSetStatus('trailers')
+                }
                 grabDetails();
                 grabCast();
                 grabProviders();
                 grabRecs();
-                //const cast = findMovieCastById(mid.mid);
-                //const providers = findMovieProvidersById(mid.mid);
+                grabTrailers();
 
-                //setDetails(details);
-
-                //setCast(cast);
-                //setProviders(providers);
-                //console.log("logging details: ", details)
             } catch (error) {
                 console.error('Error fetching data:', error);
             }
@@ -98,7 +109,8 @@ function IndividualMoviePage  () {
         fetchData();
     }, [movieId]); // if we have a new movie id we want to re-render
 
-    console.log("individual movie details ", details)
+
+    console.log('movie trailer', trailers);
 
     if (!dataStatus.details || !dataStatus.cast || !dataStatus.recs || !dataStatus.providers) {
         return <div className="App">Loading...</div>;
@@ -130,12 +142,25 @@ function IndividualMoviePage  () {
                         <br></br>
 
                         <p className="fst-italic a1-font-16px white-font"> {details.tagline}</p>
+                        <div className = "trailer-icon float-right">
+                            {trailers !== '' && (
+                                <div onClick={openVideoInNewWindow}>
+                                    <i className="fa-solid fa-play fa-2x trailer-icon" style={{color: "#f5f5f5"}}></i>
+                                </div>
+                            )}
+                        </div>
                         <p className="fw-bold a1-font-25px white-font"> Overview</p>
                         <span className="white-font">{details.overview}</span>
+
                         <br></br>
                         <br></br>
+                        <i className="fa-brands fa-twitter"></i>
+                        <i className="fa fa-search"></i>
                         <p className="fw-bold a1-font-16px white-font"> User Score </p>
                         <span className="white-font">{details.vote_average} / 10</span>
+
+
+
 
 
                     </div>
@@ -181,6 +206,8 @@ function IndividualMoviePage  () {
                     <div className = "col-8">
                         <span className="a1-font-25px fw-bold">Recommendations</span>
                         <RecommendationsScrollBar data = {recs.results}/>
+
+
                     </div>
                     <div className= "col-4">
 

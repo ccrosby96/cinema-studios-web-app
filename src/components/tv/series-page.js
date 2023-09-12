@@ -1,15 +1,13 @@
 import {useParams} from "react-router";
 import {useEffect, useState} from "react";
-import {fetchSeriesDetailsById, findSeriesSeasonDetails} from "../../services/tv-service";
+import {fetchSeriesDetailsById, findSeriesSeasonDetails, fetchSeriesRecommendationsById, fetchSeriesCastById} from "../../services/tv-service";
 import NavigationSidebar from "../navigation";
-import {extractOriginalLanguage, grabGenres, grabRuntime} from "../../helper_functions/helper_functions";
-import SeasonResultsList from "./season-results-list";
-import SeasonsScrollResults from "./season-results-scroll";
-import SeasonScrollTile from "./season-scroll-tile";
+import {grabGenres} from "../../helper_functions/helper_functions";
+import TvRecommendationsScrollBar from "./tv-recs-scroll-bar";
 import SeasonScrollTileDynamic from "./season-scroll-tile-dynamic";
+import ApiCastScrollBar from "../actor_scroll_bar/api-cast-scroll-bar";
 import CurrentSeasonOverview from "./current-season-overview";
 import EpisodeResultsList from "./episode-results-list";
-import episodeData from "./hannibal-episodes.json";
 import {grabSeriesCreators} from "../../helper_functions/helper_functions";
 import {formatDate,convertScoreToPercent,generateImageUrl,extractLanguageName} from "../../helper_functions/helper_functions";
 
@@ -18,13 +16,31 @@ function SeriesPage () {
     const seriesId = sid.sid
     console.log(seriesId);
     const [details, setDetails] = useState(null);
+    const [recs, setRecs]  = useState(null);
+    const [seriesCast, setSeriesCast] = useState(null)
     const[currentSeasonDetails, setCurrentSeasonDetails] = useState(null)
     const [currentSeasonNumber, setCurrentSeasonNumber] = useState(1)
     const [isLoading, setLoading] = useState(true);
     const[episodeLoading, setEpisodeLoading] = useState(false);
     const imageUrl = "http://image.tmdb.org/t/p/w500";
 
+    const [dataStatus,setDataStatus] = useState({
+        details: false,
+        recs: false,
+        cast: false
+
+    })
+    const handleSetStatus = (property) => {
+        setDataStatus((prevStatus) => ({
+            ...prevStatus,
+            [property]: true
+        }));
+    };
+
     const [SeasonEpisodeData,setSeasonEpisodeData] = useState({})
+    useEffect(() => {
+        clearState();
+    }, [seriesId]);
 
     const fetchSeasonData = async (seasonNumber) => {
         console.log("called fetchSeasonData, seasonNumber param: ", seasonNumber);
@@ -47,21 +63,43 @@ function SeriesPage () {
         console.error('Error fetching season data:', error);
         }
     }
-
+    function clearState () {
+        setSeasonEpisodeData({})
+        setDataStatus({
+            details: false,
+            recs: false,
+            cast: false
+        })
+    }
 
     useEffect(() => {
         const fetchSeriesData = async () => {
             try {
                 const details = fetchSeriesDetailsById(seriesId);
+                const recommendations = fetchSeriesRecommendationsById(seriesId);
+                const cast = fetchSeriesCastById(seriesId);
 
                 const grabDetails = async () => {
                     const a = await details;
                     setDetails(a)
+                    handleSetStatus('details');
                     setLoading(false);
-
                 };
+                const grabRecs = async () =>{
+                    const b = await recommendations;
+                    handleSetStatus('recs')
+                    setRecs(b)
+                }
+                const grabCast = async () => {
+                    const c = await cast;
+                    handleSetStatus('cast')
+                    setSeriesCast(c)
 
+                }
                 grabDetails();
+                grabRecs();
+                grabCast()
+                console.log('recs grabbed from for series page:', recs);
 
             } catch (error) {
                 console.error('Error fetching data:', error);
@@ -70,7 +108,7 @@ function SeriesPage () {
 
         fetchSeriesData();
     }, [seriesId]);
-    // for handling clicking of different seasons
+    // for handling clicking of different series
 
     const handleSeasonClick = async (seasonData) => {
         // Handle the click event here. You can use seasonData to access information about the clicked season.
@@ -80,8 +118,9 @@ function SeriesPage () {
         await fetchSeasonData(seasonData.season_number);
     };
     console.log('SeasonEpisodeData Dict:',SeasonEpisodeData);
+    console.log('SeriesRecs', recs)
 
-    if (isLoading) {
+    if (!dataStatus.recs || !dataStatus.details || !dataStatus.cast) {
         return <div className="App">Loading...</div>;
     }
     return (
@@ -124,7 +163,10 @@ function SeriesPage () {
                 <div className = "row">
                     <div className = "col-9">
                         <div className = "m-1">
-                            <div className="scroll_media-scroller snaps-inline">
+                            <h4>Top Billed Cast</h4>
+                            <ApiCastScrollBar cast = {seriesCast.cast}/>
+                            <h4>Seasons</h4>
+                            <div className="scroll_media-scroller snaps-inline mb-0 pb-0">
                                 {details.seasons.map((season, i) => (
                                     <SeasonScrollTileDynamic
                                         key={i}
@@ -165,8 +207,9 @@ function SeriesPage () {
 
                     </div>
                 </div>
-                <div className = "row">
-                    <div className = "col-9">
+                <div className = "row mt-0 pt-0">
+                    <div className = "col-9 mt-0 pt-0 ">
+
 
                         <CurrentSeasonOverview season = {currentSeasonDetails}/>
 
@@ -179,11 +222,18 @@ function SeriesPage () {
                             )
                         )}
 
+
                     </div>
 
                 </div>
-
+                <div className = "row">
+                    <h5>Series Recommendations</h5>
+                    <div>
+                        <TvRecommendationsScrollBar recs = {recs.results}/>
+                    </div>
                 </div>
+
+            </div>
         </>
     )
 }

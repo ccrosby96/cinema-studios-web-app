@@ -1,4 +1,9 @@
 import languageMap from "./languages-dictionary.json"
+
+const videoBaseUrls = {
+    "YouTube" : "https://www.youtube.com/watch?v=",
+    "Vimeo" : "Vimeo: https://vimeo.com/"
+}
 function grabGenres(arr) {
     let s = "";
     for (const obj of arr) {
@@ -81,5 +86,19 @@ function extractLanguageName(code) {
     return name;
 
 }
+function generateTrailerUrl(trailers) {
+    console.log('trailers data in genTrailerurl', trailers);
+    for (const obj of trailers) {
+        if (obj.site === "YouTube"){
+            return videoBaseUrls[obj.site] + obj.key
+        }
+        else if (obj.site === "Vimeo"){
+            return videoBaseUrls[obj.site] + obj.key
+        }
+    }
+    // no trailers from YouTube or Vimeo
+    return ""
+}
 export {grabGenres, grabRuntime, grabOriginalLanguage, calculateAge,
-    extractOriginalLanguage, formatDate, grabSeriesCreators, convertScoreToPercent, generateImageUrl, extractLanguageName}
+    extractOriginalLanguage, formatDate, grabSeriesCreators, convertScoreToPercent,
+    generateImageUrl, extractLanguageName, generateTrailerUrl}
