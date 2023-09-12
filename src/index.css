@@ -9,6 +9,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: #0B2340;
 
 }
 
@@ -362,7 +363,7 @@ code {
   font-size: 25px;
 }
 .bg-color {
-  background-color: #e6e6e6; /* Replace with your desired color value */
+  background-color: #bac7d1; /* Replace with your desired color value */
 }
 ul.no-bullets {
   list-style-type: none; /* Remove bullets */

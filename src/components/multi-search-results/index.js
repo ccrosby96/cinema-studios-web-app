@@ -31,7 +31,7 @@ function MultiSearchResultsPage() {
 
             <div className = "row" >
                 <div className = "col-2" >
-                    <h2>Results Type: {selectedItem}</h2>
+                    <h5>Results Type: {selectedItem}</h5>
                     <div className="card">
                         <div className="card-header">Select a Type</div>
                         <ul className="list-group list-group-flush">
@@ -57,7 +57,7 @@ function MultiSearchResultsPage() {
                     </div>
                 </div>
                 <div className="col-10">
-                    <h2>Search Results for: {query}</h2>
+                    <h5>Search Results for {query}</h5>
                     {selectedItem === 'Movie' ? (
                         <MovieResultsList movies={movieResults} />
                     ) : selectedItem === 'TV' ? (

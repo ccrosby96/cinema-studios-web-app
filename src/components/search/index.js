@@ -20,7 +20,7 @@ function LandingSearchPage () {
     const trend = trending.results;
 
     return (
-      <div>
+      <div className = "bg-color">
           <NavigationSidebar/>
 
           <SearchBar/>

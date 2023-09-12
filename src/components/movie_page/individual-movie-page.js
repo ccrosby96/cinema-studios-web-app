@@ -125,14 +125,14 @@ function IndividualMoviePage  () {
             </div>
             <div className="container">
                 <div className="row bg-color">
-                    <div className="col-4">
-                        <div className="bg-image">
-                            <img className="" src={url + details.poster_path} width="70%" height="70%"/>
+                    <div className="col-3 bg-dark" >
+                        <div className="bg-image bg-dark">
+                            <img className="" src={url + details.poster_path} width="95%" height="95%"/>
 
                         </div>
 
                     </div>
-                    <div className="col-8 bg-dark">
+                    <div className="col-9 bg-dark">
                         <span className="fw-bold a1-font-32px white-font"> {details.title}</span> <span
                         className="a1-font-32px white-font"> </span>
                         <br></br>
