@@ -9,7 +9,7 @@ import {
 } from './actionTypes';
 
 const initialState = {
-    results: [[]], // Initially, no search results
+    results: [[]], // Initially, no search results, and we use index results array as page number
     url : "",
     currentPage: 0,
     maxPage: 0,

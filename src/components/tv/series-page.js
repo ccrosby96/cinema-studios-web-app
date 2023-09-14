@@ -9,7 +9,7 @@ import ApiCastScrollBar from "../actor_scroll_bar/api-cast-scroll-bar";
 import CurrentSeasonOverview from "./current-season-overview";
 import EpisodeResultsList from "./episode-results-list";
 import {grabSeriesCreators} from "../../helper_functions/helper_functions";
-import {formatDate,convertScoreToPercent,generateImageUrl,extractLanguageName} from "../../helper_functions/helper_functions";
+import {formatDate,convertScoreToPercent,generateImageUrl,extractLanguageName, extractSeriesNetworkData} from "../../helper_functions/helper_functions";
 
 function SeriesPage () {
     const sid = useParams();
@@ -58,7 +58,7 @@ function SeriesPage () {
 
                 const seasonDetails = findSeriesSeasonDetails(seriesId, seasonNumber)
                 const data = await seasonDetails;
-                console.log("season specific data ", data)
+
                 // Update the state with the fetched data
                 setSeasonEpisodeData(prevState => ({
                     ...prevState,
@@ -83,6 +83,8 @@ function SeriesPage () {
                 const grabDetails = async () => {
                     const a = await details;
                     setDetails(a)
+                   // console.log(a)
+                    //console.log(a.name);
                     handleSetStatus('details');
                     setLoading(false);
                 };
@@ -99,8 +101,8 @@ function SeriesPage () {
                 }
                 grabDetails();
                 grabRecs();
-                grabCast()
-                console.log('recs grabbed from for series page:', recs);
+                grabCast();
+
 
             } catch (error) {
                 console.error('Error fetching data:', error);
@@ -110,132 +112,144 @@ function SeriesPage () {
         fetchSeriesData();
     }, [seriesId]);
     // for handling clicking of different series
+    console.log(dataStatus);
+
 
     const handleSeasonClick = async (seasonData) => {
         // Handle the click event here. You can use seasonData to access information about the clicked season.
-
         setCurrentSeasonDetails(seasonData);
         setCurrentSeasonNumber(seasonData.season_number);
         await fetchSeasonData(seasonData.season_number);
     };
-    console.log('SeasonEpisodeData Dict:',SeasonEpisodeData);
-    console.log('SeriesRecs', recs)
 
     if (!dataStatus.recs || !dataStatus.details || !dataStatus.cast) {
         return <div className="App">Loading...</div>;
     }
-    return (
-        <>
-            <div className="row p-0 m-0">
-                <NavigationSidebar/>
-            </div>
-            <div className="container">
-                <div className="row">
-                    <div className = "col-3 bg-dark mt-1">
-                        <div className="bg-image mt-1">
-                            <img className="" src={imageUrl + details.poster_path} width="95%" height="95%"/>
+    if (dataStatus.recs && dataStatus.details && dataStatus.cast) {
 
+        const networkInfo = extractSeriesNetworkData(details);
+        console.log(networkInfo)
+
+
+        //console.log('details grabbed from for series page:', details);
+        //console.log('name from details:', details.name)
+        return (
+
+            <>
+                <div className="row p-0 m-0">
+                    <NavigationSidebar/>
+                </div>
+                <div className="container">
+                    <div className="row">
+                        <div className="col-3 bg-dark mt-1">
+                            <div className="bg-image mt-1">
+                                <img className="" src={imageUrl + details.poster_path} width="95%" height="95%"/>
+
+                            </div>
                         </div>
-                    </div>
-                        <div className = "col-9 bg-dark mt-1">
+                        <div className="col-9 bg-dark mt-1">
                             <span className="fw-bold a1-font-32px white-font"> {details.name}</span> <span
                             className="a1-font-32px white-font"> </span>
                             <br></br>
-                            <span className="fst-italic white-font"> Aired {formatDate(details.first_air_date)}</span> . <span
+                            <span
+                                className="fst-italic white-font"> Aired {formatDate(details.first_air_date)}</span> . <span
                             className="white-font"> ({(grabGenres(details.genres))})</span> .
                             <br></br>
                             <br></br>
 
                             <p className="fst-italic a1-font-16px white-font"> {details.tagline}</p>
-                            <p className="fw-bold a1-font-25px white-font"> Overview</p>
-                            <span className="white-font">{details.overview}</span>
+                            <p className="fw-bold a1-font-25px white-font mb-0 pb-0"> Overview</p>
+                            <span className="white-font mt-0 pt-0">{details.overview}</span>
                             <br></br>
                             <br></br>
                             <p className="fw-bold a1-font-16px white-font mb-0 pb-0"> User Score </p>
-                            <span className="white-font mt-0 pt-0">{convertScoreToPercent(details.vote_average)} %</span>
-                            <p className = "fw-bold a1-font-16px white-font mb-0 pb-0 mt-3"> Creators</p>
+                            <span
+                                className="white-font mt-0 pt-0">{convertScoreToPercent(details.vote_average)} %</span>
+                            <p className="fw-bold a1-font-16px white-font mb-0 pb-0 mt-3"> Creators</p>
 
                             <span className="white-font">{grabSeriesCreators(details.created_by)}</span>
 
 
                         </div>
 
-                </div>
-                <div className = "row">
-                    <div className = "col-9">
-                        <div className = "m-1">
-                            <h4>Top Billed Cast</h4>
-                            <ApiCastScrollBar cast = {seriesCast.cast}/>
-                            <h4>Seasons</h4>
-                            <div className="scroll_media-scroller snaps-inline mb-0 pb-0">
-                                {details.seasons.map((season, i) => (
-                                    <SeasonScrollTileDynamic
-                                        key={i}
-                                        season={season}
-                                        onClickHandler={handleSeasonClick} // Pass the click handler as a prop
-                                    />
-                                ))}
+                    </div>
+                    <div className="row">
+                        <div className="col-9">
+                            <div className="m-1">
+                                <h4>Top Billed Cast</h4>
+                                <ApiCastScrollBar cast={seriesCast.cast}/>
+                                <h4>Seasons</h4>
+                                <div className="scroll_media-scroller snaps-inline mb-0 pb-0">
+                                    {details.seasons.map((season, i) => (
+                                        <SeasonScrollTileDynamic
+                                            key={i}
+                                            season={season}
+                                            onClickHandler={handleSeasonClick} // Pass the click handler as a prop
+                                        />
+                                    ))}
+                                </div>
                             </div>
+
+                        </div>
+                        <div className="col-3">
+                            <ul className="no-bullets mt-2">
+                                <li>
+                                    <span className="fw-bold"> Status</span>
+                                    <br></br>
+                                    <p> {details.status}</p>
+                                </li>
+                                <li>
+                                    <span className="fw-bold"> Original Language</span>
+                                    <br></br>
+                                    <p> {extractLanguageName(details.original_language)}</p>
+                                </li>
+
+
+                                <li>
+                                    <span className="fw-bold"> Network</span>
+                                    <br></br>
+                                    <p className="mb-0 pb-0"> {networkInfo.name}</p>
+                                    <img className="network-logo-small float mt-0 pt-0 mb-2"
+                                         src={generateImageUrl(networkInfo.logo)}></img>
+                                </li>
+                                <li>
+                                    <span className="fw-bold mt-2"> Type</span>
+                                    <br></br>
+                                    <p> {details.type}</p>
+                                </li>
+                            </ul>
+
+                        </div>
+                    </div>
+                    <div className="row mt-0 pt-0">
+                        <div className="col-9 mt-0 pt-0 ">
+
+
+                            <CurrentSeasonOverview season={currentSeasonDetails}/>
+
+                            {/* Conditionally render loading text or EpisodeResultsList */}
+                            {episodeLoading ? (
+                                <p>Loading data...</p>
+                            ) : (
+                                SeasonEpisodeData[currentSeasonNumber] && (
+                                    <EpisodeResultsList data={SeasonEpisodeData[currentSeasonNumber]}/>
+                                )
+                            )}
+
+
                         </div>
 
                     </div>
-                    <div className = "col-3">
-                        <ul className="no-bullets mt-2">
-                        <li>
-                            <span className="fw-bold"> Status</span>
-                            <br></br>
-                            <p> {details.status}</p>
-                        </li>
-                        <li>
-                            <span className="fw-bold"> Original Language</span>
-                            <br></br>
-                            <p> {extractLanguageName(details.original_language)}</p>
-                        </li>
-
-
-                        <li>
-                            <span className="fw-bold"> Network</span>
-                            <br></br>
-                            <p className = "mb-0 pb-0"> {details.networks[0].name}</p>
-                            <img className = "network-logo-small float mt-0 pt-0 mb-2"src = {generateImageUrl(details.networks[0].logo_path)}></img>
-                        </li>
-                        <li>
-                            <span className = "fw-bold mt-2"> Type</span>
-                            <br></br>
-                            <p> {details.type}</p>
-                        </li>
-                    </ul>
-
-                    </div>
-                </div>
-                <div className = "row mt-0 pt-0">
-                    <div className = "col-9 mt-0 pt-0 ">
-
-
-                        <CurrentSeasonOverview season = {currentSeasonDetails}/>
-
-                        {/* Conditionally render loading text or EpisodeResultsList */}
-                        {episodeLoading ? (
-                            <p>Loading data...</p>
-                        ) : (
-                            SeasonEpisodeData[currentSeasonNumber] && (
-                                <EpisodeResultsList data={SeasonEpisodeData[currentSeasonNumber]} />
-                            )
-                        )}
-
-
+                    <div className="row">
+                        <h5>Series Recommendations</h5>
+                        <div>
+                            <TvRecommendationsScrollBar recs={recs.results}/>
+                        </div>
                     </div>
 
                 </div>
-                <div className = "row">
-                    <h5>Series Recommendations</h5>
-                    <div>
-                        <TvRecommendationsScrollBar recs = {recs.results}/>
-                    </div>
-                </div>
-
-            </div>
-        </>
-    )
+            </>
+        )
+    }
 }
 export default SeriesPage

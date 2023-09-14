@@ -119,20 +119,20 @@ function IndividualMoviePage  () {
     }
     if (dataStatus.details && dataStatus.cast && dataStatus.recs &&  dataStatus.providers)
     return (
-        <>
+        <div className= "bg-color">
             <div className="row p-0 m-0">
                 <NavigationSidebar/>
             </div>
             <div className="container">
                 <div className="row bg-color">
-                    <div className="col-3 bg-dark" >
+                    <div className="col-3 bg-dark mt-1" >
                         <div className="bg-image bg-dark">
                             <img className="" src={url + details.poster_path} width="95%" height="95%"/>
 
                         </div>
 
                     </div>
-                    <div className="col-9 bg-dark">
+                    <div className="col-9 bg-dark mt-1">
                         <span className="fw-bold a1-font-32px white-font"> {details.title}</span> <span
                         className="a1-font-32px white-font"> </span>
                         <br></br>
@@ -145,15 +145,18 @@ function IndividualMoviePage  () {
                         <br></br>
 
                         <p className="fst-italic a1-font-16px white-font"> {details.tagline}</p>
-                        <div className = "trailer-icon float-right">
+                        <div className = "ms-0 ps-0 ">
                             {trailers !== '' && (
                                 <button className = "bg-dark" onClick={openVideoInNewWindow}>
                                     <i className="fa-solid fa-play fa-2x trailer-icon" style={{color: "#f5f5f5"}}></i>
+                                    <span className= "white-text nudge-up">  &nbsp; Play Trailer</span>
+
                                 </button>
                             )}
+
                         </div>
-                        <p className="fw-bold a1-font-25px white-font"> Overview</p>
-                        <span className="white-font">{details.overview}</span>
+                        <p className="fw-bold a1-font-25px white-font mb-0 pb-0 mt-2"> Overview</p>
+                        <span className="white-font mt-0 pt-0">{details.overview}</span>
 
                         <br></br>
                         <br></br>
@@ -169,7 +172,7 @@ function IndividualMoviePage  () {
                     </div>
                 </div>
                 <div className="row pt-1">
-                    < div className="col-8">
+                    < div className="col-9">
                         <span className="a1-font-25px fw-bold"> Top Billed Cast</span>
                         <br></br>
                         <div>
@@ -179,7 +182,7 @@ function IndividualMoviePage  () {
                             }
                         </div>
                     </div>
-                    <div className="col-4">
+                    <div className="col-3">
                         <ul className="no-bullets mt-2">
                             <li>
                                 <span className="fw-bold"> Status</span>
@@ -206,13 +209,13 @@ function IndividualMoviePage  () {
                     </div>
                 </div>
                 <div className="row">
-                    <div className = "col-8">
+                    <div className = "col-9">
                         <span className="a1-font-25px fw-bold">Recommendations</span>
                         <RecommendationsScrollBar data = {recs.results}/>
 
 
                     </div>
-                    <div className= "col-4">
+                    <div className= "col-3">
 
                         <ApiWatchProviders data = {providers.results.US}/>
 
@@ -222,7 +225,7 @@ function IndividualMoviePage  () {
 
             </div>
 
-        </>
+        </div>
     );
 }
 

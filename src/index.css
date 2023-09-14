@@ -570,4 +570,12 @@ button.active {
 button-no-style {
   all: unset;
 }
-
+.white-text {
+  color: white;
+  /* Add other styles as needed */
+}
+.nudge-up {
+  position: relative; /* Make sure the element is positioned relative to its normal position */
+  top: -5px; /* Adjust the value to nudge the element up by the desired number of pixels */
+  /* Add other styles as needed */
+}

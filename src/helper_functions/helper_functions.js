@@ -5,12 +5,10 @@ const videoBaseUrls = {
     "Vimeo" : "Vimeo: https://vimeo.com/"
 }
 function grabGenres(arr) {
-    let s = "";
-    for (const obj of arr) {
 
-        s = s + obj.name + " ";
-    }
-    return s
+    const nameArray = arr.map(obj => obj.name);
+    const combinedNames = nameArray.join(", ");
+    return combinedNames;
 }
 
 function grabRuntime (minutes) {
@@ -128,7 +126,18 @@ function extractMovieCertification(details) {
     }
     return "None";
 }
+function extractSeriesNetworkData(details) {
+    const arr = details.networks;
+    if (arr.length === 0){
+        return {name: "No Network Yet",
+                logo: ""}
+    }
+    const data = arr[0];
+    return  {name: data.name,
+             logo: data.logo_path
+            }
+}
 export {grabGenres, grabRuntime, grabOriginalLanguage, calculateAge,
     extractOriginalLanguage, formatDate, grabSeriesCreators, convertScoreToPercent,
     generateImageUrl, extractLanguageName,
-    generateTrailerUrl, grabPersonGender, extractMovieCertification}
+    generateTrailerUrl, grabPersonGender, extractMovieCertification, extractSeriesNetworkData}

@@ -77,7 +77,7 @@ function TvRecommendationsScrollBar(
 
 ) {
 
-    console.log("recs in TvRecomendationScrollbar_component",recs);
+   // console.log("recs in TvRecomendationScrollbar_component",recs);
     return (
         <>
             <div className="scroll_media-scroller snaps-inline">

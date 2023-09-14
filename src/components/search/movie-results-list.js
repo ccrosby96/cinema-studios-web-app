@@ -43,6 +43,10 @@ function MovieResultsList (movies = movies = [
         "vote_average": 5.8,
         "vote_count": 39
     }]) {
+    if (movies.movies.length === 0){
+        return (<p> No movies found (ㆆ _ ㆆ)</p>)
+    }
+
     return (
         <>
             <ul className= "list-group no-bullets">

@@ -45,6 +45,9 @@ function TvResultsList (shows = [
         "vote_count": 39
     }]) {
     console.log("shows in TvResultsList", shows)
+    if (shows.shows.length === 0){
+        return (<p> No shows found ಠ╭╮ಠ</p>)
+    }
     return (
         <>
             <ul className= "list-group no-bullets">

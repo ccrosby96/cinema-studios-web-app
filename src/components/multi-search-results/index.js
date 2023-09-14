@@ -15,7 +15,6 @@ function MultiSearchResultsPage() {
     const  q  = useParams();
     const [searchResults, setSearchResults] = useState([]);
     console.log("In multi search landing page")
-    console.log(peopleResults)
     const query = q.q;
     console.log(query);
     const [selectedItem, setSelectedItem] = useState('Movie');
@@ -72,7 +71,6 @@ function MultiSearchResultsPage() {
             </div>
             </div>
 
-            {/* Render the search results using the searchResults state */}
         </di>
 
     );

@@ -81,6 +81,9 @@ function PeopleResultsList (people = [
     }
 ]) {
     const arr = people.people;
+    if (arr.length === 0){
+        return (<p> No people found ヽ(゜～゜o)ノ</p>)
+    }
     return (
         <>
             <ul className= "list-group no-bullets">
