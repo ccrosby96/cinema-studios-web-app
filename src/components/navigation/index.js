@@ -1,6 +1,10 @@
 import {Link} from "react-router-dom";
+import style from "../../styles/navigation.css"
+import {useSelector} from "react-redux";
 const NavigationSidebar = (
 ) => {
+    const { currentUser } = useSelector((state) => state.user);
+
 
     return (
         <nav className="navbar navbar-expand-lg navbar-dark bg-dark" >
@@ -25,8 +29,6 @@ const NavigationSidebar = (
 
                             </Link>
 
-
-
                     </li>
                     <li className="nav-item">
                         <a className="nav-link" href="#">TV Shows</a>
@@ -34,12 +36,13 @@ const NavigationSidebar = (
                     <li className="nav-item">
                         <a className="nav-link" href="#">People</a>
                     </li>
-
-                </ul>
-                <ul className="navbar-nav ml-auto">
                     <li className="nav-item">
-                        <a className="nav-link" href="#">Login</a>
+                        <a className="nav-link" href="/profile">Profile</a>
                     </li>
+                    <li className="nav-item ml-auto">
+                        <a className="nav-link" href="/login">Login</a>
+                    </li>
+
                 </ul>
             </div>
         </nav>

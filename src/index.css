@@ -579,3 +579,17 @@ button-no-style {
   top: -5px; /* Adjust the value to nudge the element up by the desired number of pixels */
   /* Add other styles as needed */
 }
+.sunset-background {
+  background-image: url("../public/images/sunset_image.jpg");
+  background-size: cover;
+}
+.textured-background {
+  background-image: url("../public/images/grey-texture.jpg");
+  background-size: cover;
+}
+.checkmark {
+  font-size: 25px; /* Adjust the size as needed */
+}
+.color-green {
+  color: green;
+}

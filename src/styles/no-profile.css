@@ -1,0 +1,34 @@
+/* NoProfile.css */
+
+/* Styles for the navigation bar specific to NoProfile component */
+.no-profile-navbar {
+    width: 100%;
+    position: fixed;
+    top: 0;
+    z-index: 1000;
+}
+
+/* Styles for the content below the navigation bar specific to NoProfile component */
+.no-profile-page-content {
+    margin-top: 60px;
+}
+
+/* Styles for centering the image specific to NoProfile component */
+.no-profile-center-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: calc(100vh - 60px);
+    background-color: #f0f0f0;
+}
+
+.no-profile-center-container img {
+    display: block;
+    max-width: 80%;
+    height: auto;
+    object-fit: contain;
+}
+.no-profile-centered-text {
+    text-align: center;
+    margin-bottom: 20px; /* Adjust the margin as needed */
+}

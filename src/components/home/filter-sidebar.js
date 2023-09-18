@@ -14,6 +14,18 @@ function FilterSidebar () {
 
     const [localStartYear, setLocalStartYear] = useState(startYear);
     const [localEndYear, setLocalEndYear] = useState(endYear);
+
+    const [showCheckmark, setShowCheckmark] = useState(false);
+
+    const handleYearRangeButtonClick = () => {
+        // Show the checkmark
+        setShowCheckmark(true);
+
+        // Set a timeout to hide the checkmark after 2 seconds (adjust the duration as needed)
+        setTimeout(() => {
+            setShowCheckmark(false);
+        }, 1000);
+    };
     const handleGenreButtonClick = (genre) => {
         dispatch(toggleGenreFilter(genre));
     };
@@ -28,8 +40,10 @@ function FilterSidebar () {
         dispatch(setAudienceScore(parseInt(e.target.value)));
     };
 
+
+
     return (
-        <div>
+        <div className = "container">
             <h5>Release Dates </h5>
             <form onSubmit={handleSubmit}>
                 <label>
@@ -50,7 +64,8 @@ function FilterSidebar () {
                         onChange={(e) => setLocalEndYear(e.target.value)}
                     />
                 </label>
-                <button type="submit" className = "btn btn-secondary mt-1">Set Release Years</button>
+                <button onClick={handleYearRangeButtonClick} type="submit" className = "btn btn-secondary mt-1 float-start">Set Release Years</button>
+                {showCheckmark && <div className="checkmark color-green">&#10004;</div>}
             </form>
             <h5>Genres</h5>
 
