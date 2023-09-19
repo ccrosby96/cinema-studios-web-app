@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import style from "../../styles/profile.css"
+import "../../styles/profile.css"
 import { useNavigate } from "react-router";
 import { profileThunk, logoutThunk, updateUserThunk }
     from "../../thunks/users-thunks";
@@ -40,10 +40,10 @@ function ProfileScreen() {
      return (
          <>
              <NavigationSidebar/>
-         <div class="container rounded bg-white mt-5 mb-5">
+         <div class="container rounded mt-5 mb-5 profile-background">
              <div class="row">
                  <div class="col-md-3 border-right">
-                     <div class="d-flex flex-column align-items-center text-center p-3 py-5"><img class="rounded-circle mt-5 circle-container" src={profile.profilePic}/><span class="font-weight-bold">{profile.firstName}</span><span class="text-black-50">{profile.email}</span><span> </span></div>
+                     <div class="d-flex flex-column align-items-center text-center p-3 py-5"><img class=" mt-5 circle-container" src={profile.profilePic}/><span class="font-weight-bold">{profile.username}</span><span> </span></div>
                  </div>
                  <div class="col-md-5 border-right">
                      <div class="p-3 py-5">
@@ -103,13 +103,13 @@ function ProfileScreen() {
 
 
                              </div>
-                         <button className = "btn btn-secondary profile-button mt-5 float-start" type = "button"
+                         <button className = "btn btn-primary profile-button mt-5 float-start" type = "button"
                                  onClick={() => {
                                      dispatch(logoutThunk());
                                      navigate("/login");
                                  }}>
                              Logout</button>
-                         <div class="mt-5 text-center"><button class="btn btn-primary profile-button" type="button" onClick = {save}>Save Profile</button></div>
+                         <div class="mt-5 text-center"><button class="btn btn-primary profile-button float-end" type="button" onClick = {save}>Save Profile</button></div>
 
                      </div>
                  </div>

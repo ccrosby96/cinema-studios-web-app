@@ -110,6 +110,10 @@ function grabPersonGender(num){
     return "Not specified"
 }
 function extractMovieCertification(details) {
+    const productionCountries = details.production_countries
+     if (productionCountries.length === 0){
+         return ""
+     }
     const prodCountry = details.production_countries[0].iso_3166_1;
     console.log('country found in movie details', prodCountry);
 
@@ -118,8 +122,10 @@ function extractMovieCertification(details) {
     for (const release of releaseDates) {
         if (release.iso_3166_1 === "US") {
             for (const item of release.release_dates){
-                if (item.type === 1 || item.type === 2 || item.type === 3){
-                    return item.certification
+                if (item.type === 1 || item.type === 2 || item.type === 3 ){
+                    if (item.certification !== ""){
+                        return item.certification
+                    }
                 }
             }
         }

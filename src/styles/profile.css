@@ -1,6 +1,9 @@
 body {
     background: rgb(153, 153, 153)
 }
+.blue-background {
+    background: rgb(159, 167, 173)
+}
 
 .form-control:focus {
     box-shadow: none;
