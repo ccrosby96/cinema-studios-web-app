@@ -3,7 +3,6 @@ const API_BASE =  "http://localhost:4000/api";
 const SERVER_API_URL = process.env.REACT_APP_SERVER_API_URL;
 const USERS_URL = `${SERVER_API_URL}/users`
 const USER_API = `${API_BASE}/users`;
-//const USER_API = "https://final-project-node-server.onrender.com/api/users"
 
 
 const api = axios.create({
@@ -41,8 +40,7 @@ export const deleteUser = async (user) => {
 }
 
 export const login = async ({ username, password }) => {
-    console.log("service login with creds: ", username, password);
-    console.log("endpoint: ", `${USERS_URL}/login`)
+
     const response = await api.post(`${USERS_URL}/login`, {
         username,
         password,

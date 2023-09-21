@@ -1,9 +1,15 @@
 import {Link} from "react-router-dom";
 import style from "../../styles/navigation.css"
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
+import ReviewPostForm from "../reviews/review-post-form";
+import {logoutThunk} from "../../thunks/users-thunks";
+import {useNavigate} from "react-router";
 const NavigationSidebar = (
 ) => {
     const { currentUser } = useSelector((state) => state.user);
+    console.log("in navbar componenent, user is", currentUser);
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
 
 
     return (
@@ -39,9 +45,20 @@ const NavigationSidebar = (
                     <li className="nav-item">
                         <a className="nav-link" href="/profile">Profile</a>
                     </li>
-                    <li className="nav-item ml-auto">
-                        <a className="nav-link" href="/login">Login</a>
-                    </li>
+                    {currentUser ? (
+                        <li className="nav-item ml-auto " onClick={() => {
+                            dispatch(logoutThunk());
+                            navigate("/login");
+                        }}>
+                            <a className="nav-link" href="/login">Logout</a>
+                        </li>
+                    ) : (
+                        <li className="nav-item ml-auto">
+                            <a className="nav-link" href="/login">Login</a>
+                        </li>
+                    )}
+
+
 
                 </ul>
             </div>

@@ -13,10 +13,6 @@ import {useSelector} from "react-redux";
 
 function LandingSearchPage () {
 
-    const handleSearch = () => {
-        // Implement your search functionality here
-        alert('Searching...');
-    };
     const res = popular.results;
     const trend = trending.results;
     const { currentUser } = useSelector((state) => state.user);

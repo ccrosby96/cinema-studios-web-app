@@ -17,8 +17,11 @@ import {useEffect, useState} from "react";
 import {findMovieDetailsById, findMovieCastById, findMovieProvidersById,
     findMovieRecommendationsById, fetchMovieVideosById} from "../../services/movie-service";
 import ApiWatchProviders from "../watch_providers/api-providers";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {Link} from "react-router-dom";
+import ReviewPostForm from "../reviews/review-post-form";
+import {useSelector} from "react-redux";
+import {getReviewsByMovieId} from "../../services/movie-review-service";
+import MovieReviewList from "../reviews/movie-review-list";
+
 /*
 cinema studios - name idea by jake fredo
  */
@@ -27,6 +30,8 @@ function IndividualMoviePage  () {
     const url = "http://image.tmdb.org/t/p/w500";
     const mid = useParams();
     const movieId = mid.mid
+    const { currentUser } = useSelector((state) => state.user);
+    console.log("user in moviepage is ", currentUser);
 
     const [isLoading, setLoading] = useState(true);
     const [dataStatus,setDataStatus] = useState({
@@ -34,7 +39,8 @@ function IndividualMoviePage  () {
         cast: false,
         providers: false,
         recs: false,
-        trailers: false
+        trailers: false,
+        reviews: false
 
     })
     const handleSetStatus = (property) => {
@@ -53,16 +59,17 @@ function IndividualMoviePage  () {
     const [providers, setProviders] = useState(null);
     const [recs, setRecs] = useState(null);
     const [trailers, setTrailers] = useState(null);
+    const [movieReviews, setMovieReviews] = useState(null);
 
     useEffect(() => {
         const fetchData = async () => {
             try {
-
                 const details = findMovieDetailsById(movieId);
                 const cast = findMovieCastById(movieId);
                 const providers = findMovieProvidersById(movieId);
                 const recommendations = findMovieRecommendationsById(movieId);
                 const trailers = fetchMovieVideosById(movieId);
+                const reviews = getReviewsByMovieId(movieId);
                 const grabDetails = async () => {
                     const a = await details;
                     setDetails(a)
@@ -70,6 +77,11 @@ function IndividualMoviePage  () {
                     handleSetStatus('details')
 
                 };
+                const grabReviews = async ()=> {
+                    const r = await reviews;
+                    setMovieReviews(r);
+                    handleSetStatus('reviews');
+                }
                 const grabCast = async () => {
                     const b = await cast;
                     setCast(b)
@@ -102,6 +114,7 @@ function IndividualMoviePage  () {
                 grabProviders();
                 grabRecs();
                 grabTrailers();
+                grabReviews();
 
             } catch (error) {
                 console.error('Error fetching data:', error);
@@ -112,7 +125,8 @@ function IndividualMoviePage  () {
     }, [movieId]); // if we have a new movie id we want to re-render
 
 
-    console.log(details)
+
+    console.log(movieReviews);
 
     if (!dataStatus.details || !dataStatus.cast || !dataStatus.recs || !dataStatus.providers) {
         return <div className="App">Loading...</div>;
@@ -208,7 +222,7 @@ function IndividualMoviePage  () {
 
                     </div>
                 </div>
-                <div className="row">
+                <div className="row mb-0 pb-0">
                     <div className = "col-9">
                         <span className="a1-font-25px fw-bold">Recommendations</span>
                         <RecommendationsScrollBar data = {recs.results}/>
@@ -221,6 +235,20 @@ function IndividualMoviePage  () {
 
                     </div>
 
+                </div>
+                <div className = "row mt-0 pt-0">
+                    <span className="a1-font-25px fw-bold">Reviews</span>
+                    <div className= "col-9">
+                        {currentUser ? (
+                            <ReviewPostForm user={currentUser} movieId={movieId} />
+                        ) : (
+                            <p>Please log in to post a review.</p>
+                        )}
+                        <MovieReviewList reviews = {movieReviews}/>
+                    </div>
+                    <div className = "col-3">
+
+                    </div>
                 </div>
 
             </div>

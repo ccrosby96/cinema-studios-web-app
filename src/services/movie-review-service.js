@@ -6,11 +6,13 @@ const api = axios.create({
     withCredentials: true,
 });
 export const getReviewsByMovieId = async (movieId) => {
-    const response = await api.get(`${REVIEWS_URL}/${movieId}`)
+    const response = await api.get(`${REVIEWS_URL}/movie/${movieId}`)
     return response.data;
 }
 
 export const createMovieReview = async (review) => {
+    console.log("in createMovieReview, review is", review)
+    console.log('REVIEWS_URL',REVIEWS_URL)
     const response = await api.post(`${REVIEWS_URL}`, review)
     return response.data;
 }

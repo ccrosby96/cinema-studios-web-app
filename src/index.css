@@ -579,6 +579,10 @@ button-no-style {
   top: -5px; /* Adjust the value to nudge the element up by the desired number of pixels */
   /* Add other styles as needed */
 }
+.nudge-left {
+  position: relative;
+  left: -5px;
+}
 .sunset-background {
   background-image: url("../public/images/sunset_image.jpg");
   background-size: cover;
@@ -601,4 +605,11 @@ button-no-style {
   width: 60px;
   height: 60px;
   border-radius: 50%;
+}
+.color-yellow  {
+  color: yellow;
+}
+.custom-slider {
+  background: red; /* Change this to your desired color */
+  /* Additional styling properties can be added as needed */
 }

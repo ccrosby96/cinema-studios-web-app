@@ -198,7 +198,7 @@ function FilterSidebar () {
             </ul>
             <h5>User Rating</h5>
 
-            <Slider value={audienceScore} onChange={handleSliderChange} />
+            <Slider value={audienceScore} max = {100} step = {5} onChange={handleSliderChange} />
             <div className="slider-value">Rating: {audienceScore}%</div>
 
 

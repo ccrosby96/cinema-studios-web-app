@@ -21,6 +21,7 @@ import CreateAccount from "./components/login/create-account";
 import ProfileScreen from "./components/profile/profile-screen";
 import MovieReviewItem from "./components/reviews/movie-review";
 import review from "./components/reviews/review.json"
+import ReviewPostForm from "./components/reviews/review-post-form";
 
 const rootReducer = combineReducers({
         filters: combineReducers({
@@ -49,6 +50,8 @@ function App() {
                 <Route path = "tv/*" element = {<TvRouting/>}/>
                 <Route path = "profile" element = {<ProfileScreen/>}/>
                 <Route path = "test/review" element = {<MovieReviewItem review = {review}/>}/>
+                <Route path = "test/review/post" element = {<ReviewPostForm/>}/>
+
             </Routes>
           </Provider>
       </BrowserRouter>

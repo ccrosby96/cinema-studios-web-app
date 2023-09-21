@@ -1,15 +1,15 @@
 import React from 'react';
 
-function Slider({ value, onChange }) {
+function Slider({ value, onChange, max, step }) {
     return (
         <input
             type="range"
             min={0}
-            max={100}
-            step = {5}
+            max={max}
+            step = {step}
             value={value}
             onChange={onChange}
-            className="slider"
+            className="slider custom-slider color-yellow bg-light"
         />
     );
 }

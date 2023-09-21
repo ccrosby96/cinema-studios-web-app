@@ -61,7 +61,11 @@ function formatDate(inputDate) {
     const date = new Date(inputDate);
     return date.toLocaleDateString(undefined, options);
 }
-
+function formatReviewDate(dateString) {
+    const date = new Date(dateString);
+    const options = { year: 'numeric', month: 'long', day: 'numeric' };
+    return new Intl.DateTimeFormat('en-US', options).format(date);
+}
 function grabSeriesCreators(data) {
     const creatorNames = data.map(creator => creator.name);
 
@@ -146,4 +150,4 @@ function extractSeriesNetworkData(details) {
 export {grabGenres, grabRuntime, grabOriginalLanguage, calculateAge,
     extractOriginalLanguage, formatDate, grabSeriesCreators, convertScoreToPercent,
     generateImageUrl, extractLanguageName,
-    generateTrailerUrl, grabPersonGender, extractMovieCertification, extractSeriesNetworkData}
+    generateTrailerUrl, grabPersonGender, extractMovieCertification, extractSeriesNetworkData, formatReviewDate}
