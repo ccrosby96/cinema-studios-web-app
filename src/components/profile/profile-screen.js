@@ -6,13 +6,14 @@ import { profileThunk, logoutThunk, updateUserThunk }
     from "../../thunks/users-thunks";
 import NavigationSidebar from "../navigation";
 import NoProfile from "./no-profile";
+import MovieWatchList from "./movie-watch-list";
 function ProfileScreen() {
     const { currentUser } = useSelector((state) => state.user);
     const [profile, setProfile] = useState(currentUser);
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const save = () => { dispatch(updateUserThunk(profile)); };
-    console.log(profile)
+    const save = () => { dispatch(updateUserThunk(profile));};
+
 
     useEffect(() => {
         const fetchData = async () => {
@@ -36,7 +37,6 @@ function ProfileScreen() {
                 <NoProfile/>
             );
     }
-    console.log(currentUser)
      return (
          <>
              <NavigationSidebar/>
@@ -116,9 +116,7 @@ function ProfileScreen() {
                  <div class="col-md-4">
                      <div class="p-3 py-5">
                          <div class="d-flex justify-content-between align-items-center experience"><h4>Movie Watch List</h4></div><br></br>
-
-                         <div class="col-md-12"><span>Then Nun II</span></div>
-                         <div className="col-md-12"><span>The Shining</span></div>
+                        <MovieWatchList movies = {currentUser.watchlist}/>
                      </div>
                  </div>
              </div>

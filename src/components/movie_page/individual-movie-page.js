@@ -20,6 +20,7 @@ import ReviewPostForm from "../reviews/review-post-form";
 import {useSelector} from "react-redux";
 import {getReviewsByMovieId} from "../../services/movie-review-service";
 import MovieReviewList from "../reviews/movie-review-list";
+import {addToUserWatchlist} from "../../services/users-service";
 
 /*
 cinema studios - name idea by jake fredo
@@ -30,7 +31,9 @@ function IndividualMoviePage  () {
     const mid = useParams();
     const movieId = mid.mid
     const { currentUser } = useSelector((state) => state.user);
+    const [errorMessage, setErrorMessage] = useState(null);
     console.log("user in moviepage is ", currentUser);
+
 
     const [dataStatus,setDataStatus] = useState({
         details: false,
@@ -47,6 +50,33 @@ function IndividualMoviePage  () {
             [property]: true
         }));
     };
+    const handleAddToWatchlist = async () => {
+        if (watchListAdded){
+            console.log("Already added this to watchlist")
+            return
+        }
+        const watchListItem = {
+            movieTitle: details.title,
+            movieId: movieId,
+            posterPic: details.poster_path,
+            movieDescription: details.overview,
+            releaseDate: details.release_date
+        };
+        try {
+            // Call the API function
+            const result =await addToUserWatchlist(watchListItem);
+            setWatchListAdded(true);
+            // If successful, you can optionally display a success message or update your UI
+            // ...
+        } catch (error) {
+            // Handle the error here
+            if (error.message === 'User not authenticated') {
+                // Display an alert for the user to log in
+                setErrorMessage('Please log in to add movies to your watchlist.');
+            }
+        }
+    }
+
     const openVideoInNewWindow = () => {
         if (trailers !== '') {
             window.open(trailers, '_blank', 'width=600,height=400'); // Adjust width and height as needed
@@ -58,6 +88,7 @@ function IndividualMoviePage  () {
     const [recs, setRecs] = useState(null);
     const [trailers, setTrailers] = useState(null);
     const [movieReviews, setMovieReviews] = useState(null);
+    const [watchListAdded, setWatchListAdded] = useState(false);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -163,7 +194,16 @@ function IndividualMoviePage  () {
                                     <span className= "white-text nudge-up">  &nbsp; Play Trailer</span>
 
                                 </button>
+
                             )}
+                            {errorMessage && (
+                                <div className="alert alert-danger">{errorMessage}</div>
+                            )}
+                            {!errorMessage && (
+                            <button className="bg-dark ms-2" onClick = {handleAddToWatchlist}>
+                                <i className="fa-solid fa-plus fa-2x trailer-icon" style={{color: "#f5f5f5"}}></i>
+                                <span className= "white-text nudge-up"> Watchlist</span>
+                            </button>)}
 
                         </div>
                         <p className="fw-bold a1-font-25px white-font mb-0 pb-0 mt-2"> Overview</p>

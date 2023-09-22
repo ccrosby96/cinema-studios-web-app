@@ -554,6 +554,10 @@ button.active {
   max-width: 100px;
   max-height: 100px;
 }
+.watchlist-image {
+  max-height:200px;
+  max-width: 200px;
+}
 .watch-provider-logo {
   max-width: 50px;
   max-height: 50px;
@@ -592,7 +596,7 @@ button-no-style {
   background-size: cover;
 }
 .profile-background {
-  background-image: url("../public/images/profile.jpg");
+  background-image: url("../public/images/profile-background.jpg");
   background-size: cover;
 }
 .checkmark {

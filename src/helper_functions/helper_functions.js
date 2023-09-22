@@ -147,7 +147,16 @@ function extractSeriesNetworkData(details) {
              logo: data.logo_path
             }
 }
+function truncateString(inputString, maxLength) {
+    if (inputString.length > maxLength) {
+        return inputString.substring(0, maxLength);
+    } else {
+        return inputString;
+    }
+}
+
 export {grabGenres, grabRuntime, grabOriginalLanguage, calculateAge,
     extractOriginalLanguage, formatDate, grabSeriesCreators, convertScoreToPercent,
     generateImageUrl, extractLanguageName,
-    generateTrailerUrl, grabPersonGender, extractMovieCertification, extractSeriesNetworkData, formatReviewDate}
+    generateTrailerUrl, grabPersonGender, extractMovieCertification,
+    extractSeriesNetworkData, formatReviewDate, truncateString}
