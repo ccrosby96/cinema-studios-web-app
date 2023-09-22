@@ -1,16 +1,23 @@
 
 import MovieReviewItem from "./movie-review";
+import {useEffect} from "react";
 
-function MovieReviewList ({reviews}) {
+function MovieReviewList ({reviews, movieId}) {
 
-    if (reviews.length === 0 ){
+    useEffect(() => {
+
+    }, [reviews, movieId]);
+
+    if ( reviews === null || reviews.length === 0 ){
         return (<h5> No reviews yet for this movie</h5>)
     }
-    console.log(reviews)
+    console.log('movieReviewList reviews ',reviews)
+    console.log('movieId in movieReviewList', movieId)
+
 
     return (
         <>
-            <div className="container bg-secondary nudge-up">
+            <div className="container bg-secondary nudge-up mt-0">
 
                 <div className = "row">
                     <ul className = "list-group no-bullets ms-1">
@@ -18,7 +25,7 @@ function MovieReviewList ({reviews}) {
                             reviews.map((review) => {
 
                                 return (
-                                    <MovieReviewItem review={review}/>
+                                    <MovieReviewItem review={review} movieId={movieId}/>
                                 )
                             })
                         }

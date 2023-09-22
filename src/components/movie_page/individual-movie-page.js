@@ -1,11 +1,10 @@
 import NavigationSidebar from "../navigation";
 import '@fortawesome/fontawesome-free/css/all.css';
-import providers from "../watch_providers/providers.json"
+
 import {convertScoreToPercent, formatDate, extractMovieCertification} from "../../helper_functions/helper_functions";
 import {
     grabGenres,
     grabRuntime,
-    grabOriginalLanguage,
     extractOriginalLanguage,
     generateTrailerUrl
 } from "../../helper_functions/helper_functions";
@@ -33,7 +32,6 @@ function IndividualMoviePage  () {
     const { currentUser } = useSelector((state) => state.user);
     console.log("user in moviepage is ", currentUser);
 
-    const [isLoading, setLoading] = useState(true);
     const [dataStatus,setDataStatus] = useState({
         details: false,
         cast: false,
@@ -73,7 +71,7 @@ function IndividualMoviePage  () {
                 const grabDetails = async () => {
                     const a = await details;
                     setDetails(a)
-                    setLoading(false);
+
                     handleSetStatus('details')
 
                 };
@@ -85,7 +83,6 @@ function IndividualMoviePage  () {
                 const grabCast = async () => {
                     const b = await cast;
                     setCast(b)
-                    setLoading(false)
                     handleSetStatus('cast')
                     //console.log('individual movie cast: ', b);
                 }
@@ -141,7 +138,7 @@ function IndividualMoviePage  () {
                 <div className="row bg-color">
                     <div className="col-3 bg-dark mt-1" >
                         <div className="bg-image bg-dark">
-                            <img className="" src={url + details.poster_path} width="95%" height="95%"/>
+                            <img className="" src={url + details.poster_path} width="95%" height="95%" alt = ""/>
 
                         </div>
 
@@ -244,7 +241,7 @@ function IndividualMoviePage  () {
                         ) : (
                             <p>Please log in to post a review.</p>
                         )}
-                        <MovieReviewList reviews = {movieReviews}/>
+                        <MovieReviewList reviews = {movieReviews} movieId = {movieId}/>
                     </div>
                     <div className = "col-3">
 
