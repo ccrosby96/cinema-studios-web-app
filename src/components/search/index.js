@@ -20,15 +20,15 @@ function LandingSearchPage () {
     console.log(currentUser);
 
     return (
-      <div className = "profile-background">
+      <div className = "bg-landing-page">
           <NavigationSidebar/>
 
           <SearchBar/>
           <div className="container">
-              <h5> Trending Movies</h5>
+              <h5 className = "white-font"> Trending Movies</h5>
               <MovieScrollBar movies={trend}/>
 
-                  <h5>Popular Movies</h5>
+                  <h5 className = "white-font">Popular Movies</h5>
                   <SearchMovieGrid movies = {res}/>
 
           </div>

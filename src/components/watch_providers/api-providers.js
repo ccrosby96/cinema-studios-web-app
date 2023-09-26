@@ -91,22 +91,21 @@ function ApiWatchProviders(
     //console.log("renters: ", renters)
 
     return (
-        <>
-            <h5 className = "fw-bold">Where to Watch</h5>
+        <div className = "container">
+            <h5 className = "fw-bold white-font">Where to Watch</h5>
+            <div className = "row row-cols-3">
             {
                 streamers.map((item, i) => (
-                    <div key={item.id} className="col-md-6 mb-1 m-0 p-0 float-end ">
+                    <div key={item.id} className="p-1 ">
                             <img src={url + item.logo_path} className="img fluid watch-provider-logo" alt="..."/>
                             <div className="card-body">
-                                <p className="card-text">{item.provider_name}</p>
+                                <p className="card-text white-font">{}</p>
                             </div>
 
                     </div>
                 ))}
-
-
-
-        </>
+            </div>
+        </div>
     );
 }
 

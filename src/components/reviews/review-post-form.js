@@ -55,7 +55,7 @@ const ReviewPostForm = ({ user, movieId }) => {
             {generatedReview ? (
                 <MovieReviewItemSubmission review={generatedReview} />
             ) : (
-                <div className="bg-secondary rounded-3">
+                <div className="bg-dark rounded-3">
                     <br></br>
                     <div className="row">
                         <div className="col-auto">
@@ -76,7 +76,7 @@ const ReviewPostForm = ({ user, movieId }) => {
                   style={{ minHeight: "100px", height: "auto" }}
                   onChange={(event) => setReviewBody(event.target.value)}
               ></textarea>
-                            <span>{reviewBody.length} / 2000</span>
+                            <span className = "white-font">{reviewBody.length} / 2000</span>
 
                             <div>
                                 <Slider
@@ -88,7 +88,7 @@ const ReviewPostForm = ({ user, movieId }) => {
                                 />
 
                                 <i className="fa-solid fa-star color-yellow me-1"></i>
-                                <span className="fw-bold font-size-">{reviewScore} / 10 </span>
+                                <span className="fw-bold white-font">{reviewScore} / 10 </span>
                                 <button
                                     className="rounded-pill btn btn-primary float-end mt-0 ps-3 pe-3 fw-bold"
                                     onClick={ReviewClickHandler}

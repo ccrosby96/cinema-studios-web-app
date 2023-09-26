@@ -30,10 +30,11 @@ function ActorCard(
 
     return (
 
-            <div className="scroll_media-element">
+            <div className="">
                 <img
                     src= {headshot_url}
-                    alt="Not Found"/>
+                    alt="Not Found"
+                    className = "rounded-3 img-fluid"/>
                 <p className="title a1-font-16px mb-0 pb-0 white-font align-content-center">{actor_name}</p>
                 <p className="card-text a1-font-16px mt-1 pt-0 white-font align-content-center">{character}</p>
             </div>

@@ -47,7 +47,7 @@ function SearchBar (){
                                type="text"
                                className="form-control form-input"
                                placeholder="Search Movies, TV, People..."/>
-                        <span className="left-pan"><i className="fa fa-microphone"></i></span>
+
                     </div>
 
                 </div>

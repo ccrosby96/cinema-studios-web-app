@@ -1,49 +1,36 @@
-
-
-function MovieSearchTile(
-    movie =  {
-        "adult": false,
-        "backdrop_path": "/hiHGRbyTcbZoLsYYkO4QiCLYe34.jpg",
-        "id": 758323,
-        "title": "The Pope's Exorcist",
-        "original_language": "en",
-        "original_title": "The Pope's Exorcist",
-        "overview": "Father Gabriele Amorth, Chief Exorcist of the Vatican, investigates a young boy's terrifying possession and ends up uncovering a centuries-old conspiracy the Vatican has desperately tried to keep hidden.",
-        "poster_path": "/gNPqcv1tAifbN7PRNgqpzY8sEJZ.jpg",
-        "media_type": "movie",
-        "genre_ids": [
-            27,
-            53
-        ],
-        "popularity": 600.969,
-        "release_date": "2023-04-05",
-        "video": false,
-        "vote_average": 7.217,
-        "vote_count": 1567
-    }
-) {
+import React from 'react';
+import {truncateString} from "../../helper_functions/helper_functions";
+function MovieSearchTile({ movie }) {
     const url = "https://image.tmdb.org/t/p/w500";
-    let poster_path = url + movie.movie.poster_path;
-    const title = movie.movie.title;
-    const vote_average = movie.movie.vote_average;
-    //console.log("In actor card, headshot_url is ", poster_path);
-    const percent = (vote_average / 10 * 100).toPrecision(2)
+    let poster_path = url + movie.poster_path;
+    const title = movie.title;
+    const vote_average = movie.vote_average.toPrecision(2);
 
-        //<span className="title a1-font-16px mb-0 pb-0 white-font">{title}</span>
-    const alt_actor = "https://www.pngall.com/wp-content/uploads/4/Brad-Pitt-PNG-File.png"
+    const titleTruncated = truncateString(title, 38)
+
+
+    // Calculate the fixed aspect ratio height based on your design
+    const fixedHeight = '400px'; // Adjust this value as needed
+    const fixedWidth = '300px;'
+
+    const percent = (vote_average / 10 * 100).toPrecision(2);
 
     return (
-
-        <div className="me-0">
+        <div className="  rounded-top-2 mb-4 mt-4" style={{ height: fixedHeight, width: fixedWidth }}>
             <img
-                src= {poster_path}
+                src={poster_path}
                 alt="Not Found"
-                className = "img-fluid"/>
-
-            <span className="card-text a1-font-16px mt-1 pt-0 white-font float-start">{percent}%</span>
+                className="img-fluid rounded-3"
+                style={{ height: '100%',width: "100%", objectFit: 'cover' }} // Ensure the image covers the fixed height
+            />
+            <div className = "bg-movie-card p-2 m-0 mb-5 rounded-bottom-2">
+                <span className="card-text a1-font-16px mt-1 pt-0 white-font ">{vote_average}</span>
+                <i className="fa-solid fa-star color-yellow ms-2 "></i>
+                <br/>
+                <span className="title a1-font-16px mb-0 pb-0 white-font ">{titleTruncated}</span>
+            </div>
         </div>
-
-
     );
 }
+
 export default MovieSearchTile;

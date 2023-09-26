@@ -617,3 +617,9 @@ button-no-style {
   background: red; /* Change this to your desired color */
   /* Additional styling properties can be added as needed */
 }
+.bg-landing-page {
+  background-color: 	#202020;
+}
+.bg-movie-card {
+  background-color: #484848;
+}

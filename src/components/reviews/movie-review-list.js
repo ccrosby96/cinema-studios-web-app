@@ -17,7 +17,7 @@ function MovieReviewList ({reviews, movieId}) {
 
     return (
         <>
-            <div className="container bg-secondary nudge-up mt-0">
+            <div className="container bg-dark nudge-up mt-0">
 
                 <div className = "row">
                     <ul className = "list-group no-bullets ms-1">
