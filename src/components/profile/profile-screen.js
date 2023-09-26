@@ -12,13 +12,16 @@ function ProfileScreen() {
     const [profile, setProfile] = useState(currentUser);
     const dispatch = useDispatch();
     const navigate = useNavigate();
+
     const save = () => { dispatch(updateUserThunk(profile));};
+
 
 
     useEffect(() => {
         const fetchData = async () => {
             try {
                 const { payload } = await dispatch(profileThunk());
+                console.log("current profile", payload);
                 setProfile(payload);
 
             } catch (error) {
@@ -116,7 +119,7 @@ function ProfileScreen() {
                  <div class="col-md-4">
                      <div class="p-3 py-5">
                          <div class="d-flex justify-content-between align-items-center experience"><h4>Movie Watch List</h4></div><br></br>
-                        <MovieWatchList movies = {currentUser.watchlist}/>
+                        <MovieWatchList movies = {currentUser.watchlist} profile = {profile}/>
                      </div>
                  </div>
              </div>

@@ -7,7 +7,7 @@ import {useNavigate} from "react-router";
 const NavigationSidebar = (
 ) => {
     const { currentUser } = useSelector((state) => state.user);
-    console.log("in navbar componenent, user is", currentUser);
+    //console.log("in navbar componenent, user is", currentUser);
     const dispatch = useDispatch();
     const navigate = useNavigate();
 

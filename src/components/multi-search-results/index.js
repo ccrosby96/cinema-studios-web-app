@@ -5,6 +5,7 @@ import MovieResultsList from "../search/movie-results-list";
 import NavigationSidebar from "../navigation";
 import TvResultsList from "../search/tv-results-list";
 import PeopleResultsList from "../search/people-results-list";
+import SearchBar from "../search/search-bar";
 
 function MultiSearchResultsPage() {
     const MultiResults = useSelector(state => state.multiSearch)
@@ -29,7 +30,7 @@ function MultiSearchResultsPage() {
             <div className = "container">
 
             <div className = "row" >
-                <div className = "col-2" >
+                <div className = "col-2 mt-5" >
                     <h5>Results Type: {selectedItem}</h5>
                     <div className="card">
                         <div className="card-header">Select a Type</div>
@@ -56,7 +57,8 @@ function MultiSearchResultsPage() {
                     </div>
                 </div>
                 <div className="col-10">
-                    <h5>Search Results for {query}</h5>
+                    <SearchBar/>
+
                     {selectedItem === 'Movie' ? (
                         <MovieResultsList movies={movieResults} />
                     ) : selectedItem === 'TV' ? (

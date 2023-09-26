@@ -16,18 +16,17 @@ const ReviewPostForm = ({ user, movieId }) => {
     const [generatedReview, setGeneratedReview] = useState(null);
 
     const ReviewClickHandler = async () => {
-        console.log(reviewBody);
+
         if (currentUser) {
             console.log("this post is being written by", currentUser.username);
             const newReview = generateMovieReview();
-            console.log(newReview);
             try {
                 const generateReview = await createMovieReview(newReview);
                 if (generateReview) {
                     setGeneratedReview(generateReview);
-                    console.log("generatedReview", generatedReview);
+
                 }
-                console.log("created review", generateReview);
+
             } catch (error) {
                 // Handle errors here (e.g., display an error message)
                 console.error("Error creating review", error);

@@ -8,6 +8,38 @@ const USER_API = `${API_BASE}/users`;
 const api = axios.create({
     withCredentials: true,
 });
+export const deleteFromUserWatchList = async (movieId) => {
+    try {
+        const response = await api.delete(`${USERS_URL}/watchlist/${movieId}`)
+        return response.data
+    } catch (error){
+        if (error.response) {
+            // The request was made, but the server responded with an error status code
+            console.error('Request error:', error.response.data);
+            throw new Error(error.response.data.error || 'Request error');
+        } else if (error.request) {
+            // The request was made, but no response was received
+            console.error('No response received:', error.request);
+            throw new Error('No response received');
+        } else {
+            // Something else happened while setting up the request
+            console.error('Request setup error:', error.message);
+            throw new Error('Request setup error');
+        }if (error.response) {
+            // The request was made, but the server responded with an error status code
+            console.error('Request error:', error.response.data);
+            throw new Error(error.response.data.error || 'Request error');
+        } else if (error.request) {
+            // The request was made, but no response was received
+            console.error('No response received:', error.request);
+            throw new Error('No response received');
+        } else {
+            // Something else happened while setting up the request
+            console.error('Request setup error:', error.message);
+            throw new Error('Request setup error');
+        }
+    }
+}
 
 export const addToUserWatchlist = async (movie) => {
     try {
@@ -42,11 +74,25 @@ export const getAllUsers = async () => {
     return response.data;
 }
 
-
 export const updateUser = async (user) => {
-    const response = await api.put(`${USER_API}/${user._id}`, user);
-    return user;
-}
+    const uid = user._id.toString()
+    console.log('uid in user-service updateUser is', uid);
+    console.log('data in user-service updateUser is', user);
+    try {
+        console.log("called update user with data", user);
+        const response = await axios.put(`${USER_API}/${uid}`, user);
+
+        if (response.status === 200) {
+            return response.data;
+        } else {
+            throw new Error(`Failed to update user: Status ${response.status}`);
+        }
+    } catch (error) {
+        console.error("Error updating user:", error);
+        throw error; // Re-throw the error so it can be handled further up the call stack.
+    }
+};
+
 
 export const createUser = async (user) => {
     console.log("called create user with user: ", user);

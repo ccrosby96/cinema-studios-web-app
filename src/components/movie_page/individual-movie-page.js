@@ -17,10 +17,11 @@ import {findMovieDetailsById, findMovieCastById, findMovieProvidersById,
     findMovieRecommendationsById, fetchMovieVideosById} from "../../services/movie-service";
 import ApiWatchProviders from "../watch_providers/api-providers";
 import ReviewPostForm from "../reviews/review-post-form";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {getReviewsByMovieId} from "../../services/movie-review-service";
 import MovieReviewList from "../reviews/movie-review-list";
 import {addToUserWatchlist} from "../../services/users-service";
+import {profileThunk, updateUserThunk} from "../../thunks/users-thunks";
 
 /*
 cinema studios - name idea by jake fredo
@@ -30,9 +31,13 @@ function IndividualMoviePage  () {
     const url = "http://image.tmdb.org/t/p/w500";
     const mid = useParams();
     const movieId = mid.mid
+    const dispatch = useDispatch;
     const { currentUser } = useSelector((state) => state.user);
     const [errorMessage, setErrorMessage] = useState(null);
+    const [inWatchList, setInWatchList] = useState(false);
     console.log("user in moviepage is ", currentUser);
+
+    //const save = () => { dispatch(updateUserThunk(profile));};
 
 
     const [dataStatus,setDataStatus] = useState({
@@ -44,12 +49,23 @@ function IndividualMoviePage  () {
         reviews: false
 
     })
+    // save dispatches updates to user object, like movies added to watchlist
+
     const handleSetStatus = (property) => {
         setDataStatus((prevStatus) => ({
             ...prevStatus,
             [property]: true
         }));
     };
+    const checkWatchList = () => {
+        if (currentUser) {
+            const isInWatchlist = currentUser.watchlist.some((item) => item.movieId === movieId);
+            if (isInWatchlist){
+                setInWatchList(true);
+                console.log("movie in watchlist")
+            }
+        }
+    }
     const handleAddToWatchlist = async () => {
         if (watchListAdded){
             console.log("Already added this to watchlist")
@@ -65,7 +81,7 @@ function IndividualMoviePage  () {
         try {
             // Call the API function
             const result =await addToUserWatchlist(watchListItem);
-            setWatchListAdded(true);
+            setInWatchList(true);
             // If successful, you can optionally display a success message or update your UI
             // ...
         } catch (error) {
@@ -90,6 +106,7 @@ function IndividualMoviePage  () {
     const [movieReviews, setMovieReviews] = useState(null);
     const [watchListAdded, setWatchListAdded] = useState(false);
 
+
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -99,6 +116,7 @@ function IndividualMoviePage  () {
                 const recommendations = findMovieRecommendationsById(movieId);
                 const trailers = fetchMovieVideosById(movieId);
                 const reviews = getReviewsByMovieId(movieId);
+
                 const grabDetails = async () => {
                     const a = await details;
                     setDetails(a)
@@ -143,6 +161,7 @@ function IndividualMoviePage  () {
                 grabRecs();
                 grabTrailers();
                 grabReviews();
+                // getting and setting most up-to-date profile info
 
             } catch (error) {
                 console.error('Error fetching data:', error);
@@ -150,6 +169,8 @@ function IndividualMoviePage  () {
         };
 
         fetchData();
+        checkWatchList();
+
     }, [movieId]); // if we have a new movie id we want to re-render
 
 
@@ -199,11 +220,19 @@ function IndividualMoviePage  () {
                             {errorMessage && (
                                 <div className="alert alert-danger">{errorMessage}</div>
                             )}
-                            {!errorMessage && (
+                            {!errorMessage && !inWatchList && currentUser && (
                             <button className="bg-dark ms-2" onClick = {handleAddToWatchlist}>
                                 <i className="fa-solid fa-plus fa-2x trailer-icon" style={{color: "#f5f5f5"}}></i>
                                 <span className= "white-text nudge-up"> Watchlist</span>
                             </button>)}
+                            {inWatchList && (
+                                <button className = "bg-dark ms-2">
+                                    <i className="fa-solid fa-check fa-2x trailer-icon" style={{color: "#f5f5f5"}}></i>
+                                    <span className= "white-text nudge-up"> In Watchlist</span>
+                                </button>
+                            )
+
+                            }
 
                         </div>
                         <p className="fw-bold a1-font-25px white-font mb-0 pb-0 mt-2"> Overview</p>

@@ -47,8 +47,6 @@ const SearchMovieGrid = (movies = [
 
     // console.log("in movie grid, movies ->", movies);
     return (
-
-        <div className="container justify-content-center">
             <div className="row">
                 {movies.movies.map((element, index) => (
                     <Link to={`/movies/movie/${element.id}`} className= "text-decoration-none col-lg-2 col-md-6 scroll_media-element m-2">
@@ -58,8 +56,6 @@ const SearchMovieGrid = (movies = [
                     </Link>
                 ))}
             </div>
-        </div>
-
     );
 };
 

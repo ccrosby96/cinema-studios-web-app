@@ -35,7 +35,7 @@ function MovieHome() {
 
     return (
         <>
-            <div className="row p-0 m-0 textured-background">
+            <div className="row p-0 m-0 profile-background">
                 <NavigationSidebar/>
                 <div className="container">
                     <div className="row">

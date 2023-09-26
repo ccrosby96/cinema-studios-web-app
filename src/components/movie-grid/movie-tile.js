@@ -29,17 +29,18 @@ function MovieSearchTile(
     //console.log("In actor card, headshot_url is ", poster_path);
     const percent = (vote_average / 10 * 100).toPrecision(2)
 
-
+        //<span className="title a1-font-16px mb-0 pb-0 white-font">{title}</span>
     const alt_actor = "https://www.pngall.com/wp-content/uploads/4/Brad-Pitt-PNG-File.png"
 
     return (
 
-        <div className="">
+        <div className="me-0">
             <img
                 src= {poster_path}
-                alt="Not Found"/>
-            <span className="title a1-font-16px mb-0 pb-0 white-font">{title}</span>
-            <span className="card-text a1-font-16px mt-1 pt-0 white-font float-end">{percent}%</span>
+                alt="Not Found"
+                className = "img-fluid"/>
+
+            <span className="card-text a1-font-16px mt-1 pt-0 white-font float-start">{percent}%</span>
         </div>
 
 
