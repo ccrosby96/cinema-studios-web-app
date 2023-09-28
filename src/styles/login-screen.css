@@ -1,0 +1,9 @@
+body {
+    background-color: black;
+}
+.container.bg-dark {
+    background-color: #343a40 ;
+}
+.login-container {
+    background-color: #343a40  !important;/* Your desired dark background color */
+}

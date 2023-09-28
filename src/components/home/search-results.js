@@ -48,7 +48,7 @@ function SearchResults () {
                             <div>
                                     {currentPage === maxPage? (
                                         // Render one component if the condition is met
-                                        <span>End of Search Results ¯\_(ツ)_/¯</span>
+                                        <span className = "white-font">End of Search Results ¯\_(ツ)_/¯</span>
                                     ) : (
                                         // Render another component if the condition is not met
                                         <Link to = {`/movies/discover/${currentPage + 1}`}>

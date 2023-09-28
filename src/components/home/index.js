@@ -15,12 +15,11 @@ import InitialMovies from "./initial-movies-display";
 import {Link} from "react-router-dom";
 function MovieHome() {
     const dispatch = useDispatch();
-    const store = useSelector(state => state);
     const searchFilters = useSelector(state => state.filters)
     const searchResults = useSelector(state => state.searchResults.results)
     const loading = useSelector (state => state.searchResults.loading)
 
-    console.log(store);
+
     const handleSearch = () => {
         // Assuming you have search parameters (e.g., search text, filters) to pass
         const searchParams = {
@@ -35,7 +34,7 @@ function MovieHome() {
 
     return (
         <>
-            <div className="row p-0 m-0 profile-background">
+            <div className="row p-0 m-0 bg-landing-page">
                 <NavigationSidebar/>
                 <div className="container">
                     <div className="row">
@@ -70,5 +69,4 @@ function MovieHome() {
         </>
     );
 }
-
 export default MovieHome;

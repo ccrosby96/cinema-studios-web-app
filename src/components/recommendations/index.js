@@ -50,13 +50,13 @@ function RecommendationsScrollBar(
 
     return (
         <>
-            <div className="scroll_media-scroller snaps-inline">
+            <div className="scroll_media-scroller snaps-inline bg-dark rounded-3">
                 {
                     data.map((movie, i) => {
 
 
                         return (
-                            <Link to = {`/movies/movie/${movie.id}`} className = "text-decoration-none">
+                            <Link to = {`/movies/movie/${movie.id}`} className = "text-decoration-none pb-0 pt-3">
                                 <MovieRecTile movie={movie}/>
                             </Link>
                         )

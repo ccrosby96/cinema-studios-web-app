@@ -9,7 +9,7 @@ function MovieReviewList ({reviews, movieId}) {
     }, [reviews, movieId]);
 
     if ( reviews === null || reviews.length === 0 ){
-        return (<h5> No reviews yet for this movie</h5>)
+        return (<h5 className = "white-font"> No reviews yet for this movie</h5>)
     }
     console.log('movieReviewList reviews ',reviews)
     console.log('movieId in movieReviewList', movieId)
@@ -17,10 +17,10 @@ function MovieReviewList ({reviews, movieId}) {
 
     return (
         <>
-            <div className="container bg-dark nudge-up mt-0">
+            <div className="container bg-dark nudge-up mt-0 rounded-3">
 
                 <div className = "row">
-                    <ul className = "list-group no-bullets ms-1">
+                    <ul className = "list-group no-bullets ms-1 mt-4">
                         {
                             reviews.map((review) => {
 

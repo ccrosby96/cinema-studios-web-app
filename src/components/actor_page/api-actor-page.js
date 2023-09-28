@@ -71,7 +71,7 @@ function IndividualActorPage () {
 
     return (
         <>
-            <div className="row p-0 m-0">
+            <div className="row p-0 m-0 bg-landing-page">
                 <NavigationSidebar/>
 
                 <ApiActorDetails {...props}/>

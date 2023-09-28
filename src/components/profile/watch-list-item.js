@@ -11,13 +11,16 @@ function WatchListItem ({movie,key,onRemove})  {
         onRemove(movie.movieId);
     };
     return (
-        <div className = "list-group-item m-1 rounded-3">
+        <div className = "list-group-item list-group-item-secondary m-1 rounded-3">
             <div className = "container p-0 m-0">
                 <div className = "row">
 
                     <div className = "col-4 p-0 m-0">
                         <Link to = {`/movies/movie/${movie.movieId}`} className = "text-decoration-none m-0 p-0">
-                            <img className=" img-fluid m-0 p-0 rounded-3"  src= {url + movie.posterPic} alt="Image Not Found"/>
+                            <img className=" img-fluid m-0 p-0 rounded-3"
+                                 src= {url + movie.posterPic}
+                                 alt="Image Not Found"
+                                 style={{height: "200px",objectFit: 'cover' }}/>
                         </Link>
                     </div>
                     <div className = "col-8 p-0 m-0 ps-1">

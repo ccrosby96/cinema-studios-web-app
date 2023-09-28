@@ -38,7 +38,7 @@ function MovieWatchList({ movies, profile }) {
 
     return (
         <>
-            <ul className="list-group no-bullets">
+            <ul className="list-group no-bullets bg-dark">
                 {displayedMovies.map((movie, i) => (
                     <WatchListItem key={i} movie={movie} onRemove={removeMovie} />
                 ))}

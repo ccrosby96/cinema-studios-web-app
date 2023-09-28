@@ -44,30 +44,30 @@ function FilterSidebar () {
 
     return (
         <div className = "container">
-            <h5>Release Dates </h5>
+            <h5 className = "white-font">Release Dates </h5>
             <form onSubmit={handleSubmit}>
-                <label>
+                <label className = "white-font">
                     Start Year:
                     <input
                         type="number"
                         value={localStartYear}
-                        className = "bg-light-subtle"
+                        className = "bg-secondary"
                         onChange={(e) => setLocalStartYear(e.target.value)}
                     />
                 </label>
-                <label>
+                <label className = "white-font">
                     End Year:
                     <input
                         type="number"
                         value={localEndYear}
-                        className = "bg-light-subtle"
+                        className = "bg-secondary"
                         onChange={(e) => setLocalEndYear(e.target.value)}
                     />
                 </label>
                 <button onClick={handleYearRangeButtonClick} type="submit" className = "btn btn-secondary mt-1 float-start">Set Release Years</button>
-                {showCheckmark && <div className="checkmark color-green">&#10004;</div>}
+                {showCheckmark && <div className="checkmark color-white" style = {{color: "white"}}>&#10004;</div>}
             </form>
-            <h5>Genres</h5>
+            <h5 className="white-font">Genres</h5>
 
             <ul className="m-0 p-0 mt-1">
                 <button
@@ -90,7 +90,7 @@ function FilterSidebar () {
                 </button>
                 <button
                     onClick={() => handleGenreButtonClick('Crime')}
-                    className={genreFilters['Crime'] ? 'btn btn-primary m-1' : 'btn btn-secondary m-1'}
+                    className={genreFilters['Crime'] ? 'btn btn-primary m-1 white-font' : 'btn btn-secondary m-1 white-font'}
                 >
                     Crime
                 </button>
@@ -163,7 +163,7 @@ function FilterSidebar () {
                 </button>
 
             </ul>
-            <h5>Certification</h5>
+            <h5 className = "white-font">Certification</h5>
             <ul className = "m-0 p-0 mt-1">
                 <button
                     onClick={() => handleRatingButtonClick('R')}
@@ -196,10 +196,10 @@ function FilterSidebar () {
                     NC-17
                 </button>
             </ul>
-            <h5>User Rating</h5>
+            <h5 className = "white-font">User Rating</h5>
 
             <Slider value={audienceScore} max = {100} step = {5} onChange={handleSliderChange} />
-            <div className="slider-value">Rating: {audienceScore}%</div>
+            <div className="slider-value white-font">Rating: {audienceScore}%</div>
 
 
         </div>

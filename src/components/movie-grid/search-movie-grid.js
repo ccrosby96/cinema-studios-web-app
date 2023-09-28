@@ -11,7 +11,7 @@ const SearchMovieGrid = ({ movies }) => {
     return (
         <div className="row row-cols-lg-4 row-cols-md-4 row-cols-sm-2">
             {movies.map((element, index) => (
-                <div key={index} className="mt-4 mb-4">
+                <div key={index} className="mt-3 mb-3">
                     <Link to={`/movies/movie/${element.id}`} className="text-decoration-none">
                         <SearchMovieTile movie={element} />
                     </Link>

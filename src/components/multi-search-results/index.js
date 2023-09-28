@@ -25,18 +25,18 @@ function MultiSearchResultsPage() {
 
     return (
 
-        <di>
+        <div className = "bg-landing-page">
             <NavigationSidebar/>
             <div className = "container">
 
-            <div className = "row" >
-                <div className = "col-2 mt-5" >
-                    <h5>Results Type: {selectedItem}</h5>
+            <div className = "row " >
+                <div className = "col-2 mt-5 " >
+                    <h5 className = "white-font">Results Type: {selectedItem}</h5>
                     <div className="card">
                         <div className="card-header">Select a Type</div>
-                        <ul className="list-group list-group-flush">
+                        <ul className="list-group list-group-flush ">
                             <li
-                                className={`list-group-item ${selectedItem === 'Movie' ? 'active' : ''}`}
+                                className={`list-group-item  ${selectedItem === 'Movie' ? 'active' : ''}`}
                                 onClick={() => handleItemClick('Movie')}
                             >
                                 Movies
@@ -73,7 +73,7 @@ function MultiSearchResultsPage() {
             </div>
             </div>
 
-        </di>
+        </div>
 
     );
 }

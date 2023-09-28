@@ -66,7 +66,7 @@ function MovieReviewItem({review,movieId}){
 
                     </p>
 
-                    <h5 className = "p-0 m-0 ps-5 ps-sm-4 ps-md-3 p fw-bold wd-font-family-arial text-wrap d-inline white-font">A review by {movieReview.author.username}</h5>
+                    <h5 className = "p-0 m-0 ps-5 ps-sm-4 ps-md-3 p fw-bold wd-font-family-arial text-wrap d-inline white-font">@ {movieReview.author.username}</h5>
                     <p className="p-0 m-0 ps-1 wd-font-family-arial text-nowrap d-inline white-font">
                           &#xb7; {timeAgo.format(new Date(movieReview.createdAt))}
                     </p>

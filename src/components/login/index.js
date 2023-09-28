@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { loginThunk } from "../../thunks/users-thunks";
 import NavigationSidebar from "../navigation";
+import style from "../../styles/login-screen.css"
 
 function Login() {
     const [username, setUsername] = useState("");
@@ -28,11 +29,12 @@ function Login() {
     };
 
     return (
-        <div className="row p-0 m-0 sunset-background">
+
+        <>
             <NavigationSidebar />
-            <div className="w-100">
-                <div className="center">
-                    <div className="center_box sunset-background rounded p-3">
+            <div className="container w-100 bg-dark login-container ">
+                <div className="center bg-dark login-container">
+                    <div className="center_box bg-dark rounded p-3">
                         <p className="text-white fw-bold a1-font-family h3 text-center mt-2">
                             {" "}
                             Login{" "}
@@ -92,8 +94,7 @@ function Login() {
                     </div>
                 </div>
             </div>
-        </div>
+        </>
     );
 }
-
 export default Login;

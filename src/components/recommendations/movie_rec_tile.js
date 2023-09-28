@@ -1,6 +1,6 @@
 
 
-
+import style from "../../styles/card-hover.css"
 
 function MovieRecTile(
     movie =  {
@@ -36,11 +36,11 @@ function MovieRecTile(
 
     return (
 
-        <div className="">
+        <div className="hover-card-container">
             <img
                 src= {poster_path}
                 alt="Not Found"
-                className = "rounded-top-3"/>
+                className = "rounded-3 img-fluid"/>
             <div className = " p-2 m-0 rounded-bottom-3">
                 <span className="card-text a1-font-16px mt-1 pt-0 white-font">{vote_average}</span>
                 <i className="fa-solid fa-star color-yellow ms-2 "></i>

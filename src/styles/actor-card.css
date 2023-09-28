@@ -1,0 +1,32 @@
+.actor-card-container {
+    position: relative;
+    transition: transform 0.3s ease-in-out;
+}
+
+.actor-card-container::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border: 2px solid transparent;
+    transition: border-color 0.3s ease-in-out;
+    pointer-events: none;
+}
+
+.actor-card-container:hover {
+    transform: scale(1.05); /* Scale up the entire card on hover */
+}
+
+.actor-card-container:hover::after {
+
+}
+
+.actor-image {
+    transition: transform 0.3s ease-in-out;
+}
+
+.actor-card-container:hover .actor-image {
+    transform: scale(1.1);
+}

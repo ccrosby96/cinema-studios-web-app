@@ -49,14 +49,13 @@ function MovieResultsList (movies = movies = [
 
     return (
         <>
-            <ul className= "list-group no-bullets">
+            <ul className= "list-group no-bullets ">
                 {
                     movies.movies.map((movie, i) => {
 
                         return (
-                                <Link to = {`/movies/movie/${movie.id}`} className = "text-decoration-none">
                                     <MovieListItem movie={movie}/>
-                                </Link>
+
                         )
                     })
                 }

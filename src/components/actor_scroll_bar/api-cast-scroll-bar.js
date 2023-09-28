@@ -37,12 +37,12 @@ function ApiCastScrollBar(
 
     return (
         <>
-            <div className="scroll_media-scroller snaps-inline">
+            <div className="scroll_media-scroller snaps-inline bg-dark rounded-3">
                 {
                     cast.cast.map((person, i) => {
 
                         return (
-                            <Link to = {`/actors/actor/${person.id}`} className = "text-decoration-none">
+                            <Link to = {`/actors/actor/${person.id}`} className = "text-decoration-none pb-0 pt-3">
                                 <ActorCard actor={person}/>
                             </Link>
                         )

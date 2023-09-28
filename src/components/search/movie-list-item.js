@@ -1,4 +1,5 @@
 import {formatDate} from "../../helper_functions/helper_functions";
+import {Link} from "react-router-dom";
 function MovieListItem (movie = {
     "adult": false,
     "backdrop_path": "/xgU3KkqiME9pGe5gGCNpUYkoSWg.jpg",
@@ -27,17 +28,18 @@ function MovieListItem (movie = {
     const releaseDate = movie.movie.release_date;
 
     return (
-    <div className ="list-group-item m-1">
-        <div className="row">
-            <div className="col-4">
-                <img className="card-img rounded-3 movie-list-item-img m-0 p-0" src= {poster_path} alt="Image Not Found"/>
+    <div className ="bg-dark list-group-item m-3 border-1 ">
+        <div className="row bg-landing-page">
+            <div className="col-4 bg-landing-page">
+                <Link to = {`/movies/movie/${movie.movie.id}`} className = "text-decoration-none bg-landing-page" >
+                    <img className="card-img rounded-3 movie-list-item-img m-0 p-0" src= {poster_path} alt="Image Not Found"/>
+                </Link>
             </div>
             <div className="col-8 m-0 p-0">
                 <div className="m-0 p-0">
-                    <h5 className="mb-0 pb-0">{title}</h5>
+                    <h5 className="mb-0 pb-0 white-font">{title}</h5>
                     <span className = "grey-text mt-0 pt-0">{formatDate(releaseDate)}</span>
-                    <p className="">{overview}</p>
-
+                    <p className="white-font">{overview}</p>
                 </div>
             </div>
         </div>

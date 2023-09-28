@@ -1,58 +1,53 @@
 import MovieScrollBar from "../home/movie_scroll";
-import {calculateAge} from "../../helper_functions/helper_functions";
-import {grabPersonGender} from "../../helper_functions/helper_functions";
+import { calculateAge, grabPersonGender } from "../../helper_functions/helper_functions";
 
-function ApiActorDetails (props) {
+function ApiActorDetails(props) {
     let actor = props.actor;
     let films = props.films.cast;
     const url_prefix = "http://image.tmdb.org/t/p/w500";
-    const headshot = url_prefix + actor.profile_path
+    const headshot = url_prefix + actor.profile_path;
 
-    console.log("actor in apiactordetails: ", actor)
-    console.log('known fors in apiactordetails: ', films)
+    console.log("actor in apiactordetails: ", actor);
+    console.log("known fors in apiactordetails: ", films);
 
     return (
         <>
-            <div className= 'row bg-color'>
-                <div className= "col-3">
-                    <ul type = "none">
-                        <li>
-                            <img src = {headshot} className = 'img-fluid m-1' />
-
-                        </li>
-                        <h4 className="m-1">Personal Information</h4>
-                        <li className="m-3">
-                            <b>Name</b>: {actor.name}
-
-                        </li>
-                        <li className="m-3">
-                            <b>Gender</b>: {grabPersonGender(actor.gender)}
-
-                        </li>
-                        <li className="m-3">
-                            <b> Birthday</b>: {actor.birthday} ({calculateAge(actor.birthday)})
-
-                        </li>
-                        <li className="m-3">
-                            <b>Place of Birth</b>: {actor.place_of_birth}
-
-                        </li>
-                    </ul>
+            <div className="row bg-landing-page">
+                <div className="col-3">
+                    <div className="bg-dark rounded-3 mt-2 text-center">
+                        <ul type="none" className="d-flex flex-column m-0 p-0">
+                            <li>
+                                <img src={headshot} alt="Headshot" className="img-fluid rounded-3 p-1" />
+                            </li>
+                            <h4 className="m-1 white-font">Personal Information</h4>
+                            <li className="m-3 white-font">
+                                <b>Name</b>: {actor.name}
+                            </li>
+                            <li className="m-3 white-font">
+                                <b className="white-font">Gender</b>: {grabPersonGender(actor.gender)}
+                            </li>
+                            <li className="m-3 white-font">
+                                <b className="white-font"> Birthday</b>: {actor.birthday} ({calculateAge(actor.birthday)})
+                            </li>
+                            <li className="m-3 white-font">
+                                <b className="white-font">Place of Birth</b>: {actor.place_of_birth}
+                            </li>
+                        </ul>
+                    </div>
                 </div>
                 <div className="col-9">
-                    <h1>{actor.name}</h1>
+                    <h1 className="white-font">{actor.name}</h1>
 
-                    <h5>Biography</h5>
-                    <p>{actor.biography}</p>
+                    <h5 className="white-font">Biography</h5>
+                    <p className="white-font"> {actor.biography}</p>
 
-                    <h5>Known For</h5>
+                    <h5 className="white-font">Known For</h5>
 
-                    <MovieScrollBar movies = {films}/>
-
+                    <MovieScrollBar movies={films} />
                 </div>
             </div>
         </>
     );
-
 }
+
 export default ApiActorDetails;
