@@ -20,10 +20,9 @@ function MovieReviewList ({reviews, movieId}) {
             <div className="container bg-dark nudge-up mt-0 rounded-3">
 
                 <div className = "row">
-                    <ul className = "list-group no-bullets ms-1 mt-4">
+                    <ul className = "list-group bg-dark no-bullets ms-1 mt-4">
                         {
                             reviews.map((review) => {
-
                                 return (
                                     <MovieReviewItem review={review} movieId={movieId}/>
                                 )

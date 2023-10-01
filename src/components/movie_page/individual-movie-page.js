@@ -42,9 +42,7 @@ function IndividualMoviePage  () {
 
     const [dataStatus,setDataStatus] = useState({
         details: false,
-        cast: false,
         providers: false,
-        recs: false,
         trailers: false,
         reviews: false
 
@@ -99,29 +97,27 @@ function IndividualMoviePage  () {
         }
     };
     const [details, setDetails] = useState(null);
-    const [cast, setCast] = useState(null);
     const [providers, setProviders] = useState(null);
-    const [recs, setRecs] = useState(null);
-    const [trailers, setTrailers] = useState(null);
     const [movieReviews, setMovieReviews] = useState(null);
+    const [trailers,setTrailers] = useState(null);
     const [watchListAdded, setWatchListAdded] = useState(false);
-
 
     useEffect(() => {
         const fetchData = async () => {
             try {
                 const details = findMovieDetailsById(movieId);
-                const cast = findMovieCastById(movieId);
                 const providers = findMovieProvidersById(movieId);
-                const recommendations = findMovieRecommendationsById(movieId);
-                const trailers = fetchMovieVideosById(movieId);
                 const reviews = getReviewsByMovieId(movieId);
 
                 const grabDetails = async () => {
                     const a = await details;
                     setDetails(a)
-
                     handleSetStatus('details')
+                    // extract trailers from details
+                    const data = a.trailers;
+                    const trailerUrl = generateTrailerUrl(data)
+                    setTrailers(trailerUrl);
+                    handleSetStatus('trailers')
 
                 };
                 const grabReviews = async ()=> {
@@ -129,37 +125,15 @@ function IndividualMoviePage  () {
                     setMovieReviews(r);
                     handleSetStatus('reviews');
                 }
-                const grabCast = async () => {
-                    const b = await cast;
-                    setCast(b)
-                    handleSetStatus('cast')
-                    //console.log('individual movie cast: ', b);
-                }
+
                 const grabProviders = async () => {
                     const c = await providers;
                     setProviders(c)
                     handleSetStatus('providers')
                     //console.log('individual movie providers: ', c)
                 }
-                const grabRecs = async () => {
-                    const d = await recommendations;
-                    setRecs(d)
-                    handleSetStatus('recs')
-                    //console.log('indiv recs', d)
-                }
-                const grabTrailers = async () => {
-                    const t = await trailers;
-                    const data = t.trailers;
-                    console.log('trailer data', data);
-                    const trailerUrl = generateTrailerUrl(data)
-                    setTrailers(trailerUrl);
-                    handleSetStatus('trailers')
-                }
                 grabDetails();
-                grabCast();
                 grabProviders();
-                grabRecs();
-                grabTrailers();
                 grabReviews();
                 // getting and setting most up-to-date profile info
 
@@ -174,13 +148,12 @@ function IndividualMoviePage  () {
     }, [movieId]); // if we have a new movie id we want to re-render
 
 
-
     console.log(movieReviews);
 
-    if (!dataStatus.details || !dataStatus.cast || !dataStatus.recs || !dataStatus.providers) {
+    if (!dataStatus.details || !dataStatus.providers) {
         return <div className="App">Loading...</div>;
     }
-    if (dataStatus.details && dataStatus.cast && dataStatus.recs &&  dataStatus.providers)
+    if (dataStatus.details &&  dataStatus.providers)
     return (
         <div className= "bg-landing-page">
             <div className="row p-0 m-0">
@@ -244,11 +217,6 @@ function IndividualMoviePage  () {
                         <i className="fa fa-search"></i>
                         <p className="fw-bold a1-font-16px white-font mb-0 pb-0"> User Score </p>
                         <span className="white-font mt-0 pt-0">{convertScoreToPercent(details.vote_average)}%</span>
-
-
-
-
-
                     </div>
                 </div>
                 <div className="row pt-1">
@@ -258,7 +226,7 @@ function IndividualMoviePage  () {
                         <div>
 
                             {
-                                <ApiCastScrollBar cast={cast.cast}/>
+                                <ApiCastScrollBar cast={details.credits.cast}/>
                             }
                         </div>
                     </div>
@@ -292,16 +260,11 @@ function IndividualMoviePage  () {
                 <div className="row mb-0 pb-0">
                     <div className = "col-9">
                         <span className="a1-font-25px fw-bold white-font">Recommendations</span>
-                        <RecommendationsScrollBar data = {recs.results}/>
-
-
+                        <RecommendationsScrollBar data = {details.recommendations.results}/>
                     </div>
                     <div className= "col-3">
-
                         <ApiWatchProviders data = {providers.results.US}/>
-
                     </div>
-
                 </div>
                 <div className = "row mt-0 pt-0">
                     <span className="a1-font-25px fw-bold white-font">Reviews</span>
@@ -309,12 +272,11 @@ function IndividualMoviePage  () {
                         {currentUser ? (
                             <ReviewPostForm user={currentUser} movieId={movieId} />
                         ) : (
-                            <p>Please log in to post a review.</p>
+                            <p className = "white-font">Please log in to post a review.</p>
                         )}
                         <MovieReviewList reviews = {movieReviews} movieId = {movieId}/>
                     </div>
                     <div className = "col-3">
-
                     </div>
                 </div>
 

@@ -25,3 +25,32 @@ export const updateMovieReview = async (post) => {
     const response = await api.put(`${REVIEWS_URL}`, post);
     return response.data;
 }
+export const updateMovieReviewLikeDislike = async (update) => {
+    console.log('vote update',update)
+    console.log('calling server endpoint:', REVIEWS_URL + '/like-dislike')
+    const response = await api.put(`${REVIEWS_URL}/like-dislike`, update)
+    return response.data;
+}
+export const addReplyToReview = async (reviewId, reply) => {
+    try {
+        console.log("called addReplyToReview with reviewId,reply",reviewId,reply);
+        const response = await api.put(`${REVIEWS_URL}/${reviewId}/add-comment`, reply);
+        // Assuming the server responds with the updated review after adding the comment
+        return response.data;
+    } catch (error) {
+        // Handle errors here
+        if (error.response) {
+            // The request was made and the server responded with a status code
+            // that falls out of the range of 2xx
+            console.error('Server Error:', error.response.data);
+        } else if (error.request) {
+            // The request was made but no response was received
+            console.error('No Response from Server');
+        } else {
+            // Something happened in setting up the request that triggered an Error
+            console.error('Request Setup Error:', error.message);
+        }
+        // Throw the error to allow the calling code to handle it further if needed
+        throw error;
+    }
+};
