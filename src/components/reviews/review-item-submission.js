@@ -48,7 +48,7 @@ function MovieReviewItemSubmission(
     };
 
     return (
-        <div className = "list-group-item-full-width mb-5 bg-secondary mb-0">
+        <div className = "list-group-item-full-width mb-5 bg-dark mb-0">
             <div className="row ">
                 <div className="col-1">
 

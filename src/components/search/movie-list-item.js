@@ -22,10 +22,12 @@ function MovieListItem (movie = {
     "vote_count": 9480
     }) {
     const url = "https://image.tmdb.org/t/p/w500";
-    let poster_path = url + movie.movie.poster_path;
     const title = movie.movie.title;
     const overview = movie.movie.overview;
     const releaseDate = movie.movie.release_date;
+    let poster_path = movie.movie.poster_path
+        ? url +  movie.movie.poster_path
+        : "https://as1.ftcdn.net/v2/jpg/04/86/87/28/1000_F_486872831_9fzfn08nVV66Uycp5YYr5ecLZKivaVR9.jpg";
 
     return (
     <div className ="bg-dark list-group-item m-3 border-1 ">

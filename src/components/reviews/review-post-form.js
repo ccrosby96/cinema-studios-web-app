@@ -6,6 +6,7 @@ import Slider from "../rating_scroll_bar/scrollable_bar";
 
 import { createMovieReview } from "../../services/movie-review-service";
 import MovieReviewItemSubmission from "./review-item-submission";
+import MovieReviewItem from "./movie-review";
 
 const ReviewPostForm = ({ user, movieId }) => {
     let [reviewBody, setReviewBody] = useState("");
@@ -53,7 +54,7 @@ const ReviewPostForm = ({ user, movieId }) => {
     return (
         <>
             {generatedReview ? (
-                <MovieReviewItemSubmission review={generatedReview} />
+                <MovieReviewItem review={generatedReview} />
             ) : (
                 <div className="bg-dark rounded-3">
                     <br></br>
@@ -71,7 +72,7 @@ const ReviewPostForm = ({ user, movieId }) => {
               <textarea
                   value={reviewBody}
                   placeholder="Write Review Here!"
-                  className="form-control border-0"
+                  className="form-control border-0 white-font"
                   maxLength="2000"
                   style={{ minHeight: "100px", height: "auto" }}
                   onChange={(event) => setReviewBody(event.target.value)}

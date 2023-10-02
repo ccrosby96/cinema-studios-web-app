@@ -128,7 +128,7 @@ function MovieReviewItem({review,movieId}){
     }
 
     return (
-        <div className = "list-group-item-full-width mb-3 rounded-3 p-1 ">
+        <div className = "list-group-item-full-width mb-3 bg-dark rounded-3 p-1 ">
             <div className="row ">
                 <div className="col-12">
 
