@@ -5,7 +5,7 @@ function EpisodeResultsList (data = {}) {
     const episodes = data.data.episodes;
     return (
         <>
-            <ul className= "list-group no-bullets">
+            <ul className= "list-group no-bullets bg-dark">
                 {
                     episodes.map((episode, i) => {
 

@@ -27,17 +27,17 @@ function MovieListItem (movie = {
     const releaseDate = movie.movie.release_date;
     let poster_path = movie.movie.poster_path
         ? url +  movie.movie.poster_path
-        : "https://as1.ftcdn.net/v2/jpg/04/86/87/28/1000_F_486872831_9fzfn08nVV66Uycp5YYr5ecLZKivaVR9.jpg";
+        : "https://media.istockphoto.com/id/1039351052/vector/movie-and-film-festival-poster-template-design-modern-retro-vintage-style.jpg?s=612x612&w=0&k=20&c=aPVSLX7VlJj7DYBZ8afyj9ca15qoZEeZkLj_1exaUfE=";
 
     return (
-    <div className ="bg-dark list-group-item m-3 border-1 ">
-        <div className="row bg-landing-page">
-            <div className="col-4 bg-landing-page">
-                <Link to = {`/movies/movie/${movie.movie.id}`} className = "text-decoration-none bg-landing-page" >
-                    <img className="card-img rounded-3 movie-list-item-img m-0 p-0" src= {poster_path} alt="Image Not Found"/>
+    <div className ="list-group-item p-1 bg-dark border-secondary-subtle rounded-3 m-1 ">
+        <div className="row">
+            <div className="col-2">
+                <Link to = {`/movies/movie/${movie.movie.id}`} className = "text-decoration-none m-0 p-0" >
+                    <img className="card-img rounded-3 img-fluid m-0 p-0" src= {poster_path} alt="Image Not Found"/>
                 </Link>
             </div>
-            <div className="col-8 m-0 p-0">
+            <div className="col-10 m-0 p-0">
                 <div className="m-0 p-0">
                     <h5 className="mb-0 pb-0 white-font">{title}</h5>
                     <span className = "grey-text mt-0 pt-0">{formatDate(releaseDate)}</span>

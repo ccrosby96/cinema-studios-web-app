@@ -18,12 +18,22 @@ function SeasonScrollTileDynamic({ season, onClickHandler }) {
     }
 
     return (
-        <div className="scroll_media-element" onClick={handleClick}>
+        <div className="hover-card-container" onClick={handleClick}>
             <img
                 src= {poster_path}
-                alt="Not Found"/>
-            <span className="title a1-font-16px mb-0 pb-0 white-font">{title}</span>
-            <span className="card-text a1-font-16px mt-1 pt-0 white-font float-end">{percent}%  &nbsp;&nbsp;{episodeCount} Episodes </span>
+                alt="Not Found"
+                className = "img-fluid rounded-3 m-0 p-1"
+                style = {{height: "300px",width:"220px", objectFit: "cover"}}/>
+            <div className = "p-2 m-0 rounded-bottom-3">
+                <span className="title a1-font-16px mb-0 pb-0 white-font me-2">{title}</span>
+                <span className="card-text a1-font-16px m-0 p-0 white-font float-end">{vote_average}
+                    <i className="fa-solid fa-star color-yellow ms-2 p-0 "></i></span>
+
+                <br/>
+                <span className="card-text a1-font-16px mt-1 pt-0 white-font float-start">{episodeCount} Episodes </span>
+
+            </div>
+
         </div>
     );
 }

@@ -44,7 +44,7 @@ function MovieResultsList (movies = movies = [
         "vote_count": 39
     }]) {
     if (movies.movies.length === 0){
-        return (<p> No movies found (ㆆ _ ㆆ)</p>)
+        return (<p className = "white-font"> No movies found (ㆆ _ ㆆ)</p>)
     }
 
     return (

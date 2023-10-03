@@ -28,11 +28,11 @@ function MultiSearchResultsPage() {
         <div className = "bg-landing-page">
             <NavigationSidebar/>
             <div className = "container">
+            <div className = "row" >
 
-            <div className = "row " >
-                <div className = "col-2 mt-5 " >
-                    <h5 className = "white-font">Results Type: {selectedItem}</h5>
-                    <div className="card">
+                <div className = "col-2 mt-5" >
+                    <div className="mt-5"></div>
+                    <div className="card mt-5">
                         <div className="card-header">Select a Type</div>
                         <ul className="list-group list-group-flush ">
                             <li

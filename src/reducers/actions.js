@@ -46,9 +46,12 @@ export const setMaxPage = (maxPage) => ({
     type: SET_MAX_PAGE,
     payload: maxPage,
 });
-export const appendToResults = (dataToAppend) => ({
+export const appendToResults = (currentPage,pageData) => ({
     type: APPEND_TO_RESULTS,
-    payload: dataToAppend,
+    payload: {
+        page: currentPage,  // Include the page number
+        data: pageData,
+    },
 });
 
 export const setSearchUrl = (url) => ({

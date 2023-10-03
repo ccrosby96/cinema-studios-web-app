@@ -10,6 +10,7 @@ import {
 
 const initialState = {
     results: [[]], // Initially, no search results, and we use index results array as page number
+    pageResults: {},
     url : "",
     currentPage: 0,
     maxPage: 0,
@@ -23,11 +24,13 @@ const searchResultsReducer = (state = initialState, action) => {
             return {
                 ...state,
                 results: action.payload,
+                pageResults: action.payload,
             };
         case CLEAR_SEARCH_RESULTS:
             return {
                 ...state,
                 results: [[]],
+                pageResults: {},
             };
         case SET_CURRENT_PAGE:
             return {
@@ -64,9 +67,15 @@ const searchResultsReducer = (state = initialState, action) => {
                 error: action.error,
             };
         case APPEND_TO_RESULTS:
+            const { page, data } = action.payload;
             return {
                 ...state,
-                results: [...state.results, action.payload], // Append data to the results list
+                results: [...state.results, data], // Append data to the results list
+                pageResults: {
+                    ...state.pageResults,
+                    [page]: data,
+                },
+
             };
         default:
             return state;

@@ -4,6 +4,8 @@ import {useDispatch, useSelector} from "react-redux";
 import ReviewPostForm from "../reviews/review-post-form";
 import {logoutThunk} from "../../thunks/users-thunks";
 import {useNavigate} from "react-router";
+import popcornImage from '../../images/popcorn.png';
+
 const NavigationSidebar = (
 ) => {
     const { currentUser } = useSelector((state) => state.user);
@@ -14,20 +16,17 @@ const NavigationSidebar = (
 
     return (
         <nav className="navbar navbar-expand-lg navbar-dark bg-dark" >
-            <a className="navbar-brand" href="/search">Cinema Studios</a>
+            <Link className = "text-decoration-none me-2 p-2 ms-1" to = "/search">
+                <img src = {popcornImage}
+                     style = {{height: "40px",width:"40px"}}
+                    className = ""/>
+            </Link>
             <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
                     aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span className="navbar-toggler-icon"></span>
             </button>
             <div className="collapse navbar-collapse" id="navbarNav">
                 <ul className="navbar-nav">
-                    <li className="nav-item active mt-1">
-                        <Link  className="text-decoration-none" to = "/search">
-                            <span className="text-light"> Home</span>
-
-                        </Link>
-
-                    </li>
                     <li className="nav-item mt-1">
 
                             <Link  className="text-decoration-none" to = "/movies/discover">
@@ -37,24 +36,24 @@ const NavigationSidebar = (
 
                     </li>
                     <li className="nav-item">
-                        <a className="nav-link" href="#">TV Shows</a>
+                        <a className="nav-link text-light" href="#">TV Shows</a>
                     </li>
                     <li className="nav-item">
-                        <a className="nav-link" href="#">People</a>
+                        <a className="nav-link text-light" href="#">People</a>
                     </li>
                     <li className="nav-item">
-                        <a className="nav-link" href="/profile">Profile</a>
+                        <a className="nav-link text-light" href="/profile">Profile</a>
                     </li>
                     {currentUser ? (
                         <li className="nav-item ml-auto " onClick={() => {
                             dispatch(logoutThunk());
                             navigate("/login");
                         }}>
-                            <a className="nav-link" href="/login">Logout</a>
+                            <a className="nav-link text-light" href="/login">Logout</a>
                         </li>
                     ) : (
                         <li className="nav-item ml-auto">
-                            <a className="nav-link" href="/login">Login</a>
+                            <a className="nav-link text-light" href="/login">Login</a>
                         </li>
                     )}
 

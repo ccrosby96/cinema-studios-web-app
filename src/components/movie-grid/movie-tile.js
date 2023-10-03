@@ -22,7 +22,7 @@ function MovieSearchTile({ movie }) {
                 src={poster_path}
                 alt="Not Found"
                 className="img-fluid rounded-3 rounded-top-3"
-                style={{ height: '375px',width: "100%", objectFit: 'cover' }} // Ensure the image covers the fixed height
+                style={{ height: '375px',width: "300px", objectFit: 'cover' }} // Ensure the image covers the fixed height
             />
             <div className = "bg-movie-card p-2 m-0 mb-5 rounded-bottom-2">
                 <span className="card-text a1-font-16px mt-1 pt-0 white-font ">{vote_average}</span>

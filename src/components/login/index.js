@@ -32,9 +32,9 @@ function Login() {
 
         <>
             <NavigationSidebar />
-            <div className="container w-100 bg-dark login-container ">
-                <div className="center bg-dark login-container">
-                    <div className="center_box bg-dark rounded p-3">
+            <div className="container w-100 bg-secondary login-container ">
+                <div className="center bg-secondary login-container">
+                    <div className="center_box bg-secondary rounded p-3">
                         <p className="text-white fw-bold a1-font-family h3 text-center mt-2">
                             {" "}
                             Login{" "}

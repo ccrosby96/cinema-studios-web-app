@@ -66,9 +66,9 @@ function CreateAccount() {
     return (
         <div className = "mb-2 pb-2 bg-landing-page">
             <NavigationSidebar/>
-        <div className="mt-2 pt-2  w-100">
+        <div className="w-100">
             <div className="center">
-                <div className="center_box sunset-background rounded p-3">
+                <div className="center_box bg-secondary rounded p-3 mt-3">
                     <p className="fw-bold a1-font-family h4 text-center mt-2 text-white"> Create Account </p>
                     <form>
 

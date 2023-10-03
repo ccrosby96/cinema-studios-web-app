@@ -176,10 +176,10 @@ function SeriesPage () {
                     <div className="row">
                         <div className="col-9">
                             <div className="m-1">
-                                <h4>Top Billed Cast</h4>
+                                <h4 className = "white-font">Top Billed Cast</h4>
                                 <ApiCastScrollBar cast={seriesCast.cast}/>
-                                <h4>Seasons</h4>
-                                <div className="scroll_media-scroller snaps-inline mb-0 pb-0">
+                                <h4 className = "white-font">Seasons</h4>
+                                <div className="scroll_media-scroller snaps-inline bg-dark rounded-3 m-2 p-1">
                                     {details.seasons.map((season, i) => (
                                         <SeasonScrollTileDynamic
                                             key={i}
@@ -194,28 +194,28 @@ function SeriesPage () {
                         <div className="col-3">
                             <ul className="no-bullets mt-2">
                                 <li>
-                                    <span className="fw-bold"> Status</span>
+                                    <span className="fw-bold white-font"> Status</span>
                                     <br></br>
-                                    <p> {details.status}</p>
+                                    <p className = "white-font"> {details.status}</p>
                                 </li>
                                 <li>
-                                    <span className="fw-bold"> Original Language</span>
+                                    <span className="fw-bold white-font"> Original Language</span>
                                     <br></br>
-                                    <p> {extractLanguageName(details.original_language)}</p>
+                                    <p className = "white-font"> {extractLanguageName(details.original_language)}</p>
                                 </li>
 
 
                                 <li>
-                                    <span className="fw-bold"> Network</span>
+                                    <span className="fw-bold white-font"> Network</span>
                                     <br></br>
-                                    <p className="mb-0 pb-0"> {networkInfo.name}</p>
-                                    <img className="network-logo-small float mt-0 pt-0 mb-2"
+                                    <p className="mb-0 pb-0 white-font"> {networkInfo.name}</p>
+                                    <img className="network-logo-small float mt-0 pt-0 mb-2 "
                                          src={generateImageUrl(networkInfo.logo)}></img>
                                 </li>
                                 <li>
-                                    <span className="fw-bold mt-2"> Type</span>
+                                    <span className="fw-bold mt-2 white-font"> Type</span>
                                     <br></br>
-                                    <p> {details.type}</p>
+                                    <p className = "white-font"> {details.type}</p>
                                 </li>
                             </ul>
 
@@ -241,7 +241,7 @@ function SeriesPage () {
 
                     </div>
                     <div className="row">
-                        <h5>Series Recommendations</h5>
+                        <h5 className = "white-font">You May Also Like</h5>
                         <div>
                             <TvRecommendationsScrollBar recs={recs.results}/>
                         </div>
