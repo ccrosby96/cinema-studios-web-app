@@ -8,9 +8,9 @@ import ReplyForm from "./comment-reply-form";
 import en from 'javascript-time-ago/locale/en'
 import TimeAgo from 'javascript-time-ago'
 import ReviewCommentSection from "./review-comment-section";
+TimeAgo.addDefaultLocale(en)
 
 function MovieReviewItem({review,movieId}){
-    TimeAgo.addDefaultLocale(en)
     const {currentUser} = useSelector( state => state.user)
     const [movieReview,setMovieReview] = useState(review)
     const timeAgo = new TimeAgo('en-US')
@@ -18,11 +18,23 @@ function MovieReviewItem({review,movieId}){
     const [isDownvoted, setIsDownvoted] = useState(false);
     const[reply,setReply] = useState(false);
     const [showReplies, setShowReplies] = useState(false);
+    const [spoilers, setSpoilers] = useState(false);
+    const [spoilersVisible, setSpoilersVisible] = useState(false);
 
     useEffect(() => {
         setMovieReview(review)
+        if ("containsSpoilers" in review && review.containsSpoilers){
+            console.log("review flagged for spoilers!");
+            setSpoilers(true);
+            setSpoilersVisible(false);
+        }
 
     }, [review, movieId]);
+    const handleSpoilersClick = () => {
+        if (spoilers) {
+            setSpoilersVisible(!spoilersVisible);
+        }
+    };
     const toggleReplies = () => {
         setShowReplies(!showReplies);
     };
@@ -143,10 +155,17 @@ function MovieReviewItem({review,movieId}){
                     </p>
                     <p className="p-0 m-0 ps-1 wd-font-family-arial text-nowrap d-inline white-font">
                          &nbsp; {movieReview.rating} <i className="fa-solid fa-star color-yellow"></i>
+                        {spoilers && <i className=" ms-3 fa-solid fa-circle-exclamation "></i>}
                     </p>
 
                     <div className="row">
-                        <p className = "white-font">{movieReview.body}</p>
+                        <div className="review-body-container">
+                            {!spoilers || spoilersVisible ? (
+                                <p className="white-font review-body" onClick={handleSpoilersClick}>{movieReview.body}</p>
+                            ) : (
+                                <p className="white-font review-body spoilers-blur" onClick={handleSpoilersClick}>{movieReview.body}</p>
+                            )}
+                        </div>
                         <span className="white-font me-2">
                             <i
                                 className={`${isUpvoted ? "upvoted fa-solid" : "fa-regular"} fa-thumbs-up me-2`}

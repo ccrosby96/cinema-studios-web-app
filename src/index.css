@@ -588,6 +588,10 @@ button-no-style {
   position: relative;
   left: -5px;
 }
+.nudge-down {
+  position: relative;
+  top: 3px;
+}
 .sunset-background {
   background-image: url("../public/images/sunset_image.jpg");
   background-size: cover;

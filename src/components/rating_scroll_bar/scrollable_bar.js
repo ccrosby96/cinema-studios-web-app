@@ -9,7 +9,7 @@ function Slider({ value, onChange, max, step }) {
             step = {step}
             value={value}
             onChange={onChange}
-            className="slider custom-slider color-yellow bg-light"
+            className="slider custom-slider bg-light"
         />
     );
 }

@@ -15,9 +15,9 @@ const ReviewPostForm = ({ user, movieId }) => {
     const dispatch = useDispatch();
     const [reviewScore, setReviewScore] = useState(5);
     const [generatedReview, setGeneratedReview] = useState(null);
+    const [spoilers, setSpoilers] = useState(false);
 
     const ReviewClickHandler = async () => {
-
         if (currentUser) {
             console.log("this post is being written by", currentUser.username);
             const newReview = generateMovieReview();
@@ -34,6 +34,9 @@ const ReviewPostForm = ({ user, movieId }) => {
             }
         }
     };
+    const spoilersClickHandler = () => {
+       setSpoilers(!spoilers);
+    }
 
     // Function to generate a movie review object
     const generateMovieReview = () => {
@@ -42,6 +45,7 @@ const ReviewPostForm = ({ user, movieId }) => {
             rating: parseFloat(reviewScore),
             movieId: parseInt(movieId),
             body: reviewBody,
+            containsSpoilers: spoilers,
         };
         return newReview;
     };
@@ -90,8 +94,18 @@ const ReviewPostForm = ({ user, movieId }) => {
 
                                 <i className="fa-solid fa-star color-yellow me-1"></i>
                                 <span className="fw-bold white-font">{reviewScore} / 10 </span>
+                                <label className="white-font ms-3 form-check-label">
+                                    Spoilers
+                                    <input
+                                        type="checkbox"
+                                        checked={spoilers}
+                                        onChange={spoilersClickHandler}
+                                        className="white-font ms-2 m-0 nudge-down form-check-input"
+                                    />
+                                </label>
+
                                 <button
-                                    className="rounded-pill btn btn-primary float-end mt-0 ps-3 pe-3 fw-bold"
+                                    className="rounded-pill btn btn-primary float-end mt-0 ps-3 pe-3 fw-bold nudge-up"
                                     onClick={ReviewClickHandler}
                                 >
                                     Post Review

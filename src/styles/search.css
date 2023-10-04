@@ -53,3 +53,8 @@ body{
     box-shadow: none;
     border:none;
 }
+
+.search-bar-bg {
+    background-image: url("../../public/images/popcorn-background.png");
+    background-size: cover;
+}

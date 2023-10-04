@@ -35,8 +35,8 @@ function SearchBar (){
         };
     return (
 
-        <div>
-            <div className="row d-flex justify-content-center align-items-center mb-3">
+        <div className = " container search-bar-bg p-3 rounded-3 mt-1">
+            <div className="row d-flex justify-content-center align-items-center mb-4">
 
                 <div className="col-md-6 mt-4">
 
