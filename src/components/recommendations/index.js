@@ -47,6 +47,9 @@ function RecommendationsScrollBar(
 
 ) {
     const data = recs.data;
+    if (data.length === 0) {
+        return (<p className = "white-font"> No recommendations found</p>);
+    }
 
     return (
         <>
