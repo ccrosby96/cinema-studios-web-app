@@ -1,9 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 import { findUserThunk, updateUserThunk, deleteUserThunk,
-    createUserThunk, findAllUsersThunk, loginThunk, profileThunk, logoutThunk } from
+    createUserThunk, findAllUsersThunk, loginThunk, profileThunk, logoutThunk, addMovieFavoriteThunk } from
         "../thunks/users-thunks";
-
 
 const initialState = {
     user: [],
@@ -73,7 +72,18 @@ const usersSlice = createSlice({
             (state, { payload }) => {
                 state.loading = false
                 state.user = state.user.filter(user => user._id !== payload._id)
-            }
+            },
+        [addMovieFavoriteThunk.fulfilled]: (state, { payload }) => {
+            return {
+                ...state,
+                loading: false,
+                currentUser: {
+                    ...state.currentUser,
+                    favoriteMovies: [...state.currentUser.favoriteMovies, payload],
+                },
+            };
+        },
+
 
     }
 })

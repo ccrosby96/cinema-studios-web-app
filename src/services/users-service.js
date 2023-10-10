@@ -63,6 +63,59 @@ export const addToUserWatchlist = async (movie) => {
         }
     }
 };
+export const addToUserFavorites = async (movie) => {
+    try {
+        console.log('movie in addToUserFavorites', movie);
+        const response = await api.post(`${USER_API}/add-to-favorites`, movie);
+        return response.data;
+    } catch (error) {
+        if (error.response) {
+            // The request was made, but the server responded with an error status code
+            console.error('Request error:', error.response.data);
+            throw new Error(error.response.data.error || 'Request error');
+        } else if (error.request) {
+            // The request was made, but no response was received
+            console.error('No response received:', error.request);
+            throw new Error('No response received');
+        } else {
+            // Something else happened while setting up the request
+            console.error('Request setup error:', error.message);
+            throw new Error('Request setup error');
+        }
+    }
+}
+export const deleteFromUserFavorites = async (movieId) => {
+    try {
+        const response = await api.delete(`${USERS_URL}/favorites/${movieId}`)
+        return response.data
+    } catch (error){
+        if (error.response) {
+            // The request was made, but the server responded with an error status code
+            console.error('Request error:', error.response.data);
+            throw new Error(error.response.data.error || 'Request error');
+        } else if (error.request) {
+            // The request was made, but no response was received
+            console.error('No response received:', error.request);
+            throw new Error('No response received');
+        } else {
+            // Something else happened while setting up the request
+            console.error('Request setup error:', error.message);
+            throw new Error('Request setup error');
+        }if (error.response) {
+            // The request was made, but the server responded with an error status code
+            console.error('Request error:', error.response.data);
+            throw new Error(error.response.data.error || 'Request error');
+        } else if (error.request) {
+            // The request was made, but no response was received
+            console.error('No response received:', error.request);
+            throw new Error('No response received');
+        } else {
+            // Something else happened while setting up the request
+            console.error('Request setup error:', error.message);
+            throw new Error('Request setup error');
+        }
+    }
+}
 
 export const getUser = async (handle) => {
     const response = await api.get(`${USER_API}/${handle}`);

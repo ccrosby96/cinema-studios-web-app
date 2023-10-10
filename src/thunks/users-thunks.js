@@ -40,6 +40,13 @@ export const loginThunk = createAsyncThunk(
         return user;
     }
 )
+export const addMovieFavoriteThunk = createAsyncThunk(
+    "users/favorites", async (movie) => {
+        const result = await service.addToUserFavorites(movie)
+        console.log("return result in favoriteThunk", result);
+        return result;
+    }
+)
 
 export const profileThunk = createAsyncThunk(
     "users/profile", async () => {

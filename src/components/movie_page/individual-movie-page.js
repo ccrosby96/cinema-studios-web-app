@@ -13,15 +13,14 @@ import ApiCastScrollBar from "../actor_scroll_bar/api-cast-scroll-bar";
 import RecommendationsScrollBar from "../recommendations";
 import {useParams} from "react-router";
 import {useEffect, useState} from "react";
-import {findMovieDetailsById, findMovieCastById, findMovieProvidersById,
-    findMovieRecommendationsById, fetchMovieVideosById} from "../../services/movie-service";
+import {findMovieDetailsById, findMovieProvidersById} from "../../services/movie-service";
 import ApiWatchProviders from "../watch_providers/api-providers";
 import ReviewPostForm from "../reviews/review-post-form";
 import {useDispatch, useSelector} from "react-redux";
 import {getReviewsByMovieId} from "../../services/movie-review-service";
 import MovieReviewList from "../reviews/movie-review-list";
-import {addToUserWatchlist} from "../../services/users-service";
-import {profileThunk, updateUserThunk} from "../../thunks/users-thunks";
+import {addToUserWatchlist, addToUserFavorites, deleteFromUserFavorites} from "../../services/users-service";
+import {profileThunk, updateUserThunk, addMovieFavoriteThunk} from "../../thunks/users-thunks";
 
 /*
 cinema studios - name idea by jake fredo
@@ -31,10 +30,11 @@ function IndividualMoviePage  () {
     const url = "http://image.tmdb.org/t/p/w500";
     const mid = useParams();
     const movieId = mid.mid
-    const dispatch = useDispatch;
+    const dispatch = useDispatch();
     const { currentUser } = useSelector((state) => state.user);
     const [errorMessage, setErrorMessage] = useState(null);
     const [inWatchList, setInWatchList] = useState(false);
+    const [inFavorites, setInFavorites] = useState(false);
     console.log("user in moviepage is ", currentUser);
 
     //const save = () => { dispatch(updateUserThunk(profile));};
@@ -61,6 +61,57 @@ function IndividualMoviePage  () {
             if (isInWatchlist){
                 setInWatchList(true);
                 console.log("movie in watchlist")
+            }
+            else {
+                setInWatchList(false);
+            }
+        }
+    }
+    const checkFavorites = () => {
+        if (currentUser) {
+            const favorite = currentUser.favoriteMovies.some((item) => item.movieId === movieId);
+            if (favorite){
+                setInFavorites(true);
+                console.log("movie in favorites");
+                return
+            }
+            else {
+                setInFavorites(false);
+            }
+        }
+    }
+    const favoritesClickHandler = async () => {
+        if (!currentUser){
+            setInFavorites(!inFavorites)
+            return;
+        }
+        // if it's in favorites already then user wants to delete it
+        if (inFavorites) {
+            try {
+                await deleteFromUserFavorites(movieId);
+                setInFavorites(!inFavorites);
+                return
+            }catch (error){
+            }
+        }
+        // create favoriteItem with details and dispatch action
+        const favoriteItem = {
+            movieTitle: details.title,
+            movieId: movieId,
+            posterPic: details.poster_path
+        };
+        try {
+            // Call the API function
+            //const result =await addToUserFavorites(favoriteItem);
+            dispatch(addMovieFavoriteThunk(favoriteItem))
+            setInFavorites(true);
+            // If successful, you can optionally display a success message or update your UI
+            // ...
+        } catch (error) {
+            // Handle the error here
+            if (error.message === 'User not authenticated') {
+                // Display an alert for the user to log in
+                setErrorMessage('Please log in to add movies to your watchlist.');
             }
         }
     }
@@ -144,6 +195,8 @@ function IndividualMoviePage  () {
 
         fetchData();
         checkWatchList();
+        checkFavorites();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
 
     }, [movieId]); // if we have a new movie id we want to re-render
 
@@ -203,9 +256,19 @@ function IndividualMoviePage  () {
                                     <i className="fa-solid fa-check fa-2x trailer-icon" style={{color: "#f5f5f5"}}></i>
                                     <span className= "white-text nudge-up"> In Watchlist</span>
                                 </button>
-                            )
+                            )}
+                            {currentUser && (
+                                <button className = "bg-dark ms-2">
+                                    <i
+                                        className="fa-solid fa-heart fa-2x trailer-icon"
+                                        style={{ color: inFavorites ? "#EC4D82" : "#f5f5f5" }}
+                                        onClick = {favoritesClickHandler}>
 
-                            }
+
+                                    </i>
+                                    <span className="white-text nudge-up ms-1">{inFavorites ? "In Favorites" : "Favorite"}</span>
+                                </button>)}
+
 
                         </div>
                         <p className="fw-bold a1-font-25px white-font mb-0 pb-0 mt-2"> Overview</p>
