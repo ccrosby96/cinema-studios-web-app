@@ -10,7 +10,6 @@ function MovieWatchList({ movies, profile }) {
     const [displayedMovies, setDisplayedMovies] = useState(movies);
     console.log('profile in movieWatchList', profile);
 
-
     console.log('watchlist: ',movies)
     const dispatch = useDispatch();
     // Function to remove a movie from the displayed list

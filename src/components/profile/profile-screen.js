@@ -7,6 +7,7 @@ import { profileThunk, logoutThunk, updateUserThunk }
 import NavigationSidebar from "../navigation";
 import NoProfile from "./no-profile";
 import MovieWatchList from "./movie-watch-list";
+import FavoritesScrollBar from "../favorites";
 function ProfileScreen() {
     const { currentUser } = useSelector((state) => state.user);
     const [profile, setProfile] = useState(currentUser);
@@ -115,6 +116,7 @@ function ProfileScreen() {
                          <div class="mt-5 text-center"><button class="btn btn-secondary profile-button float-end" type="button" onClick = {save}>Save Profile</button></div>
 
                      </div>
+
                  </div>
                  <div class="col-md-4">
                      <div class="p-3 py-5">
@@ -122,8 +124,23 @@ function ProfileScreen() {
                         <MovieWatchList movies = {currentUser.watchlist} profile = {profile}/>
                      </div>
                  </div>
+
              </div>
+             <div className = "row">
+                 <div className = "">
+                     <h4 className = "white-font ms-2"> Favorites</h4>
+                     <FavoritesScrollBar favorites={profile.favoriteMovies}/>
+                 </div>
+                 <div className = "">
+                 </div>
+
+
+
+             </div>
+
+
          </div>
+
 
 </div>
 );
