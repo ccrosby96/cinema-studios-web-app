@@ -40,8 +40,8 @@ const usersSlice = createSlice({
 
         [updateUserThunk.fulfilled]: (state, { payload }) => {
             state.loading = false
-            state.user = {
-                ...state.user,
+            state.currentUser = {
+                ...state.currentUser,
                 ...payload
             }
         },

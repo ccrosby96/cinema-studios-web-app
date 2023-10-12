@@ -8,9 +8,12 @@ import NavigationSidebar from "../navigation";
 import NoProfile from "./no-profile";
 import MovieWatchList from "./movie-watch-list";
 import FavoritesScrollBar from "../favorites";
+import {getReviewsByUserId} from "../../services/movie-review-service";
+import ProfileReviewList from "./profile-review-list";
 function ProfileScreen() {
     const { currentUser } = useSelector((state) => state.user);
     const [profile, setProfile] = useState(currentUser);
+    const [reviews,setReviews] = useState(null);
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
@@ -25,6 +28,13 @@ function ProfileScreen() {
                 console.log("current profile", payload);
                 setProfile(payload);
 
+                // get some user reviews too for profile
+                console.log('uid of user in profile screen', payload._id);
+
+                const userReviews = await getReviewsByUserId(payload._id);
+                setReviews(userReviews);
+                console.log('user reviews: ', userReviews);
+
             } catch (error) {
                 // Handle errors here (e.g., display an error message)
                 console.error("Error fetching profile:", error);
@@ -32,24 +42,26 @@ function ProfileScreen() {
         };
 
         fetchData();
-    }, []);
+    }, []);  // Empty dependency array ensures it only runs once, similar to componentDidMount
+
     // if not loggged in don't try and load profile
     if (!profile){
         console.log("no user profile loaded")
-        //navigate("/login");
         return (
                 <NoProfile/>
             );
     }
+
+    console.log('user reviews', reviews)
      return (
          <div className = "bg-landing-page m-0 p-0">
              <NavigationSidebar/>
          <div class="container rounded mt-3 mb-5 bg-dark">
              <div class="row">
                  <div class="col-md-3 border-right">
-                     <div class="d-flex flex-column align-items-center text-center p-3 py-5"><img class=" mt-5 circle-container" src={profile.profilePic}/><span class="font-weight-bold white-font">{profile.username}</span><span> </span></div>
+                     <div class="d-flex flex-column align-items-center text-center p-3 py-5"><img class="mt-5 circle-container" src={profile.profilePic}/><span class="font-weight-bold white-font">{profile.username}</span><span> </span></div>
                  </div>
-                 <div class="col-md-5 border-right">
+                 <div class="col-md-5 border-right mb-0">
                      <div class="p-3 py-5">
                          <div class="d-flex justify-content-between align-items-center mb-3">
                              <h4 class="text-right white-font">Profile Settings</h4>
@@ -127,15 +139,40 @@ function ProfileScreen() {
 
              </div>
              <div className = "row">
-                 <div className = "">
-                     <h4 className = "white-font ms-2"> Favorites</h4>
-                     <FavoritesScrollBar favorites={profile.favoriteMovies}/>
+                 <div className = "col-md-8">
+                     <div className="row">
+                         <div className="col">
+                             <h4 className="white-font ms-2">Favorites</h4>
+                         </div>
+                         <div className="col">
+                             <h4 className="white-font float-end me-2">All</h4>
+                         </div>
+                         <div>
+                             <FavoritesScrollBar favorites={profile.favoriteMovies} profile = {profile}/>
+                         </div>
+                     </div>
+                     <div className="row">
+                         <div className="col">
+                             <h4 className="white-font ms-2">My Recent Reviews</h4>
+                         </div>
+                         <div className="col">
+                             <h4 className="white-font float-end me-2">All</h4>
+                         </div>
+                         {/* Conditionally render ProfileReviewList */}
+                         {reviews !== null ? (
+                             <div>
+                                 <ProfileReviewList reviews={reviews} />
+                             </div>
+                         ) : (
+                             <div className = "">
+                                 <h5 className = "white-font ms-5">Loading reviews...</h5>
+                             </div>
+                         )}
+                     </div>
+
+
+
                  </div>
-                 <div className = "">
-                 </div>
-
-
-
              </div>
 
 

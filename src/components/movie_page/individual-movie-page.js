@@ -333,7 +333,7 @@ function IndividualMoviePage  () {
                     <span className="a1-font-25px fw-bold white-font">Reviews</span>
                     <div className= "col-9">
                         {currentUser ? (
-                            <ReviewPostForm user={currentUser} movieId={movieId} />
+                            <ReviewPostForm user={currentUser} movieId={movieId} movie = {details} />
                         ) : (
                             <p className = "white-font">Please log in to post a review.</p>
                         )}

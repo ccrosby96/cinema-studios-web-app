@@ -8,7 +8,7 @@ import { createMovieReview } from "../../services/movie-review-service";
 import MovieReviewItemSubmission from "./review-item-submission";
 import MovieReviewItem from "./movie-review";
 
-const ReviewPostForm = ({ user, movieId }) => {
+const ReviewPostForm = ({ user, movieId, movie }) => {
     let [reviewBody, setReviewBody] = useState("");
     const { currentUser } = useSelector((state) => state.user);
 
@@ -44,6 +44,8 @@ const ReviewPostForm = ({ user, movieId }) => {
             author: currentUser._id,
             rating: parseFloat(reviewScore),
             movieId: parseInt(movieId),
+            movieTitle: movie.title,
+            posterPic: movie.poster_path,
             body: reviewBody,
             containsSpoilers: spoilers,
         };

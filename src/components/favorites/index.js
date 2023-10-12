@@ -2,8 +2,12 @@ import FavoriteItem from "./favorite-item";
 import {Link} from "react-router-dom";
 import {useState} from "react";
 import {updateUserThunk} from "../../thunks/users-thunks";
-function FavoritesScrollBar ({favorites}) {
+import {useDispatch, useSelector} from "react-redux";
+function FavoritesScrollBar ({favorites, profile}) {
     const [displayedFavorites, setDisplayedFavorites] = useState(favorites);
+    const { currentUser } = useSelector((state) => state.user);
+    const dispatch = useDispatch();
+    console.log("currentUser in favorites Scroll", currentUser);
 
     const removeFavorite =  async (movieId) => {
         try {
@@ -13,7 +17,13 @@ function FavoritesScrollBar ({favorites}) {
             // in the user document we want to update the watchlist array to the filtered watchlist above
             await setDisplayedFavorites(updatedFavorites);
             console.log("set displayed movies", displayedFavorites);
+            const update = {
+                    _id: profile._id,
+                    favoriteMovies: updatedFavorites
+                };
 
+            console.log("calling updateUserThunk with updated favorites", update)
+            dispatch(updateUserThunk(update))
 
             // If successful, you can optionally display a success message or update your UI
             // ...

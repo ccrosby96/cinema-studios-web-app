@@ -25,7 +25,11 @@ function MovieWatchList({ movies, profile }) {
                 watchlist: updatedMovies,
             };
             console.log('calling updateUserThunk with updated watchlist:', {watchlist: updatedMovies});
+            console.log("userId:", profile._id);
+            console.log("newProfile:", newProfile);
+
             dispatch(updateUserThunk(newProfile));
+
 
             // If successful, you can optionally display a success message or update your UI
             // ...

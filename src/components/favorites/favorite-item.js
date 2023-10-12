@@ -16,7 +16,7 @@ function MovieRecTile({movie, onRemove}) {
 
     return (
 
-        <div className="bg-dark rounded-3 border-secondary border-1">
+        <div className="bg-secondary rounded-3 border-secondary mb-0 pb-0">
             <i className="btn fa-solid fa-x float-end m-0 p-1"
                style = {{color: "white"}}
                 onClick = {handleRemoveClick}></i>
@@ -26,9 +26,6 @@ function MovieRecTile({movie, onRemove}) {
                     alt="Not Found"
                     className = "rounded-3 img-fluid p-1 pb-0 mb-0"/>
             </Link>
-            <div className = " ps-1 m-0 rounded-bottom-3">
-                <span className="title a1-font-16px mb-0 pb-0 mt-0 pt-0 white-font">{title}</span>
-            </div>
         </div>
     );
 }

@@ -18,6 +18,7 @@ export const findAllUsersThunk = createAsyncThunk(
 
 export const updateUserThunk = createAsyncThunk(
     "users/updateUser", async (user) => {
+        console.log('user data in updateUserThunk', user);
         return await service.updateUser(user)
     }
 )
