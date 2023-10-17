@@ -93,11 +93,11 @@ function ApiWatchProviders(
     return (
         <div className = "container">
             <h5 className = "fw-bold white-font">Where to Watch</h5>
-            <div className = "row row-cols-3">
+            <div className = "row row-cols-3 m-0 p-0">
             {
                 streamers.map((item, i) => (
                     <div key={item.id} className="p-1 ">
-                            <img src={url + item.logo_path} className="img fluid watch-provider-logo" alt="..."/>
+                            <img src={url + item.logo_path} className="img fluid watch-provider-logo rounded-3 m-0 p-1" alt="..."/>
                             <div className="card-body">
                                 <p className="card-text white-font">{}</p>
                             </div>

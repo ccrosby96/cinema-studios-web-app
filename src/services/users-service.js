@@ -121,6 +121,40 @@ export const getUser = async (handle) => {
     const response = await api.get(`${USER_API}/${handle}`);
     return response.data;
 }
+export const getBaseProfileByUsername = async (username) => {
+    try {
+        const response = await api.get(`${USER_API}/${username}/base-profile`);
+        return response.data;
+    } catch (error) {
+        // Handle error
+        console.error('Error fetching base profile by username:', error);
+        // throw error
+        throw new Error('Failed to fetch base profile');
+    }
+};
+export const getWatchlistByUsername = async (username) => {
+    try {
+        const response = await api.get(`${USER_API}/${username}/watchlist`);
+        return response.data;
+    } catch (error) {
+        // Handle error
+        console.error('Error fetching watchlist by username:', error);
+        // throw error
+        throw new Error('Failed to fetch user watchlist');
+    }
+}
+export const getFavoritesByUsername = async (username) => {
+    try {
+        console.log('calling getFavoritesByUsername with username', username);
+        const response = await api.get(`${USER_API}/${username}/favorites`);
+        return response.data;
+    } catch (error) {
+        // Handle error
+        console.error('Error fetching favorites by username:', error);
+        // throw error
+        throw new Error('Failed to fetch user favorites');
+    }
+}
 
 export const getAllUsers = async () => {
     const response = await api.get(USER_API + "/all");

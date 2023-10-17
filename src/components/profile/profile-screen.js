@@ -1,37 +1,42 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import "../../styles/profile.css"
-import { useNavigate } from "react-router";
-import { profileThunk, logoutThunk, updateUserThunk }
+import {useNavigate, useParams} from "react-router";
+import { profileThunk, updateUserThunk }
     from "../../thunks/users-thunks";
 import NavigationSidebar from "../navigation";
 import NoProfile from "./no-profile";
-import MovieWatchList from "./movie-watch-list";
 import FavoritesScrollBar from "../favorites";
 import {getReviewsByUserId} from "../../services/movie-review-service";
 import ProfileReviewList from "./profile-review-list";
+import {getBaseProfileByUsername} from "../../services/users-service";
+import {Link} from "react-router-dom";
 function ProfileScreen() {
     const { currentUser } = useSelector((state) => state.user);
-    const [profile, setProfile] = useState(currentUser);
+    const [profile, setProfile] = useState(null);
     const [reviews,setReviews] = useState(null);
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    const {username} = useParams()
+    console.log('username in ProfileScreen', username);
+    console.log('currentUser in profileScreen', currentUser);
 
-    const save = () => { dispatch(updateUserThunk(profile));};
-
-
+    const handleEditProfileButtonClick = ()=> {
+        navigate('/profile/settings')
+    }
 
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const { payload } = await dispatch(profileThunk());
-                console.log("current profile", payload);
-                setProfile(payload);
+                const {currentUser} = await dispatch(profileThunk())
+                const userProfile = await getBaseProfileByUsername(username)
+                setProfile(userProfile);
+                console.log("set profile in profile screen to ", profile);
 
                 // get some user reviews too for profile
-                console.log('uid of user in profile screen', payload._id);
+                console.log('uid of user in profile screen', userProfile._id);
 
-                const userReviews = await getReviewsByUserId(payload._id);
+                const userReviews = await getReviewsByUserId(userProfile._id);
                 setReviews(userReviews);
                 console.log('user reviews: ', userReviews);
 
@@ -42,7 +47,8 @@ function ProfileScreen() {
         };
 
         fetchData();
-    }, []);  // Empty dependency array ensures it only runs once, similar to componentDidMount
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }, [username]);  // Empty dependency array ensures it only runs once, similar to componentDidMount
 
     // if not loggged in don't try and load profile
     if (!profile){
@@ -56,96 +62,93 @@ function ProfileScreen() {
      return (
          <div className = "bg-landing-page m-0 p-0">
              <NavigationSidebar/>
-         <div class="container rounded mt-3 mb-5 bg-dark">
-             <div class="row">
-                 <div class="col-md-3 border-right">
-                     <div class="d-flex flex-column align-items-center text-center p-3 py-5"><img class="mt-5 circle-container" src={profile.profilePic}/><span class="font-weight-bold white-font">{profile.username}</span><span> </span></div>
+
+         <div class="container rounded mt-3 mb-5 bg-dark border-1 border-secondary">
+             <div className = "row">
+                 <div className = "col-2">
+                     <img
+                         className="img-fluid p-3"
+                         src={profile.profilePic}
+                         style={{
+                             width: "140px",
+                             height: "140px",
+                             objectFit: "cover", // Maintain aspect ratio while filling the box
+                             borderRadius: "50%",
+                             overflow: "hidden",
+                         }}
+                         alt="Profile Avatar"
+                     />
                  </div>
-                 <div class="col-md-5 border-right mb-0">
-                     <div class="p-3 py-5">
-                         <div class="d-flex justify-content-between align-items-center mb-3">
-                             <h4 class="text-right white-font">Profile Settings</h4>
-                         </div>
-                         <div class="row mt-2">
-                             <div class="col-md-6"><label class="labels" className = "white-font">First Name</label><input type="text" className="form-control" placeholder="first name" value={profile.firstName} onChange={(event) => {
-                                 const newProfile = {
-                                     ...profile,
-                                     firstName: event.target.value,
-                                 };
-                                 setProfile(newProfile);
-                             }}
-                             /></div>
-                             <div class="col-md-6"><label class="labels" className = "white-font">Last Name</label><input type="text" className="form-control" value={profile.lastName} onChange = {(event)=>{
-                             const newProfile = {
-                                 ...profile,
-                                 lastName: event.target.value,
-                                 };
-                                setProfile(newProfile);
-                                }
-                             } placeholder="last name"/></div>
-                         </div>
-                         <div class="row mt-3">
-
-                             <div class="col-md-12"><label class="labels" className = "white-font">Email</label><input type="text" class="form-control" placeholder= {profile.email} value={profile.email}/></div>
-                             <div className="col-md-12"><label className="labels white-font">Profile Pic Url</label><input type="text"
-                                                                                                      className="form-control"
-                                                                                                      placeholder={profile.profilePic}
-                                                                                                      value={profile.profilePic}
-                                                                                                      onChange = {(event)=> {
-                                                                                                          const newProfile = {
-                                                                                                              ...profile,
-                                                                                                              profilePic: event.target.value,
-                                                                                                          };
-                                                                                                          setProfile(newProfile);}
-                                                                                                      }
-                             />
-                             </div>
-
-
-                         </div>
-                         <div class="row mt-3">
-                             <div class="col-md-6"><label class="labels" className = "white-font">Location</label><input type="text" class="form-control" placeholder={profile.location} value={profile.location} onChange={(event) => {
-                                 const newProfile = {
-                                     ...profile,
-                                     location: event.target.value,
-                                 };
-                                 setProfile(newProfile);
-                             }}
-                             /></div>
-                             <div class="col-md-6"><label class="labels" className = "white-font">Role</label><input type="text"
-                                                                                            className="form-control"
-                                                                                            placeholder=""
-                                                                                            value={profile.role}/></div>
-
-
-                             </div>
-                         <button className = "btn btn-secondary profile-button mt-5 float-start" type = "button"
-                                 onClick={() => {
-                                     dispatch(logoutThunk());
-                                     navigate("/login");
-                                 }}>
-                             Logout</button>
-                         <div class="mt-5 text-center"><button class="btn btn-secondary profile-button float-end" type="button" onClick = {save}>Save Profile</button></div>
-
-                     </div>
+                 <div className = "col-8">
+                     <h4 className = "white-font mt-5">{profile.username}</h4>
+                     <i className="fa-solid fa-location-dot float-start me-2" style = {{color:"grey"}}></i>
+                     <p className = "grey-text float-start me-2">{profile.location}</p>
 
                  </div>
-                 <div class="col-md-4">
-                     <div class="p-3 py-5">
-                         <div class="d-flex justify-content-between align-items-center experience"><h4 className = "white-font">Movie Watch List</h4></div><br></br>
-                        <MovieWatchList movies = {currentUser.watchlist} profile = {profile}/>
-                     </div>
+                 <div className  = 'col-2'>
+                     <p className="grey-text ms-2 mt-5">{profile.role}</p>
+                     {profile && currentUser && profile.username === currentUser.username &&
+                         (
+                             <button
+                                 className = "btn btn-secondary"
+                                onClick = {handleEditProfileButtonClick}
+                                >Edit Profile
+                             </button>
+                         )
+                     }
                  </div>
 
              </div>
              <div className = "row">
-                 <div className = "col-md-8">
+                 <ul className="nav nav-highlight justify-content-center border-secondary border-top-2 border-bottom-2 border-1 m-0 p-0">
+                     <li className="nav-item">
+                         <a className="grey-underline ms-3 me-3 active" aria-current="page" href="#">
+                             Profile
+                         </a>
+                     </li>
+                     <li className="nav-item">
+                         <Link className = "text-decoration-none" to={`/profile/${username}/reviews`}>
+                             <a className="grey-no-underline ms-3 me-3">
+                                 Reviews
+                             </a>
+                         </Link>
+                     </li>
+                     <li className="nav-item">
+                         <Link className = "text-decoration-none" to={`/profile/${username}/watchlist`}>
+                             <a className="grey-no-underline ms-3 me-3">
+                                 Watchlist
+                             </a>
+                         </Link>
+                     </li>
+                     <li className="nav-item">
+                         <Link className = "text-decoration-none" to={`/profile/${username}/favorites`}>
+                             <a className="grey-no-underline ms-3 me-3">
+                                 Favorites
+                             </a>
+                         </Link>
+                     </li>
+                     <li className="nav-item">
+                         <a className="grey-no-underline ms-3 me-3" href="#">
+                             Followers
+                         </a>
+                     </li>
+                     <li className="nav-item">
+                         <a className="grey-no-underline ms-3 me-3" href="#">
+                             Following
+                         </a>
+                     </li>
+                 </ul>
+
+
+             </div>
+             <div className = "row mt-2">
+                 <div className = "col-md-9">
                      <div className="row">
                          <div className="col">
-                             <h4 className="white-font ms-2">Favorites</h4>
+                             <h5 className="white-font ms-2">Favorites</h5>
                          </div>
                          <div className="col">
-                             <h4 className="white-font float-end me-2">All</h4>
+                             <h4 className="white-font float-end me-2"></h4>
                          </div>
                          <div>
                              <FavoritesScrollBar favorites={profile.favoriteMovies} profile = {profile}/>
@@ -153,10 +156,10 @@ function ProfileScreen() {
                      </div>
                      <div className="row">
                          <div className="col">
-                             <h4 className="white-font ms-2">My Recent Reviews</h4>
+                             <h5 className="white-font ms-2 mt-2">Recent Reviews</h5>
                          </div>
                          <div className="col">
-                             <h4 className="white-font float-end me-2">All</h4>
+                             <h4 className="white-font float-end me-2"></h4>
                          </div>
                          {/* Conditionally render ProfileReviewList */}
                          {reviews !== null ? (
@@ -169,16 +172,14 @@ function ProfileScreen() {
                              </div>
                          )}
                      </div>
-
-
+                 </div>
+                 <div className = "col-md-3" >
+                     <h5 className="white-font justify-content-center border-bottom">Biography</h5>
+                     <p className = "white-font"> {profile.bio}</p>
 
                  </div>
              </div>
-
-
          </div>
-
-
 </div>
 );
 }

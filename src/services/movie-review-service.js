@@ -21,6 +21,10 @@ export const getReviewsByUserId = async (userId) => {
     const response = await api.get(`${REVIEWS_URL}/user/${userId}`)
     return response.data;
 }
+export const getReviewsByUserName = async (username) => {
+    const response = await api.get(`${REVIEWS_URL}/user/username/${username}`)
+    return response.data;
+}
 export const updateMovieReview = async (post) => {
     const response = await api.put(`${REVIEWS_URL}`, post);
     return response.data;

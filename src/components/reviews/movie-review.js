@@ -1,4 +1,5 @@
 import {useSelector} from "react-redux";
+import {Link} from "react-router-dom";
 import {updateMovieReview} from "../../services/movie-review-service";
 import {useEffect, useState} from "react";
 import {formatReviewDate} from "../../helper_functions/helper_functions";
@@ -9,6 +10,7 @@ import en from 'javascript-time-ago/locale/en'
 import TimeAgo from 'javascript-time-ago'
 import ReviewCommentSection from "./review-comment-section";
 TimeAgo.addDefaultLocale(en)
+
 
 function MovieReviewItem({review,movieId}){
     const {currentUser} = useSelector( state => state.user)
@@ -143,8 +145,11 @@ function MovieReviewItem({review,movieId}){
         <div className = "list-group-item-full-width mb-3 bg-dark rounded-3 p-1 ">
             <div className="row ">
                 <div className="col-12">
+                    <Link className = "text-decoration-none p-0 m-0" to = {`/profile/${movieReview.author.username}`}>
+                        <img alt="" className="review-profile-pic float-start" src={movieReview.author.profilePic}/>
+                    </Link>
 
-                    <img alt="" className="review-profile-pic float-start" src={movieReview.author.profilePic}/>
+
                     <p className="p-0 m-0 ps-5 ps-sm-4 ps-md-3 p fw-bold wd-font-family-arial text-wrap d-inline white-font">
 
                     </p>

@@ -38,7 +38,7 @@ function FavoritesScrollBar ({favorites, profile}) {
     }
     return (
         <>
-            <div className="scroll_media-scroller snaps-inline bg-dark rounded-3">
+            <div className="scroll_media-scroller snaps-inline bg-dark rounded-3 mb-2">
                 {
                     displayedFavorites.map((movie, i) => {
                         return (

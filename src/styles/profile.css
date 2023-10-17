@@ -51,3 +51,31 @@ body {
     border-radius: 50%; /* Make it a circle */
     overflow: hidden; /* Clip any content outside the circle */
 }
+.avatar-top-bar {
+    border-radius: 50%; /* Make it a circle */
+    overflow: hidden; /* Clip any content outside the circle */
+    width: 100px;
+    height: 100px;
+
+}
+.grey-no-underline {
+    color: grey;
+    text-decoration: none;
+    font-weight: bold;
+}
+.grey-underline {
+    color: grey;
+    text-decoration: underline;
+    font-weight: bold;
+}
+.nav-item a:hover {
+    color: white;
+}
+.nav-highlight .nav-item a:hover {
+    color: white;
+
+}
+h5.border-bottom {
+    border-bottom: 1px solid grey;
+}
+

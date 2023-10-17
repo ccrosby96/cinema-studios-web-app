@@ -6,6 +6,7 @@ import MovieRouting from "./components/home/movie-routing";
 import ActorRouting from "./routing/actor-routing";
 import MultiSearchRouting from "./routing/search-routing";
 import TvRouting from "./routing/TvRouting";
+import ProfileRouting from "./routing/profile-routing";
 import {combineReducers} from "redux";
 import filtersReducer from "./reducers/filters-reducer";
 import ratingsReducer from "./reducers/ratings-filter-reducer";
@@ -19,9 +20,6 @@ import multiSearchReducer from "./reducers/multi-search-reducer";
 import Login from "./components/login";
 import CreateAccount from "./components/login/create-account";
 import ProfileScreen from "./components/profile/profile-screen";
-import MovieReviewItem from "./components/reviews/movie-review";
-import review from "./components/reviews/review.json"
-import ReviewPostForm from "./components/reviews/review-post-form";
 
 const rootReducer = combineReducers({
         filters: combineReducers({
@@ -48,10 +46,7 @@ function App() {
                 <Route path = "movies/*" element = {<MovieRouting/>}/>
                 <Route path = "actors/*" element = {<ActorRouting/>}/>
                 <Route path = "tv/*" element = {<TvRouting/>}/>
-                <Route path = "profile" element = {<ProfileScreen/>}/>
-                <Route path = "test/review" element = {<MovieReviewItem review = {review}/>}/>
-                <Route path = "test/review/post" element = {<ReviewPostForm/>}/>
-
+                <Route path = "profile/*" element = {<ProfileRouting/>}/>
             </Routes>
           </Provider>
       </BrowserRouter>

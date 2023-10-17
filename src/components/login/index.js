@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { loginThunk } from "../../thunks/users-thunks";
+import {loginThunk, profileThunk} from "../../thunks/users-thunks";
 import NavigationSidebar from "../navigation";
 import style from "../../styles/login-screen.css"
 
@@ -18,10 +18,11 @@ function Login() {
         console.log("handleLogin: ", username, password);
         try {
             const logged = await dispatch(loginThunk({ username, password }));
+            await dispatch(profileThunk())
             if (logged.error) {
                 alert("Login failed");
             } else {
-                navigate("/profile");
+                navigate("/search");
             }
         } catch (e) {
             alert(e);

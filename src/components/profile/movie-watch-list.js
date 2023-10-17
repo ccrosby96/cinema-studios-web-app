@@ -5,10 +5,11 @@ import {deleteFromUserWatchList} from "../../services/users-service";
 
 import {updateUserThunk} from "../../thunks/users-thunks"
 
-function MovieWatchList({ movies, profile }) {
+function MovieWatchList({ movies, profile, username, loggedInUser}) {
     // Create state to store the movies to be displayed
     const [displayedMovies, setDisplayedMovies] = useState(movies);
     console.log('profile in movieWatchList', profile);
+    console.log('logged in user in movieWatchList', loggedInUser);
 
     console.log('watchlist: ',movies)
     const dispatch = useDispatch();
@@ -29,10 +30,6 @@ function MovieWatchList({ movies, profile }) {
             console.log("newProfile:", newProfile);
 
             dispatch(updateUserThunk(newProfile));
-
-
-            // If successful, you can optionally display a success message or update your UI
-            // ...
         } catch (error) {
             // Handle the error here
             console.error(error)
@@ -43,7 +40,7 @@ function MovieWatchList({ movies, profile }) {
         <>
             <ul className="list-group no-bullets bg-dark">
                 {displayedMovies.map((movie, i) => (
-                    <WatchListItem key={i} movie={movie} onRemove={removeMovie} />
+                    <WatchListItem key={i} movie={movie} onRemove={removeMovie} profile = {profile} username = {username} loggedInUser = {loggedInUser} />
                 ))}
             </ul>
         </>

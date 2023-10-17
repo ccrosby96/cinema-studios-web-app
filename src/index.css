@@ -638,3 +638,6 @@ button-no-style {
   text-decoration: underline;
   color: white; /* Set the color to grey */
 }
+.underline-text {
+  text-decoration: underline;
+}

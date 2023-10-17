@@ -42,7 +42,7 @@ const NavigationSidebar = (
                         <a className="nav-link text-light" href="#">People</a>
                     </li>
                     <li className="nav-item">
-                        <a className="nav-link text-light" href="/profile">Profile</a>
+                        <a className="nav-link text-light" href={currentUser ? `/profile/${currentUser.username}` : '/profile'}>Profile</a>
                     </li>
                     {currentUser ? (
                         <li className="nav-item ml-auto " onClick={() => {
