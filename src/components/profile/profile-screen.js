@@ -9,12 +9,23 @@ import NoProfile from "./no-profile";
 import FavoritesScrollBar from "../favorites";
 import {getReviewsByUserId} from "../../services/movie-review-service";
 import ProfileReviewList from "./profile-review-list";
-import {getBaseProfileByUsername} from "../../services/users-service";
+import ProfileStatItem from "./profile-stat-item";
+import {
+    getBaseProfileByUsername,
+    checkForFollowRelationship,
+    followUser,
+    unfollowUser,
+    getFollowersList
+} from "../../services/users-service";
 import {Link} from "react-router-dom";
+import FollowerGrid from "./follow-grid";
+import FollowingGrid from "./follower-grid";
 function ProfileScreen() {
     const { currentUser } = useSelector((state) => state.user);
     const [profile, setProfile] = useState(null);
     const [reviews,setReviews] = useState(null);
+    const [loggedInUser, setLoggedInUser] = useState(currentUser);
+    const [followRelationship, setFollowRelationship] = useState(false);
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const {username} = useParams()
@@ -24,13 +35,51 @@ function ProfileScreen() {
     const handleEditProfileButtonClick = ()=> {
         navigate('/profile/settings')
     }
+    const handleFollowButtonClick = async () => {
+        // if no logged-in user stop
+        if (currentUser === null) {
+            setFollowRelationship(!followRelationship);
+            return
+        }
+        // if they follow this user try to unfollow
+        if (followRelationship) {
+            try {
+                const response = await unfollowUser(currentUser._id, profile._id)
+                // update display
+                setFollowRelationship(false);
+                return
+            }catch(error){
+                console.error(error);
+            }
+        }
+        else {
+            // if they don't follow try and follow this user, create relationship
+            const relationship = {
+                    follower: currentUser._id,
+                    following: profile._id
+                }
+                try {
+                    const response = await followUser(relationship);
+                    console.log('created follow relationship', response);
+                    // update display
+                    setFollowRelationship(true)
+
+                } catch (error) {
+                    console.error(error)
+                }
+        }
+    }
 
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const {currentUser} = await dispatch(profileThunk())
+                const {loggedUser} = await dispatch(profileThunk())
+                setLoggedInUser(loggedUser)
+                console.log('currentUser', loggedUser);
                 const userProfile = await getBaseProfileByUsername(username)
                 setProfile(userProfile);
+                // a user is logged in now, check for a follow/followee relationship
+
                 console.log("set profile in profile screen to ", profile);
 
                 // get some user reviews too for profile
@@ -39,6 +88,16 @@ function ProfileScreen() {
                 const userReviews = await getReviewsByUserId(userProfile._id);
                 setReviews(userReviews);
                 console.log('user reviews: ', userReviews);
+                // check for a follow relationship between logged in user and this user
+                if (currentUser !== null && userProfile !== null) {
+                    console.log('now checking for a follow relationship', currentUser.username, userProfile.username);
+                    const followRelationship = await checkForFollowRelationship(currentUser._id, userProfile._id)
+                    console.log("outcome of follow relationship check", followRelationship);
+                    // setting the follow relationship
+                    setFollowRelationship((followRelationship.follows))
+                }
+                // get a list of people that this user follows
+
 
             } catch (error) {
                 // Handle errors here (e.g., display an error message)
@@ -56,6 +115,10 @@ function ProfileScreen() {
         return (
                 <NoProfile/>
             );
+    }
+    if (profile){
+        console.log('followers of this user', profile.followers)
+        console.log('people this user is following', profile.following);
     }
 
     console.log('user reviews', reviews)
@@ -79,18 +142,36 @@ function ProfileScreen() {
                          alt="Profile Avatar"
                      />
                  </div>
-                 <div className = "col-8">
-                     <h4 className = "white-font mt-5">{profile.username}</h4>
-                     <i className="fa-solid fa-location-dot float-start me-2" style = {{color:"grey"}}></i>
-                     <p className = "grey-text float-start me-2">{profile.location}</p>
+                 <div className = "col-4">
+                     <div className = "float-start">
+                         <h4 className = "white-font mt-5">{profile.username}  <span className="grey-text  ms-2 mt-5">{profile.role}</span></h4>
+                         <i className="fa-solid fa-location-dot float-start me-2" style = {{color:"grey"}}></i>
+                         <p className = "grey-text float-start me-2">{profile.location}</p>
+
+                     </div>
+                     {currentUser && (
+                         <buttton className = "btn bg-secondary mt-5 ms-3 float-start" onClick = {handleFollowButtonClick}>
+                             <i className= {`fa-solid ${followRelationship ? 'fa-check' : 'fa-plus'} fa-lg trailer-icon`} style={{color: "#f5f5f5"}}></i>
+                             <span className=" ms-1 white-text">
+                                {followRelationship ? 'Following' : 'Follow'}
+                            </span>
+                         </buttton>)
+                     }
 
                  </div>
+                 <div className = "col-4">
+                     <div className = "mt-5 float-start bi-border-right">
+                         <ProfileStatItem label={"Followers"} number={profile.followersCount}/>
+                     </div>
+                     <div className = "mt-5 float-start">
+                         <ProfileStatItem label={"Following"} number={profile.followingCount}/>
+                     </div>
+                 </div>
                  <div className  = 'col-2'>
-                     <p className="grey-text ms-2 mt-5">{profile.role}</p>
                      {profile && currentUser && profile.username === currentUser.username &&
                          (
                              <button
-                                 className = "btn btn-secondary"
+                                 className = "btn btn-secondary mt-5"
                                 onClick = {handleEditProfileButtonClick}
                                 >Edit Profile
                              </button>
@@ -145,18 +226,18 @@ function ProfileScreen() {
                  <div className = "col-md-9">
                      <div className="row">
                          <div className="col">
-                             <h5 className="white-font ms-2">Favorites</h5>
+                             <h5 className="white-font ms-2 border-bottom">Favorites</h5>
                          </div>
                          <div className="col">
                              <h4 className="white-font float-end me-2"></h4>
                          </div>
                          <div>
-                             <FavoritesScrollBar favorites={profile.favoriteMovies} profile = {profile}/>
+                             <FavoritesScrollBar favorites={profile.favoriteMovies} profile = {profile} currentUser = {currentUser}/>
                          </div>
                      </div>
                      <div className="row">
                          <div className="col">
-                             <h5 className="white-font ms-2 mt-2">Recent Reviews</h5>
+                             <h5 className="white-font ms-2 mt-2 border-bottom">Recent Reviews</h5>
                          </div>
                          <div className="col">
                              <h4 className="white-font float-end me-2"></h4>
@@ -174,8 +255,13 @@ function ProfileScreen() {
                      </div>
                  </div>
                  <div className = "col-md-3" >
-                     <h5 className="white-font justify-content-center border-bottom">Biography</h5>
+                     <h5 className="white-font justify-content-center border-bottom">Bio</h5>
                      <p className = "white-font"> {profile.bio}</p>
+                     <h5 className="white-font justify-content-center border-bottom">Followers</h5>
+                     <FollowerGrid data={profile.followers}/>
+                     <br></br>
+                     <h5 className="white-font justify-content-center border-bottom">Following</h5>
+                     <FollowingGrid data={profile.following}/>
 
                  </div>
              </div>

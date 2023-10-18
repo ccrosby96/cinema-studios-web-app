@@ -1,13 +1,19 @@
 import FavoriteItem from "./favorite-item";
 import {Link} from "react-router-dom";
-import {useState} from "react";
-import {updateUserThunk} from "../../thunks/users-thunks";
+import {useEffect, useState} from "react";
+import {profileThunk, updateUserThunk} from "../../thunks/users-thunks";
 import {useDispatch, useSelector} from "react-redux";
-function FavoritesScrollBar ({favorites, profile}) {
+import {checkForFollowRelationship, getBaseProfileByUsername} from "../../services/users-service";
+import {getReviewsByUserId} from "../../services/movie-review-service";
+function FavoritesScrollBar ({favorites, profile, currentUser}) {
     const [displayedFavorites, setDisplayedFavorites] = useState(favorites);
-    const { currentUser } = useSelector((state) => state.user);
     const dispatch = useDispatch();
     console.log("currentUser in favorites Scroll", currentUser);
+
+    useEffect(() => {
+            setDisplayedFavorites(favorites)
+    }, [favorites]);
+
 
     const removeFavorite =  async (movieId) => {
         try {
@@ -18,7 +24,7 @@ function FavoritesScrollBar ({favorites, profile}) {
             await setDisplayedFavorites(updatedFavorites);
             console.log("set displayed movies", displayedFavorites);
             const update = {
-                    _id: profile._id,
+                    _id: currentUser._id,
                     favoriteMovies: updatedFavorites
                 };
 
@@ -42,7 +48,7 @@ function FavoritesScrollBar ({favorites, profile}) {
                 {
                     displayedFavorites.map((movie, i) => {
                         return (
-                                <FavoriteItem movie={movie} onRemove={removeFavorite}/>
+                                <FavoriteItem movie={movie} profile={profile} currentUser={currentUser} onRemove={removeFavorite}/>
                         )
                     })
                 }

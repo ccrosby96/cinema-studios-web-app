@@ -214,6 +214,53 @@ export const profile = async () => {
     const response = await api.post(`${USER_API}/profile`);
     return response.data;
 }
+export const getFollowersList = async (userId) => {
+    try {
+        const response = await api.get(`${USER_API}/${userId}/followers`);
+        return response.data;
+    } catch (error) {
+        console.error("Error fetching followers list:", error);
+        throw error;
+    }
+};
+export const getUserFollowingList = async (userId) => {
+    try {
+        const response = await api.get(`${USER_API}/${userId}/following`);
+        return response.data;
+    } catch (error) {
+        console.error("Error fetching followers list:", error);
+        throw error;
+    }
+};
+export const checkForFollowRelationship = async (userId, targetUserId) => {
+    console.log('called checkForFollowRelationship with uid and tid', userId, targetUserId);
+    try {
+        const response = await api.get(`${USER_API}/${userId}/follows/${targetUserId}`)
+        return response.data;
+    }catch (error) {
+        console.error("Error checking for follow relationship", error);
+        throw error;
+    }
+}
+export const followUser = async (follow) => {
+    console.log('called followUser with relationship', follow)
+    try {
+        const response = await api.post(`${USER_API}/follow`, follow)
+        return response.data;
+    }catch (error){
+        console.error("error following user", error)
+        throw error
+    }
+}
+export const unfollowUser = async (userId, targetUserId) => {
+    try {
+        const response = await api.delete(`${USER_API}/${userId}/unfollow/${targetUserId}`)
+        return response.data
+    }catch (error){
+        console.error('error unfollowing user', error)
+    }
+}
+
 
 
 

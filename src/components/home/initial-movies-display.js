@@ -17,6 +17,7 @@ function InitialMovies() {
 
             <span className="a1-font-25px fw-bold white-font"> Popular</span>
 
+
             <SearchMovieGrid movies = {res}/>
         </div>)
 

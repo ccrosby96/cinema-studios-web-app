@@ -29,8 +29,10 @@ function WatchListItem ({movie,key,onRemove, profile,username,loggedInUser})  {
                     <div className = "col-8 p-0 m-0 ps-1">
                         <div className="m-0 p-0">
                             {loggedInUser && profile && profile.username === loggedInUser.username && (
-                            <i className="btn fa-solid fa-x float-end m-0 p-0 nudge-up"
-                               onClick={handleRemoveClick}></i>
+                            <i className="btn fa-solid fa-x float-end m-0 p-1 nudge-up white-icon bg-white"
+                                onClick={handleRemoveClick}>
+
+                            </i>
                             )
                             }
 

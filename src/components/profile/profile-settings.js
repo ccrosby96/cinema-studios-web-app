@@ -6,14 +6,12 @@ import { profileThunk, logoutThunk, updateUserThunk }
     from "../../thunks/users-thunks";
 import NavigationSidebar from "../navigation";
 import NoProfile from "./no-profile";
-import MovieWatchList from "./movie-watch-list";
-import FavoritesScrollBar from "../favorites";
+
 import {getReviewsByUserId} from "../../services/movie-review-service";
-import ProfileReviewList from "./profile-review-list";
+
 function ProfileSettings() {
     const { currentUser } = useSelector((state) => state.user);
     const [profile, setProfile] = useState(currentUser);
-    const [reviews,setReviews] = useState(null);
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
@@ -31,9 +29,9 @@ function ProfileSettings() {
                 // get some user reviews too for profile
                 console.log('uid of user in profile screen', payload._id);
 
-                const userReviews = await getReviewsByUserId(payload._id);
-                setReviews(userReviews);
-                console.log('user reviews: ', userReviews);
+                // const userReviews = await getReviewsByUserId(payload._id);
+                // setReviews(userReviews);
+                // console.log('user reviews: ', userReviews);
 
             } catch (error) {
                 // Handle errors here (e.g., display an error message)
@@ -52,7 +50,6 @@ function ProfileSettings() {
         );
     }
 
-    console.log('user reviews', reviews)
     return (
         <div className = "bg-landing-page m-0 p-0">
             <NavigationSidebar/>

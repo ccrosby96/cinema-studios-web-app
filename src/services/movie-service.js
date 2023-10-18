@@ -1,5 +1,6 @@
 import axios from "axios";
 const Movies_URL = "http://localhost:4000/api/movie"
+const SERVER_API_URL = process.env.REACT_APP_SERVER_API_URL;
 
 const api = axios.create({
     withCredentials: false,
@@ -16,6 +17,15 @@ export const fetchPopularMovies = async () => {
         throw error; // Re-throw the error to be handled by the calling code
     }
 };
+export const fetchUpcomingMovies = async () => {
+    try {
+        const response = await api.get(`${SERVER_API_URL}/movie/upcoming`);
+        return response.data;
+    }catch (error) {
+        console.error('Error fetching upcoming movies', error.message);
+        throw error;
+    }
+}
 
 export const fetchMovieVideosById = async (mid) => {
     console.log("movieId in fetchMovieVideosById", mid);

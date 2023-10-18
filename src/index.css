@@ -641,3 +641,13 @@ button-no-style {
 .underline-text {
   text-decoration: underline;
 }
+.white-icon {
+  color: white;
+}
+.follow-item {
+  float: left;
+  width:  50px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 50%;
+}
