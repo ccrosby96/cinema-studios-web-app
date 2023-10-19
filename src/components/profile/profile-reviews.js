@@ -6,6 +6,7 @@ import {profileThunk} from "../../thunks/users-thunks";
 import {getReviewsByUserName} from "../../services/movie-review-service";
 import {Link} from "react-router-dom";
 import NavigationSidebar from "../navigation";
+import LoadingScreen from "./loading-profile";
 function ProfileReviews () {
     const { currentUser } = useSelector((state) => state.user);
     const [data,setData] = useState(null);
@@ -29,7 +30,7 @@ function ProfileReviews () {
     }, []);
 
     if (data === null){
-        return (<h4 className = 'white-font justify-content-center'> Loading Reviews</h4>)
+        return (<LoadingScreen label={"Reviews"} />)
     }
     else if (data.reviews.length === 0) {
         return (<h4 className = "white-font justify-content-center">{username} hasn't written any reviews yet</h4>)
@@ -70,9 +71,11 @@ function ProfileReviews () {
                         </Link>
                     </li>
                     <li className="nav-item mt-4 pt-2">
-                        <a className="grey-no-underline ms-3 me-3" href="#">
-                            Favorites
-                        </a>
+                        <Link className = "text-decoration-none" to={`/profile/${username}/favorites`}>
+                            <a className="grey-no-underline ms-3 me-3">
+                                Favorites
+                            </a>
+                        </Link>
                     </li>
                     <li className="nav-item mt-4 pt-2">
                         <a className="grey-no-underline ms-3 me-3" href="#">

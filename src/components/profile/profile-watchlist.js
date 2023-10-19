@@ -8,6 +8,8 @@ import {Link, useLocation} from "react-router-dom";
 import NavigationSidebar from "../navigation";
 import {getBaseProfileByUsername, getWatchlistByUsername} from "../../services/users-service";
 import MovieWatchList from "./movie-watch-list";
+import {useDispatch} from "react-redux";
+import LoadingScreen from "./loading-profile";
 function ProfileWatchlist () {
     const { currentUser } = useSelector((state) => state.user);
     const [data,setData] = useState(null);
@@ -15,6 +17,7 @@ function ProfileWatchlist () {
     const [profile,setProfile] = useState(null);
     const [loggedInUser, setLoggedInUser] = useState(null);
     const location = useLocation();
+    const dispatch = useDispatch();
 
     useEffect(() => {
         const fetchData = async () => {
@@ -34,7 +37,7 @@ function ProfileWatchlist () {
     }, []);
 
     if (data === null){
-        return (<h4 className = 'white-font justify-content-center'> Loading Watchlist</h4>)
+        return (<LoadingScreen label={"Watchlist"} />)
     }
     else if (data.watchlist.length === 0) {
         return (<h4 className = "white-font justify-content-center">{username} has no movies in watchlist, how sad</h4>)

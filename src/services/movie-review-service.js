@@ -35,6 +35,16 @@ export const updateMovieReviewLikeDislike = async (update) => {
     const response = await api.put(`${REVIEWS_URL}/like-dislike`, update)
     return response.data;
 }
+export const updateCommentLikeDislike = async (update) => {
+    console.log('update in updateCommentLikeDislike', update)
+    try {
+        const response = await api.put(`${REVIEWS_URL}/like-dislike/comment`, update)
+        return response.data;
+    }catch (error) {
+        console.error("server encountered an error updating likeDislikes for comment")
+        throw error
+    }
+}
 export const addReplyToReview = async (reviewId, reply) => {
     try {
         console.log("called addReplyToReview with reviewId,reply",reviewId,reply);

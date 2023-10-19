@@ -5,6 +5,7 @@ import {Link} from "react-router-dom";
 import NavigationSidebar from "../navigation";
 import {getBaseProfileByUsername, getFavoritesByUsername} from "../../services/users-service";
 import ProfileFavoriteItem from "./profile-favorite-item";
+import LoadingScreen from "./loading-profile";
 function ProfileFavorites () {
     const { currentUser } = useSelector((state) => state.user);
     const [data,setData] = useState(null);
@@ -30,7 +31,7 @@ function ProfileFavorites () {
     }, []);
 
     if (data === null){
-        return (<h4 className = 'white-font justify-content-center'> Loading Favorites</h4>)
+        return (<LoadingScreen label={"Favorites"} />)
     }
     else if (data.favoriteMovies.length === 0) {
         return (<h4 className = "white-font justify-content-center">{username} has no movies in favorites, how sad</h4>)

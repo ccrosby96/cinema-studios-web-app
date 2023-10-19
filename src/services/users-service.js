@@ -9,6 +9,7 @@ const api = axios.create({
     withCredentials: true,
 });
 export const deleteFromUserWatchList = async (movieId) => {
+    console.log('called deleteFromUserWatchList with movieId', movieId);
     try {
         const response = await api.delete(`${USERS_URL}/watchlist/${movieId}`)
         return response.data
@@ -45,7 +46,6 @@ export const addToUserWatchlist = async (movie) => {
     try {
         console.log('watchlist movie in addToUserWatchList', movie);
         const response = await api.post(`${USER_API}/add-to-watchlist`, movie);
-
         return response.data;
     } catch (error) {
         if (error.response) {

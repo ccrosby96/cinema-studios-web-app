@@ -19,8 +19,8 @@ import ReviewPostForm from "../reviews/review-post-form";
 import {useDispatch, useSelector} from "react-redux";
 import {getReviewsByMovieId} from "../../services/movie-review-service";
 import MovieReviewList from "../reviews/movie-review-list";
-import {addToUserWatchlist, addToUserFavorites, deleteFromUserFavorites} from "../../services/users-service";
-import {profileThunk, updateUserThunk, addMovieFavoriteThunk} from "../../thunks/users-thunks";
+import {addToUserWatchlist, addToUserFavorites, deleteFromUserFavorites, deleteFromUserWatchList} from "../../services/users-service";
+import {profileThunk, updateUserThunk, addMovieFavoriteThunk, addMovieWatchlistThunk} from "../../thunks/users-thunks";
 
 /*
 cinema studios - name idea by jake fredo
@@ -115,21 +115,30 @@ function IndividualMoviePage  () {
             }
         }
     }
-    const handleAddToWatchlist = async () => {
-        if (watchListAdded){
-            console.log("Already added this to watchlist")
+    const watchlistClickHandler = async () => {
+        if (!currentUser){
+            return;
+        }
+        if (inWatchList){
+            try {
+                await deleteFromUserWatchList(movieId);
+                setInWatchList(false);
+                return
+            }catch (error){
+                console.error("error removing movie from watchlist")
+            }
             return
         }
+        // new watchlist movie item
         const watchListItem = {
             movieTitle: details.title,
             movieId: movieId,
             posterPic: details.poster_path,
             movieDescription: details.overview,
-            releaseDate: details.release_date
         };
         try {
             // Call the API function
-            const result =await addToUserWatchlist(watchListItem);
+            dispatch(addMovieWatchlistThunk(watchListItem))
             setInWatchList(true);
             // If successful, you can optionally display a success message or update your UI
             // ...
@@ -151,7 +160,6 @@ function IndividualMoviePage  () {
     const [providers, setProviders] = useState(null);
     const [movieReviews, setMovieReviews] = useState(null);
     const [trailers,setTrailers] = useState(null);
-    const [watchListAdded, setWatchListAdded] = useState(false);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -243,18 +251,12 @@ function IndividualMoviePage  () {
                                 </button>
 
                             )}
-                            {errorMessage && (
-                                <div className="alert alert-danger">{errorMessage}</div>
-                            )}
-                            {!errorMessage && !inWatchList && currentUser && (
-                            <button className="bg-dark ms-2" onClick = {handleAddToWatchlist}>
-                                <i className="fa-solid fa-plus fa-2x trailer-icon" style={{color: "#f5f5f5"}}></i>
-                                <span className= "white-text nudge-up"> Watchlist</span>
-                            </button>)}
-                            {inWatchList && (
-                                <button className = "bg-dark ms-2">
-                                    <i className="fa-solid fa-check fa-2x trailer-icon" style={{color: "#f5f5f5"}}></i>
-                                    <span className= "white-text nudge-up"> In Watchlist</span>
+                            {currentUser && (
+                                <button className="bg-dark ms-2" onClick={watchlistClickHandler}>
+                                    <i className={`fa-solid ${inWatchList ? 'fa-check' : 'fa-plus'} fa-2x trailer-icon`} style={{ color: "#f5f5f5" }}></i>
+                                    <span className={`white-text nudge-up${inWatchList ? ' in-watchlist' : ''}`}>
+                                    {inWatchList ? 'In Watchlist' : 'Watchlist'}
+                                  </span>
                                 </button>
                             )}
                             {currentUser && (
@@ -348,5 +350,4 @@ function IndividualMoviePage  () {
         </div>
     );
 }
-
 export default IndividualMoviePage;

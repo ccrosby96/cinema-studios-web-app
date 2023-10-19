@@ -3,7 +3,7 @@ import {useEffect, useState} from "react";
 import en from 'javascript-time-ago/locale/en'
 import TimeAgo from 'javascript-time-ago'
 import style from "../../styles/review-style.css"
-import {updateMovieReviewLikeDislike} from "../../services/movie-review-service";
+import {updateCommentLikeDislike} from "../../services/movie-review-service";
 import {useSelector} from "react-redux";
 import ReplyForm from "./comment-reply-form";
 
@@ -44,13 +44,14 @@ function ReviewReplyItem ({reply, parentCommentId,reviewId}) {
         }
         const updateObject =
             {
-                reviewId: parentCommentId,
-                "commentId": reply._id,  // Replace with the actual review ID
-                "userId": currentUser._id,    // Replace with the actual user ID
-                "isLike": likeDislike,
+                reviewId: reviewId, // the id of the review this comment is under
+                "commentId": reply._id,  // the id of this comment we are voting on
+                "userId": currentUser._id,    // the id of the voter who is voting jeezus christ this is a lot
+                "isLike": likeDislike, // boolean indicating whether it's an upvote or downvote
             }
-        //let update = await updateMovieReviewLikeDislike(updateObject);
-       // console.log('update in handleVote', update);
+        console.log('comment vote update object ', updateObject);
+        let update = await updateCommentLikeDislike(updateObject);
+        console.log('update in handleVote of Comment', update);
     }
 
     const handleUpvote = async () => {
@@ -82,10 +83,8 @@ function ReviewReplyItem ({reply, parentCommentId,reviewId}) {
             }));
             setIsUpvoted(false);
         }
-
         // Call a function to send the updated review data to your API
-        // await updateMovieReview(movieReview);
-        //await handleVote(true);
+        await handleVote(true);
     };
     const handleDownvote = async () => {
         if (!currentUser){
@@ -116,7 +115,7 @@ function ReviewReplyItem ({reply, parentCommentId,reviewId}) {
             }));
             setIsDownvoted(false);
         }
-       // await handleVote(false);
+       await handleVote(false);
     };
     console.log(replyData);
     if (replyData === null) {

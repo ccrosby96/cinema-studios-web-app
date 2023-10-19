@@ -30,7 +30,7 @@ function CreateAccount() {
             if (logged.error) {
                 throw new Error("User Creation Failed");
             }
-            navigate("/home")
+            navigate("/search")
         } catch (e) {
             alert("UserName  Already Exists ");
         }

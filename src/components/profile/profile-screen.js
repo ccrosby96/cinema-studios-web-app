@@ -14,12 +14,12 @@ import {
     getBaseProfileByUsername,
     checkForFollowRelationship,
     followUser,
-    unfollowUser,
-    getFollowersList
+    unfollowUser
 } from "../../services/users-service";
 import {Link} from "react-router-dom";
 import FollowerGrid from "./follow-grid";
 import FollowingGrid from "./follower-grid";
+import LoadingScreen from "./loading-profile";
 function ProfileScreen() {
     const { currentUser } = useSelector((state) => state.user);
     const [profile, setProfile] = useState(null);
@@ -73,22 +73,22 @@ function ProfileScreen() {
     useEffect(() => {
         const fetchData = async () => {
             try {
+                // this is really important somehow
                 const {loggedUser} = await dispatch(profileThunk())
                 setLoggedInUser(loggedUser)
-                console.log('currentUser', loggedUser);
+
                 const userProfile = await getBaseProfileByUsername(username)
                 setProfile(userProfile);
                 // a user is logged in now, check for a follow/followee relationship
 
-                console.log("set profile in profile screen to ", profile);
+
 
                 // get some user reviews too for profile
-                console.log('uid of user in profile screen', userProfile._id);
+
 
                 const userReviews = await getReviewsByUserId(userProfile._id);
                 setReviews(userReviews);
-                console.log('user reviews: ', userReviews);
-                // check for a follow relationship between logged in user and this user
+                // check for a follow relationship between logged-in user and this user
                 if (currentUser !== null && userProfile !== null) {
                     console.log('now checking for a follow relationship', currentUser.username, userProfile.username);
                     const followRelationship = await checkForFollowRelationship(currentUser._id, userProfile._id)
@@ -110,18 +110,18 @@ function ProfileScreen() {
     }, [username]);  // Empty dependency array ensures it only runs once, similar to componentDidMount
 
     // if not loggged in don't try and load profile
-    if (!profile){
+    if (!username){
         console.log("no user profile loaded")
+        console.log(username)
         return (
                 <NoProfile/>
             );
     }
-    if (profile){
-        console.log('followers of this user', profile.followers)
-        console.log('people this user is following', profile.following);
+    else if (!profile){
+        return (
+            <LoadingScreen label={"profile"}/>
+        )
     }
-
-    console.log('user reviews', reviews)
      return (
          <div className = "bg-landing-page m-0 p-0">
              <NavigationSidebar/>

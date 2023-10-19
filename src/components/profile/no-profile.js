@@ -1,5 +1,6 @@
 import  "../../styles/no-profile.css"
 import NavigationSidebar from "../navigation";
+import popcornImage from '../../images/popcorn.png';
 
 function NoProfile (){
     return (
@@ -7,9 +8,9 @@ function NoProfile (){
                 <NavigationSidebar />
                 <div className="no-profile-center-container">
                     <div className="centered-content">
-                        <h5 className="centered-text white-font">It looks like nobody is logged in yet ...</h5>
+                        <h5 className="centered-text white-font ms-5 mb-3">It looks like nobody is logged in yet ...</h5>
                         <img
-                            src="https://image-cdn.neatoshop.com/styleimg/89230/none/navy/default/422686-20;1562795466y.jpg"
+                            src= {popcornImage}
                             alt="Your Image"
                             className = "rounded-3"
                         />

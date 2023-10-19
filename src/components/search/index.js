@@ -4,14 +4,13 @@
 
 import SearchBar from "./search-bar";
 import NavigationSidebar from "../navigation";
-import popular from "../home/popular.json"
-import trending from "../home/trending.json"
 import MovieScrollBar from "../home/movie_scroll";
 import {useSelector} from "react-redux";
 import {useEffect, useState} from "react";
 import {fetchPopularMovies, fetchUpcomingMovies} from "../../services/movie-service";
 import {Link} from "react-router-dom";
 import MovieRecTile from "../recommendations/movie_rec_tile";
+import LoadingScreen from "../profile/loading-profile";
 
 function LandingSearchPage () {
 
@@ -37,7 +36,7 @@ function LandingSearchPage () {
 
     if (popularResults === null || upcomingResults === null) {
         return (
-            <h5 className = "white-font">Loading Data</h5>
+            <LoadingScreen label={"Search Page"}/>
         )
     }
     return (

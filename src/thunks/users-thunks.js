@@ -48,7 +48,13 @@ export const addMovieFavoriteThunk = createAsyncThunk(
         return result;
     }
 )
-
+export const addMovieWatchlistThunk = createAsyncThunk(
+    "users/watchlist", async (movie) => {
+        const result = await service.addToUserWatchlist(movie);
+        console.log('return result in add watchlist thunk', result);
+        return result
+    }
+)
 export const profileThunk = createAsyncThunk(
     "users/profile", async () => {
         return await service.profile();

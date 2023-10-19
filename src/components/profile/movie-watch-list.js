@@ -28,15 +28,12 @@ function MovieWatchList({ movies, profile, username, loggedInUser}) {
             const updatedMovies = displayedMovies.filter((movie) => movie.movieId !== movieId);
             // in the user document we want to update the watchlist array to the filtered watchlist above
             await setDisplayedMovies(updatedMovies);
-            const newProfile = {
-                ...profile,
+            const update = {
+                _id: loggedInUser._id,
                 watchlist: updatedMovies,
             };
-            console.log('calling updateUserThunk with updated watchlist:', {watchlist: updatedMovies});
-            console.log("userId:", profile._id);
-            console.log("newProfile:", newProfile);
-
-            dispatch(updateUserThunk(newProfile));
+            console.log('calling updateUserThunk with update:',update);
+            dispatch(updateUserThunk(update));
         } catch (error) {
             // Handle the error here
             console.error(error)
