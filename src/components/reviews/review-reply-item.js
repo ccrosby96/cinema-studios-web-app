@@ -6,6 +6,7 @@ import style from "../../styles/review-style.css"
 import {updateCommentLikeDislike} from "../../services/movie-review-service";
 import {useSelector} from "react-redux";
 import ReplyForm from "./comment-reply-form";
+import {Link} from "react-router-dom";
 
 
 function ReviewReplyItem ({reply, parentCommentId,reviewId}) {
@@ -126,8 +127,10 @@ function ReviewReplyItem ({reply, parentCommentId,reviewId}) {
         <div className = "list-group-item-full-width mb-3 rounded-3 p-1 ">
             <div className="row ">
                 <div className="col-12">
+                    <Link className = "text-decoration-none p-0 m-0" to = {`/profile/${replyData.author.username}`}>
+                        <img alt="" className="comment-profile-pic float-start" src={replyData.author.profilePic}/>
+                    </Link>
 
-                    <img alt="" className="comment-profile-pic float-start" src={replyData.author.profilePic}/>
                     <p className="p-0 m-0 ps-5 ps-sm-4 ps-md-3 p fw-bold wd-font-family-arial text-wrap d-inline white-font">
 
                     </p>

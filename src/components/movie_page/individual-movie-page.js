@@ -1,7 +1,7 @@
 import NavigationSidebar from "../navigation";
 import '@fortawesome/fontawesome-free/css/all.css';
 
-import {convertScoreToPercent, formatDate, extractMovieCertification} from "../../helper_functions/helper_functions";
+import {convertScoreToPercent, formatDate, extractMovieCertification, getDirectors} from "../../helper_functions/helper_functions";
 import {
     grabGenres,
     grabRuntime,
@@ -11,6 +11,7 @@ import {
 
 import ApiCastScrollBar from "../actor_scroll_bar/api-cast-scroll-bar";
 import RecommendationsScrollBar from "../recommendations";
+import Directors from "../directors";
 import {useParams} from "react-router";
 import {useEffect, useState} from "react";
 import {findMovieDetailsById, findMovieProvidersById} from "../../services/movie-service";
@@ -160,6 +161,7 @@ function IndividualMoviePage  () {
     const [providers, setProviders] = useState(null);
     const [movieReviews, setMovieReviews] = useState(null);
     const [trailers,setTrailers] = useState(null);
+    const [directorData, setDirectors] = useState(null);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -204,6 +206,7 @@ function IndividualMoviePage  () {
         fetchData();
         checkWatchList();
         checkFavorites();
+
         window.scrollTo({ top: 0, behavior: 'smooth' });
 
     }, [movieId]); // if we have a new movie id we want to re-render
@@ -277,11 +280,23 @@ function IndividualMoviePage  () {
                         <span className="white-font mt-0 pt-0">{details.overview}</span>
 
                         <br></br>
-                        <br></br>
                         <i className="fa-brands fa-twitter"></i>
                         <i className="fa fa-search"></i>
-                        <p className="fw-bold a1-font-16px white-font mb-0 pb-0"> User Score </p>
-                        <span className="white-font mt-0 pt-0">{convertScoreToPercent(details.vote_average)}%</span>
+                        <br></br>
+                        <div className = "row">
+                            <div className = "col-2">
+                                <div className = "float-start me-3">
+                                    <p className="fw-bold a1-font-16px white-font mb-0 pb-0"> User Score </p>
+                                    <span className="white-font mt-0 pt-0">{convertScoreToPercent(details.vote_average)}%</span>
+                                </div>
+                            </div>
+                           <div className = "col-10">
+                               <div className = "ms-3">
+                                   <p className="fw-bold a1-font-16px white-font mb-0 pb-0">Directed By </p>
+                                   <Directors data={details.credits.crew}/>
+                               </div>
+                           </div>
+                        </div>
                     </div>
                 </div>
                 <div className="row pt-1">
@@ -324,7 +339,7 @@ function IndividualMoviePage  () {
                 </div>
                 <div className="row mb-0 pb-0">
                     <div className = "col-9">
-                        <span className="a1-font-25px fw-bold white-font">Recommendations</span>
+                        <span className="a1-font-25px fw-bold white-font">You May Also Like</span>
                         <RecommendationsScrollBar data = {details.recommendations.results}/>
                     </div>
                     <div className= "col-3">

@@ -154,9 +154,17 @@ function truncateString(inputString, maxLength) {
         return inputString;
     }
 }
+function getDirectors(arr) {
+    // Filter the array to find objects with "known_for_department" as "Directing"
+    const directingDirectors = arr
+        .filter((item) => item.known_for_department === 'Directing')
+        .slice(0, 3);
+    // Map the names of directors and join them into a comma-separated string
+    return directingDirectors;
+}
 
 export {grabGenres, grabRuntime, grabOriginalLanguage, calculateAge,
     extractOriginalLanguage, formatDate, grabSeriesCreators, convertScoreToPercent,
     generateImageUrl, extractLanguageName,
     generateTrailerUrl, grabPersonGender, extractMovieCertification,
-    extractSeriesNetworkData, formatReviewDate, truncateString}
+    extractSeriesNetworkData, formatReviewDate, truncateString, getDirectors}

@@ -1,7 +1,4 @@
-
-
 import style from "../../styles/card-hover.css"
-
 function MovieRecTile(
     movie =  {
         "adult": false,
@@ -29,7 +26,8 @@ function MovieRecTile(
         ? url +  movie.movie.poster_path
         : "https://media.istockphoto.com/id/1039351052/vector/movie-and-film-festival-poster-template-design-modern-retro-vintage-style.jpg?s=612x612&w=0&k=20&c=aPVSLX7VlJj7DYBZ8afyj9ca15qoZEeZkLj_1exaUfE="
     const title = movie.movie.title;
-    const vote_average = movie.movie.vote_average.toPrecision(2);
+    const vote_average = isNaN(movie.movie.vote_average) ? '' : movie.movie.vote_average.toPrecision(2);
+
     //console.log("In actor card, headshot_url is ", poster_path);
 
     return (

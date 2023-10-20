@@ -11,13 +11,13 @@ function ApiActorDetails(props) {
     console.log("known fors in apiactordetails: ", films);
 
     return (
-        <>
+        <div className = "container">
             <div className="row bg-landing-page">
                 <div className="col-3">
                     <div className="bg-dark rounded-3 mt-2 text-center">
                         <ul type="none" className="d-flex flex-column m-0 p-0">
-                            <li>
-                                <img src={headshot} alt="Headshot" className="img-fluid rounded-3 p-1" />
+                            <li className = "p-3">
+                                <img src={headshot} alt="Headshot" className="img-fluid rounded-3" />
                             </li>
                             <h4 className="m-1 white-font">Personal Information</h4>
                             <li className="m-3 white-font">
@@ -36,17 +36,22 @@ function ApiActorDetails(props) {
                     </div>
                 </div>
                 <div className="col-9">
-                    <h1 className="white-font">{actor.name}</h1>
+                    <div className = "mt-2">
+                        <h1 className="white-font">{actor.name}</h1>
 
-                    <h5 className="white-font">Biography</h5>
-                    <p className="white-font"> {actor.biography}</p>
+                        <h5 className="white-font">Biography</h5>
+                        <p className="white-font"> {actor.biography}</p>
 
-                    <h5 className="white-font">Known For</h5>
+                        <h5 className="white-font border-bottom">Known For</h5>
+
+
+
+                    </div>
 
                     <MovieScrollBar movies={films} />
                 </div>
             </div>
-        </>
+        </div>
     );
 }
 

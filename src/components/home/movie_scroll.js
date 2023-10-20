@@ -7,7 +7,7 @@ function MovieScrollBar({movies}) {
     //console.log("films in movieScrollBar component",movies);
     return (
         <>
-            <div className="scroll_media-scroller snaps-inline">
+            <div className="scroll_media-scroller snaps-inline bg-dark rounded-3 p-2">
                 {
                      movies.map((movie, i) => {
 
