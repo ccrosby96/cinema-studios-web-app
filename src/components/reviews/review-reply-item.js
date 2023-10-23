@@ -145,7 +145,7 @@ function ReviewReplyItem ({reply, parentCommentId,reviewId}) {
                         )}
                         <p className="white-font ">{replyData.body}</p>
 
-                        <span className="white-font me-2">
+                        <span className="white-font me-2 nudge-up">
                             <i
                                     className={`${isUpvoted ? "upvoted fa-solid" : "fa-regular"} fa-thumbs-up me-2`}
                                     style={{ color: "white" }}

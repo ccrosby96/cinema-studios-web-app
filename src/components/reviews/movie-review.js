@@ -171,7 +171,7 @@ function MovieReviewItem({review,movieId}){
                                 <p className="white-font review-body spoilers-blur" onClick={handleSpoilersClick}>{movieReview.body}</p>
                             )}
                         </div>
-                        <span className="white-font me-2">
+                        <span className="white-font me-2 nudge-up">
                             <i
                                 className={`${isUpvoted ? "upvoted fa-solid" : "fa-regular"} fa-thumbs-up me-2`}
                                 style={{ color: "white" }}
@@ -193,7 +193,7 @@ function MovieReviewItem({review,movieId}){
                         {reply &&
                             <ReplyForm reviewId = {review._id} parentCommentId= {null} replyTo={null} onSubmit={handleReplySubmit} user = {currentUser}/>
                         }
-                        <span className = "blue-font">
+                        <span className = "blue-font nudge-up">
 
                             {review.comments.length > 0 && (<button
                                 className="m-0 blue-font rounded-3 bg-dark  p-2 float-start"

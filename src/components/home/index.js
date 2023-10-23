@@ -40,7 +40,7 @@ function MovieHome() {
                     <div className="row">
                         <div className = 'col-2'>
                             <FilterSidebar/>
-                            <Link to = {`/movies/discover/1`}>
+                            <Link to = {`/movies/discover/1`} className = "ms-2">
                                 <button onClick={handleSearch} className="btn btn-secondary mt-3">
                                     Search
                                 </button>

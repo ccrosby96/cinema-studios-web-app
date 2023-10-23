@@ -1,7 +1,7 @@
 import NavigationSidebar from "../navigation";
 import '@fortawesome/fontawesome-free/css/all.css';
 
-import {convertScoreToPercent, formatDate, extractMovieCertification, getDirectors} from "../../helper_functions/helper_functions";
+import {convertScoreToPercent, formatDate, extractMovieCertification} from "../../helper_functions/helper_functions";
 import {
     grabGenres,
     grabRuntime,
@@ -20,8 +20,8 @@ import ReviewPostForm from "../reviews/review-post-form";
 import {useDispatch, useSelector} from "react-redux";
 import {getReviewsByMovieId} from "../../services/movie-review-service";
 import MovieReviewList from "../reviews/movie-review-list";
-import {addToUserWatchlist, addToUserFavorites, deleteFromUserFavorites, deleteFromUserWatchList} from "../../services/users-service";
-import {profileThunk, updateUserThunk, addMovieFavoriteThunk, addMovieWatchlistThunk} from "../../thunks/users-thunks";
+import {deleteFromUserFavorites, deleteFromUserWatchList} from "../../services/users-service";
+import {addMovieFavoriteThunk, addMovieWatchlistThunk} from "../../thunks/users-thunks";
 
 /*
 cinema studios - name idea by jake fredo

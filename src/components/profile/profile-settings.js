@@ -7,17 +7,26 @@ import { profileThunk, logoutThunk, updateUserThunk }
 import NavigationSidebar from "../navigation";
 import NoProfile from "./no-profile";
 
-import {getReviewsByUserId} from "../../services/movie-review-service";
-
 function ProfileSettings() {
     const { currentUser } = useSelector((state) => state.user);
     const [profile, setProfile] = useState(currentUser);
+    const [showSuccessMessage, setShowSuccessMessage] = useState(false);
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
-    const save = () => { dispatch(updateUserThunk(profile));};
+    const save = () => {
+        try  {
+            dispatch(updateUserThunk(profile));
+            // If save is successful, set showSuccessMessage to true
+            setShowSuccessMessage(true);
 
-
+            setTimeout(() => {
+                setShowSuccessMessage(false);
+            }, 2000);// Hide the message after 3 seconds}
+        }catch (error) {
+            console.error(error, error.message)
+        }
+    }
 
     useEffect(() => {
         const fetchData = async () => {
@@ -122,7 +131,14 @@ function ProfileSettings() {
                                         navigate("/login");
                                     }}>
                                 Logout</button>
-                            <div class="mt-5 text-center"><button class="btn btn-secondary profile-button float-end" type="button" onClick = {save}>Save Profile</button></div>
+                            <div class="mt-5 text-center">
+                                <button class="btn btn-secondary float-end" type="button" onClick = {save}>Save Profile</button>
+                                {showSuccessMessage && (
+                                    <div className="alert alert-success mt-2">
+                                        Profile saved successfully!
+                                    </div>)
+                                }
+                            </div>
 
                         </div>
 

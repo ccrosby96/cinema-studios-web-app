@@ -64,10 +64,10 @@ function FilterSidebar () {
                         onChange={(e) => setLocalEndYear(e.target.value)}
                     />
                 </label>
-                <button onClick={handleYearRangeButtonClick} type="submit" className = "btn btn-secondary mt-1 float-start">Set Release Years</button>
+                <button onClick={handleYearRangeButtonClick} type="submit" className = "btn btn-secondary mt-2 mb-2 float-start">Set Release Years</button>
                 {showCheckmark && <div className="checkmark color-white" style = {{color: "white"}}>&#10004;</div>}
             </form>
-            <h5 className="white-font">Genres</h5>
+            <h5 className="white-font mt-2">Genres</h5>
 
             <ul className="m-0 p-0 mt-1">
                 <button

@@ -149,7 +149,7 @@ function ProfileScreen() {
                          <p className = "grey-text float-start me-2">{profile.location}</p>
 
                      </div>
-                     {currentUser && (
+                     {currentUser && currentUser.username !== profile.username && (
                          <buttton className = "btn bg-secondary mt-5 ms-3 float-start" onClick = {handleFollowButtonClick}>
                              <i className= {`fa-solid ${followRelationship ? 'fa-check' : 'fa-plus'} fa-lg trailer-icon`} style={{color: "#f5f5f5"}}></i>
                              <span className=" ms-1 white-text">
