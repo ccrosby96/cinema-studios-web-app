@@ -592,6 +592,14 @@ button-no-style {
   position: relative;
   top: 3px;
 }
+.nudge-right {
+  position: relative;
+  right: -5px;
+}
+.push-right {
+  position: relative;
+  right: -50px;
+}
 .sunset-background {
   background-image: url("../public/images/sunset_image.jpg");
   background-size: cover;

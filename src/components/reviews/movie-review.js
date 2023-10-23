@@ -275,7 +275,7 @@ function MovieReviewItem({review,movieId,onRemove}){
                     </div>
                     <div className="row">
                         {isDropdownVisible && (
-                            <div className="list-group bg-secondary">
+                            <div className="list-group bg-secondary push-right">
                                 <div className="list-group-item border-0 bg-secondary" onClick={shareReview}>
                                     <i className="fa-solid fa-share float-start color-white nudge-down"></i>
                                     <span className="white-font ms-3 ">Share</span>
