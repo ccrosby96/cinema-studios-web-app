@@ -9,6 +9,24 @@ export const getReviewsByMovieId = async (movieId) => {
     const response = await api.get(`${REVIEWS_URL}/movie/${movieId}`)
     return response.data;
 }
+export const getReviewByReviewId = async (reviewId) => {
+    try {
+        const response = await api.get(`${REVIEWS_URL}/${reviewId}`)
+        return response.data;
+    }catch (error) {
+        console.error("Error getting review by reviewId", error.message);
+    }
+}
+export const deleteMovieReview = async (reviewId) => {
+    try {
+        console.log('calling api to delete review', reviewId)
+        const response = await api.delete(`${REVIEWS_URL}/${reviewId}`)
+        return response.data;
+    }catch (error) {
+        console.error("Error deleting movie review", error.message)
+        throw error;
+    }
+}
 
 export const createMovieReview = async (review) => {
     console.log("in createMovieReview, review is", review)

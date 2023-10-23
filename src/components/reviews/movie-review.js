@@ -1,18 +1,19 @@
 import {useSelector} from "react-redux";
 import {Link} from "react-router-dom";
-import {updateMovieReview} from "../../services/movie-review-service";
+import {updateMovieReview, deleteMovieReview} from "../../services/movie-review-service";
 import {useEffect, useState} from "react";
-import {formatReviewDate} from "../../helper_functions/helper_functions";
-import style from "../../styles/review-style.css"
 import {updateMovieReviewLikeDislike} from "../../services/movie-review-service";
 import ReplyForm from "./comment-reply-form";
 import en from 'javascript-time-ago/locale/en'
 import TimeAgo from 'javascript-time-ago'
 import ReviewCommentSection from "./review-comment-section";
+import {generateReviewShareLink} from "../../helper_functions/helper_functions";
+import { ToastContainer,toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 TimeAgo.addDefaultLocale(en)
 
 
-function MovieReviewItem({review,movieId}){
+function MovieReviewItem({review,movieId,onRemove}){
     const {currentUser} = useSelector( state => state.user)
     const [movieReview,setMovieReview] = useState(review)
     const timeAgo = new TimeAgo('en-US')
@@ -22,6 +23,58 @@ function MovieReviewItem({review,movieId}){
     const [showReplies, setShowReplies] = useState(false);
     const [spoilers, setSpoilers] = useState(false);
     const [spoilersVisible, setSpoilersVisible] = useState(false);
+    const [isDropdownVisible, setIsDropdownVisible] = useState(false);
+
+    const shareReview = () => {
+        const url = generateReviewShareLink(review);
+        navigator.clipboard.writeText(url)
+            .then(() => {
+                console.log('Text copied to clipboard: ' + url);
+                toast.success('Copied Link To Clipboard!', {
+                    position: 'top-right',
+                    autoClose: 3000, // Notification will close after 3 seconds
+                    hideProgressBar: false, // Show a progress bar
+                    closeOnClick: true, // Close the notification when clicked
+                    pauseOnHover: true, // Pause the timer on hover
+                    draggable: true, // Allow dragging the notification
+                });
+            })
+            .catch((error) => {
+                console.error('Copy to clipboard failed: ', error);
+                console.log(error)
+            });
+    }
+    const handleRemove = () => {
+        console.log('calling handleRemove with reviewId', review._id)
+        try {
+            onRemove(review._id)
+            toast.success('Review Successfully Deleted', {
+                position: 'top-right',
+                autoClose: 3000, // Notification will close after 3 seconds
+                hideProgressBar: false, // Show a progress bar
+                closeOnClick: true, // Close the notification when clicked
+                pauseOnHover: true, // Pause the timer on hover
+                draggable: true, // Allow dragging the notification
+            });
+        }catch (error) {
+            console.error("issue removing review")
+        }
+
+
+    }
+    const handleReport = () => {
+        toast.success('Comment Reported. Thank You For Helping Popcorn!', {
+            position: 'top-right',
+            autoClose: 3000, // Notification will close after 3 seconds
+            hideProgressBar: false, // Show a progress bar
+            closeOnClick: true, // Close the notification when clicked
+            pauseOnHover: true, // Pause the timer on hover
+            draggable: true, // Allow dragging the notification
+        });
+    }
+    const handleDropdownClick = () => {
+        setIsDropdownVisible(!isDropdownVisible);
+    };
 
     useEffect(() => {
         setMovieReview(review)
@@ -143,8 +196,8 @@ function MovieReviewItem({review,movieId}){
 
     return (
         <div className = "list-group-item-full-width mb-3 bg-dark rounded-3 p-1 ">
-            <div className="row ">
-                <div className="col-12">
+            <div className="row">
+                <div className="col-10">
                     <Link className = "text-decoration-none p-0 m-0" to = {`/profile/${movieReview.author.username}`}>
                         <img alt="" className="review-profile-pic float-start" src={movieReview.author.profilePic}/>
                     </Link>
@@ -211,7 +264,40 @@ function MovieReviewItem({review,movieId}){
                             />
                         )}
 
+
                     </div>
+                </div>
+                <div className="col-2">
+                    <div className = "row">
+                        <button className = "btn" onClick={handleDropdownClick}>
+                            <i className="fa-solid fa-ellipsis-vertical color-grey me-3 mt-3"></i>
+                        </button>
+                    </div>
+                    <div className="row">
+                        {isDropdownVisible && (
+                            <div className="list-group bg-secondary">
+                                <div className="list-group-item border-0 bg-secondary" onClick={shareReview}>
+                                    <i className="fa-solid fa-share float-start color-white nudge-down"></i>
+                                    <span className="white-font ms-3 ">Share</span>
+                                </div>
+                                {currentUser &&
+                                    ((currentUser.role === "admin") || (currentUser.role !== "admin" && review.author.username === currentUser.username)) && (
+                                        <div className="list-group-item border-0 bg-secondary" onClick={handleRemove}>
+                                            <i className="fa-solid fa-trash float-start color-white nudge-down"></i>
+                                            <span className="white-font ms-3">Delete</span>
+                                        </div>
+                                    )}
+
+                                <div className="list-group-item border-0 bg-secondary" onClick = {handleReport}>
+                                    <i className="fa-solid fa-flag float-start  nudge-down"></i>
+                                    <span className="white-font ms-3 ">Report</span>
+                                </div>
+                            </div>
+
+                        )}
+
+                    </div>
+
                 </div>
 
             </div>

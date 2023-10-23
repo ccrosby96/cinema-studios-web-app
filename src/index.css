@@ -618,6 +618,12 @@ button-no-style {
 .color-yellow  {
   color: yellow;
 }
+.color-grey {
+  color: grey;
+}
+color-white{
+  color: white;
+}
 .custom-slider {
   background: red; /* Change this to your desired color */
   /* Additional styling properties can be added as needed */
@@ -650,4 +656,11 @@ button-no-style {
   height: 60px;
   object-fit: cover;
   border-radius: 50%;
+}
+.custom-list-item{
+  background-color: grey;
+  transition: background-color 0.3s;
+}
+.custom-list-item:hover {
+  background-color:black;
 }

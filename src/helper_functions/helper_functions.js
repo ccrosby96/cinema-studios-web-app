@@ -1,5 +1,7 @@
 import languageMap from "./languages-dictionary.json"
 
+// server base api
+const CLIENT_URL = process.env.REACT_APP_CLIENT_BASE_URL;
 const videoBaseUrls = {
     "YouTube" : "https://www.youtube.com/watch?v=",
     "Vimeo" : "Vimeo: https://vimeo.com/"
@@ -162,9 +164,14 @@ function getDirectors(arr) {
     // Map the names of directors and join them into a comma-separated string
     return directingDirectors;
 }
+function generateReviewShareLink(review) {
+    const reviewId = review._id.toString();
+    let url = `${CLIENT_URL}/reviews/${reviewId}`;
+    return url
+}
 
 export {grabGenres, grabRuntime, grabOriginalLanguage, calculateAge,
     extractOriginalLanguage, formatDate, grabSeriesCreators, convertScoreToPercent,
     generateImageUrl, extractLanguageName,
     generateTrailerUrl, grabPersonGender, extractMovieCertification,
-    extractSeriesNetworkData, formatReviewDate, truncateString, getDirectors}
+    extractSeriesNetworkData, formatReviewDate, truncateString, getDirectors, generateReviewShareLink}

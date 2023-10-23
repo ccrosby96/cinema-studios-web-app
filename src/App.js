@@ -5,8 +5,10 @@ import MovieHome from "./components/home";
 import MovieRouting from "./components/home/movie-routing";
 import ActorRouting from "./routing/actor-routing";
 import MultiSearchRouting from "./routing/search-routing";
+import ReviewRouting from "./routing/review-routing";
 import TvRouting from "./routing/TvRouting";
 import ProfileRouting from "./routing/profile-routing";
+
 import {combineReducers} from "redux";
 import filtersReducer from "./reducers/filters-reducer";
 import ratingsReducer from "./reducers/ratings-filter-reducer";
@@ -19,7 +21,7 @@ import {Provider} from "react-redux";
 import multiSearchReducer from "./reducers/multi-search-reducer";
 import Login from "./components/login";
 import CreateAccount from "./components/login/create-account";
-import ProfileScreen from "./components/profile/profile-screen";
+import { ToastContainer } from 'react-toastify';
 
 const rootReducer = combineReducers({
         filters: combineReducers({
@@ -47,7 +49,9 @@ function App() {
                 <Route path = "actors/*" element = {<ActorRouting/>}/>
                 <Route path = "tv/*" element = {<TvRouting/>}/>
                 <Route path = "profile/*" element = {<ProfileRouting/>}/>
+                <Route path = "reviews/*" element = {<ReviewRouting/>}/>
             </Routes>
+              <ToastContainer/>
           </Provider>
       </BrowserRouter>
   );
