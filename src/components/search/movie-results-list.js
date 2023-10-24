@@ -49,7 +49,7 @@ function MovieResultsList (movies = movies = [
 
     return (
         <>
-            <ul className= "list-group no-bullets ">
+            <ul className= "list-group no-bullets">
                 {
                     movies.movies.map((movie, i) => {
 

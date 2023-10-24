@@ -13,6 +13,7 @@ function MultiSearchResultsPage() {
     const tvResults = useSelector(state => state.multiSearch.results.tv)
     const peopleResults = useSelector(state => state.multiSearch.results.people)
 
+    console.log(MultiResults);
     const  q  = useParams();
     const [searchResults, setSearchResults] = useState([]);
     console.log("In multi search landing page")

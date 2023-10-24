@@ -30,7 +30,7 @@ function MovieListItem (movie = {
         : "https://media.istockphoto.com/id/1039351052/vector/movie-and-film-festival-poster-template-design-modern-retro-vintage-style.jpg?s=612x612&w=0&k=20&c=aPVSLX7VlJj7DYBZ8afyj9ca15qoZEeZkLj_1exaUfE=";
 
     return (
-    <div className ="list-group-item p-1 bg-dark border-secondary-subtle rounded-3 m-1 ">
+    <div className ="list-group-item p-1 bg-dark rounded-3 m-1 border-0" >
         <div className="row">
             <div className="col-2">
                 <Link to = {`/movies/movie/${movie.movie.id}`} className = "text-decoration-none m-0 p-0" >

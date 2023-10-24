@@ -672,3 +672,8 @@ color-white{
 .custom-list-item:hover {
   background-color:black;
 }
+
+#my-container .my-custom-list-item {
+  /* Your custom styles here */
+  border: 10px blue;
+}
