@@ -7,10 +7,11 @@ function MovieReviewList ({reviews, movieId}) {
     const [movieReviews,setMovieReviews] = useState(reviews);
 
     useEffect(() => {
+        setMovieReviews(reviews);
 
     }, [reviews, movieId]);
 
-    if ( reviews === null || reviews.length === 0 ){
+    if ( movieReviews === null || movieReviews.length === 0 ){
         return (<h5 className = "white-font"> No reviews yet for this movie</h5>)
     }
 

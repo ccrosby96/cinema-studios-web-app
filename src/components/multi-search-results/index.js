@@ -29,35 +29,35 @@ function MultiSearchResultsPage() {
             <NavigationSidebar/>
             <div className = "container">
             <div className = "row" >
-
-                <div className = "col-2 mt-5" >
-                    <div className="mt-5"></div>
-                    <div className="card mt-5">
-                        <div className="card-header">Select a Type</div>
-                        <ul className="list-group list-group-flush ">
+                <SearchBar/>
+                <div className = "col-2" >
+                    <div className="card mt-2">
+                        <div className="card-header bg-secondary white-font">
+                            <span className="white-font">Select A Type</span>
+                        </div>
+                        <ul className="list-group list-group-flush bg-secondary border-0 ">
                             <li
-                                className={`list-group-item  ${selectedItem === 'Movie' ? 'active' : ''}`}
+                                className={`list-group-item border-0 ${selectedItem === 'Movie' ? 'active' : 'bg-secondary'}`}
                                 onClick={() => handleItemClick('Movie')}
                             >
-                                Movies
+                                <span className="white-font">Movies</span>
                             </li>
                             <li
-                                className={`list-group-item ${selectedItem === 'TV' ? 'active' : ''}`}
+                                className={`list-group-item border-0 ${selectedItem === 'TV' ? 'active' : 'bg-secondary'}`}
                                 onClick={() => handleItemClick('TV')}
                             >
-                                TV
+                                <span className="white-font">TV</span>
                             </li>
                             <li
-                                className={`list-group-item ${selectedItem === 'People' ? 'active' : ''}`}
+                                className={`list-group-item ${selectedItem === 'People' ? 'active' : 'bg-secondary'}`}
                                 onClick={() => handleItemClick('People')}
                             >
-                                People
+                                <span className="white-font">People</span>
                             </li>
                         </ul>
                     </div>
                 </div>
-                <div className="col-10">
-                    <SearchBar/>
+                <div className="col-10 mt-1">
 
                     {selectedItem === 'Movie' ? (
                         <MovieResultsList movies={movieResults} />

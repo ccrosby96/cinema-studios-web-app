@@ -37,6 +37,10 @@ function MovieReviewItem({review,movieId,onRemove}){
                     closeOnClick: true, // Close the notification when clicked
                     pauseOnHover: true, // Pause the timer on hover
                     draggable: true, // Allow dragging the notification
+                    style: {
+                        background: 'rgba(52, 58, 64, 1)',
+                        color: "white",
+                    },
                 });
             })
             .catch((error) => {
@@ -55,6 +59,10 @@ function MovieReviewItem({review,movieId,onRemove}){
                 closeOnClick: true, // Close the notification when clicked
                 pauseOnHover: true, // Pause the timer on hover
                 draggable: true, // Allow dragging the notification
+                style: {
+                    background: 'rgba(52, 58, 64, 1)',
+                    color: "white",
+                },
             });
         }catch (error) {
             console.error("issue removing review")
@@ -63,13 +71,17 @@ function MovieReviewItem({review,movieId,onRemove}){
 
     }
     const handleReport = () => {
-        toast.success('Comment Reported. Thank You For Helping Popcorn!', {
+        toast.success('Review Reported To Popcorn. Thank You!', {
             position: 'top-right',
             autoClose: 3000, // Notification will close after 3 seconds
             hideProgressBar: false, // Show a progress bar
             closeOnClick: true, // Close the notification when clicked
             pauseOnHover: true, // Pause the timer on hover
             draggable: true, // Allow dragging the notification
+            style: {
+                background: 'rgba(52, 58, 64, 1)',
+                color: "white",
+            },
         });
     }
     const handleDropdownClick = () => {

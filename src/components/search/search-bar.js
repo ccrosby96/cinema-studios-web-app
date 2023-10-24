@@ -4,6 +4,7 @@ import {useState} from "react"; // Import Font Awesome CSS
 import {useDispatch, useSelector} from "react-redux";
 import {fetchMultiSearchResults} from "../../thunks/multi-search-thunks";
 import {useNavigate } from 'react-router-dom';
+import {toast } from 'react-toastify'
 
 function SearchBar (){
         const dispatch = useDispatch();
@@ -18,6 +19,22 @@ function SearchBar (){
                 const searchParams = {
                     searchText: searchQuery
                 }
+                if (searchQuery === null || searchQuery === ""){
+                    toast.info('Search Bar Is Empty', {
+                        position: 'top-right',
+                        autoClose: 3000, // Notification will close after 3 seconds
+                        hideProgressBar: false, // Show a progress bar
+                        closeOnClick: true, // Close the notification when clicked
+                        pauseOnHover: true, // Pause the timer on hover
+                        draggable: true, // Allow dragging the notification
+                        style: {
+                            background: 'rgba(52, 58, 64, 1)',
+                            color: "white",
+                        },
+                    });
+                    return
+                }
+
                 performSearch(searchQuery);
                 console.log("User pressed Enter!")
                 console.log(searchParams)
