@@ -142,7 +142,7 @@ function ProfileScreen() {
                          alt="Profile Avatar"
                      />
                  </div>
-                 <div className = "col-4">
+                 <div className = "col-5">
                      <div className = "float-start">
                          <h4 className = "white-font mt-5">{profile.username}  <span className="grey-text  ms-2 mt-5">{profile.role}</span></h4>
                          <i className="fa-solid fa-location-dot float-start me-2" style = {{color:"grey"}}></i>
@@ -159,7 +159,7 @@ function ProfileScreen() {
                      }
 
                  </div>
-                 <div className = "col-4">
+                 <div className = "col-3">
                      <div className = "mt-5 float-start bi-border-right">
                          <ProfileStatItem label={"Followers"} number={profile.followersCount}/>
                      </div>
