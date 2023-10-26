@@ -1,9 +1,4 @@
 import NavigationSidebar from "../navigation";
-import MovieScrollBar from "./movie_scroll";
-import trending from "./trending.json"
-import popular from "./popular.json"
-import results from "./search-results.json"
-import MovieGrid from "./movie_grid";
 import SearchResults from "./search-results";
 import {useState} from "react";
 import Slider from "../rating_scroll_bar/scrollable_bar";
@@ -23,7 +18,7 @@ function MovieHome() {
     const handleSearch = () => {
         // Assuming you have search parameters (e.g., search text, filters) to pass
         const searchParams = {
-            searchText: 'Your Search Text',
+            searchText: '',
             filters: searchFilters
         };
         console.log('search params created in handleSearch', searchParams);

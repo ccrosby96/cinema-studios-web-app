@@ -135,7 +135,7 @@ function ReviewReplyItem ({reply, parentCommentId,reviewId}) {
 
                     </p>
 
-                    <h5 className = "p-0 m-0 ps-0 ps-sm-0 ps-md-0 fw-bold wd-font-family-arial text-wrap d-inline white-font">@ {replyData.author.username}</h5>
+                    <h5 className = "p-0 m-0 ps-0 ps-sm-0 ps-md-0 fw-bold wd-font-family-arial text-wrap d-inline white-font">@{replyData.author.username}</h5>
                     <p className="p-0 m-0 ps-1 wd-font-family-arial text-nowrap d-inline time-ago-font">
                         {timeAgo.format(new Date(replyData.createdAt))}
                     </p>

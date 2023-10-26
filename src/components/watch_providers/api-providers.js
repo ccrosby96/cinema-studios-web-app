@@ -87,13 +87,11 @@ function ApiWatchProviders(
     const url = "http://image.tmdb.org/t/p/w500";
     let streamers = info.buy;
     let renters = info.rent
-    //console.log("streamers: ", streamers)
-    //console.log("renters: ", renters)
 
     return (
         <div className = "container">
             <h5 className = "fw-bold white-font">Where to Watch</h5>
-            <div className = "row row-cols-3 m-0 p-0">
+            <div className = "row row-cols-3 m-0 p-0 bg-dark rounded-3">
             {
                 streamers.map((item, i) => (
                     <div key={item.id} className="p-1 ">

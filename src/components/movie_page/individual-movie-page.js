@@ -13,7 +13,7 @@ import ApiCastScrollBar from "../actor_scroll_bar/api-cast-scroll-bar";
 import RecommendationsScrollBar from "../recommendations";
 import Directors from "../directors";
 import {useParams} from "react-router";
-import {useEffect, useState} from "react";
+import React, {useEffect, useState} from "react";
 import {findMovieDetailsById, findMovieProvidersById} from "../../services/movie-service";
 import ApiWatchProviders from "../watch_providers/api-providers";
 import ReviewPostForm from "../reviews/review-post-form";
@@ -22,6 +22,7 @@ import {getReviewsByMovieId} from "../../services/movie-review-service";
 import MovieReviewList from "../reviews/movie-review-list";
 import {deleteFromUserFavorites, deleteFromUserWatchList} from "../../services/users-service";
 import {addMovieFavoriteThunk, addMovieWatchlistThunk} from "../../thunks/users-thunks";
+import Slider from "../rating_scroll_bar/scrollable_bar";
 
 /*
 cinema studios - name idea by jake fredo
@@ -36,10 +37,11 @@ function IndividualMoviePage  () {
     const [errorMessage, setErrorMessage] = useState(null);
     const [inWatchList, setInWatchList] = useState(false);
     const [inFavorites, setInFavorites] = useState(false);
+    // values for handling user rating submission, should be abstracted in refactor...
+    const [displayRatingBar,setDisplayRatingBar] = useState(false);
+    const [ratingScore, setRatingScore] = useState(5);
+    const [ratingSubmitted,setRatingSubmitted] = useState(false);
     console.log("user in moviepage is ", currentUser);
-
-    //const save = () => { dispatch(updateUserThunk(profile));};
-
 
     const [dataStatus,setDataStatus] = useState({
         details: false,
@@ -48,8 +50,17 @@ function IndividualMoviePage  () {
         reviews: false
 
     })
-    // save dispatches updates to user object, like movies added to watchlist
-
+    const handleRatingsStarClick = () => {
+        setDisplayRatingBar(!displayRatingBar);
+    }
+    const handleSliderChange = (e) => {
+        setRatingScore(e.target.value);
+        console.log("set moviereview score to ", ratingScore);
+    };
+    const handleRatingSubmission = () => {
+        setDisplayRatingBar(false)
+        setRatingSubmitted(true);
+    }
     const handleSetStatus = (property) => {
         setDataStatus((prevStatus) => ({
             ...prevStatus,
@@ -269,10 +280,35 @@ function IndividualMoviePage  () {
                                         style={{ color: inFavorites ? "#EC4D82" : "#f5f5f5" }}
                                         onClick = {favoritesClickHandler}>
 
-
                                     </i>
                                     <span className="white-text nudge-up ms-1">{inFavorites ? "In Favorites" : "Favorite"}</span>
                                 </button>)}
+                            {currentUser && (
+                                <button className = "bg-dark ms-2">
+                                    <i
+                                        className={`fa-${ratingSubmitted ? 'solid' : 'regular'} fa-star fa-2x`}
+                                        style={{ color: ratingSubmitted ? 'yellow' : '#f5f5f5' }}
+                                        onClick={handleRatingsStarClick}
+                                    ></i>
+
+                                    <span className = "white-font ms-1 nudge-up">{ratingSubmitted && !displayRatingBar ? ratingScore : "Rate"}</span>
+                                </button>)}
+                            {currentUser && displayRatingBar ? (
+                                <>
+                                    <Slider
+                                        className="float-start m-0 p-0"
+                                        value={ratingScore}
+                                        max={10}
+                                        step={0.5}
+                                        onChange={handleSliderChange}
+                                    />
+                                    <i className="fa-solid fa-star color-yellow me-1"></i>
+                                    <span className="fw-bold white-font">{ratingScore} / 10</span>
+                                    <button className = "btn btn-secondary ms-2"
+                                            onClick = {handleRatingSubmission}>Submit</button>
+                                </>
+                            ) : null}
+
 
 
                         </div>

@@ -1,16 +1,15 @@
-// actionTypes.js
+
 export const TOGGLE_GENRE_FILTER = 'TOGGLE_GENRE_FILTER';
 
-// actionTypes.js
+// for movie certifications rating = R, PG-13, PG, G, etc.
 export const TOGGLE_RATING_FILTER = 'TOGGLE_RATING_FILTER';
 
-// actionTypes.js
 export const SET_RELEASE_YEARS = 'SET_RELEASE_YEARS';
 
 export const SET_SEARCH_URL = 'SET_SEARCH_URL';
 
 export const SET_AUDIENCE_SCORE = 'SET_AUDIENCE_SCORE';
-// In your actionTypes.js file
+
 export const APPEND_TO_RESULTS = 'APPEND_TO_RESULTS';
 
 export const SET_SEARCH_RESULTS = 'SET_SEARCH_RESULTS';

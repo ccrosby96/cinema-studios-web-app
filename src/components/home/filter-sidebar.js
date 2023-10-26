@@ -10,12 +10,12 @@ function FilterSidebar () {
     const ratingFilters = useSelector(state => state.filters.ratings);
     const { startYear, endYear } = useSelector(state => state.filters.years);
     const audienceScore = useSelector(state => state.filters.score);
-    const store = useSelector(state => state.filters);
 
     const [localStartYear, setLocalStartYear] = useState(startYear);
     const [localEndYear, setLocalEndYear] = useState(endYear);
 
     const [showCheckmark, setShowCheckmark] = useState(false);
+    console.log('filter sidebar certifications: ', ratingFilters);
 
     const handleYearRangeButtonClick = () => {
         // Show the checkmark
@@ -172,8 +172,8 @@ function FilterSidebar () {
                     R
                 </button>
                 <button
-                    onClick={() => handleRatingButtonClick('PG13')}
-                    className={ratingFilters['PG13'] ? 'btn btn-primary m-1' : 'btn btn-secondary m-1'}
+                    onClick={() => handleRatingButtonClick('PG-13')}
+                    className={ratingFilters['PG-13'] ? 'btn btn-primary m-1' : 'btn btn-secondary m-1'}
                 >
                     PG-13
                 </button>
