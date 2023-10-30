@@ -20,6 +20,7 @@ import {Link} from "react-router-dom";
 import FollowerGrid from "./follow-grid";
 import FollowingGrid from "./follower-grid";
 import LoadingScreen from "./loading-profile";
+import {toastNotification} from "../../helper_functions/helper_functions";
 function ProfileScreen() {
     const { currentUser } = useSelector((state) => state.user);
     const [profile, setProfile] = useState(null);
@@ -38,15 +39,19 @@ function ProfileScreen() {
     const handleFollowButtonClick = async () => {
         // if no logged-in user stop
         if (currentUser === null) {
-            setFollowRelationship(!followRelationship);
+            toastNotification("You need to log in to follow people!")
+
             return
         }
         // if they follow this user try to unfollow
         if (followRelationship) {
             try {
                 const response = await unfollowUser(currentUser._id, profile._id)
+
                 // update display
                 setFollowRelationship(false);
+                toastNotification(`Unfollowed ${username}`)
+
                 return
             }catch(error){
                 console.error(error);
@@ -63,6 +68,7 @@ function ProfileScreen() {
                     console.log('created follow relationship', response);
                     // update display
                     setFollowRelationship(true)
+                    toastNotification(`Followed ${username}!`)
 
                 } catch (error) {
                     console.error(error)

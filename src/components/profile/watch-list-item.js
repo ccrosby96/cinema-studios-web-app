@@ -17,17 +17,16 @@ function WatchListItem ({movie,key,onRemove, profile,username,loggedInUser})  {
         <div className = "list-group-item bg-dark m-1 rounded-3">
             <div className = "container p-0 m-0">
                 <div className = "row">
-
-                    <div className = "col-4 p-0 m-0">
+                    <div className = "col-2 p-0 m-0">
                         <Link to = {`/movies/movie/${movie.movieId}`} className = "text-decoration-none m-0 p-0">
-                            <img className=" img-fluid m-0 p-0 rounded-3"
+                            <img className=" img-fluid rounded-3 m-0 p-0"
                                  src= {url + movie.posterPic}
                                  alt="Image Not Found"
-                                 style={{height: "200px",objectFit: 'cover' }}/>
+                                 style={{objectFit: 'cover' }}/>
                         </Link>
                     </div>
-                    <div className = "col-8 p-0 m-0 ps-1">
-                        <div className="m-0 p-0">
+                    <div className = "col-10 p-0 m-0 ">
+                        <div className="m-0 ps-3">
                             {loggedInUser && profile && profile.username === loggedInUser.username && (
                             <i className="btn fa-solid fa-x float-end m-0 p-1 nudge-up white-icon bg-white"
                                 onClick={handleRemoveClick}>
@@ -42,7 +41,6 @@ function WatchListItem ({movie,key,onRemove, profile,username,loggedInUser})  {
 
                             <span className = "grey-text mt-0 pt-0 white-font">{formatDate(movie.releaseDate)}</span>
                             <p className="white-font">{overview}</p>
-
                         </div>
                     </div>
 

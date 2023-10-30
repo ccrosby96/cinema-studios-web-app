@@ -287,7 +287,7 @@ function IndividualMoviePage  () {
                                 <button className = "bg-dark ms-2">
                                     <i
                                         className={`fa-${ratingSubmitted ? 'solid' : 'regular'} fa-star fa-2x`}
-                                        style={{ color: ratingSubmitted ? 'yellow' : '#f5f5f5' }}
+                                        style={{ color: ratingSubmitted ? 'gold' : '#f5f5f5' }}
                                         onClick={handleRatingsStarClick}
                                     ></i>
 

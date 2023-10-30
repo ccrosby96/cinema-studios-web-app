@@ -2,7 +2,7 @@
 import { TOGGLE_RATING_FILTER } from './actionTypes';
 
 // Define your list of ratings
-const ratings = ['R', 'PG', 'PG-13', 'G', 'NC17'];
+const ratings = ['R', 'PG', 'PG-13', 'G', 'NC-17'];
 
 // Create an initial state mapping each rating to `false`
 const initialState = ratings.reduce((acc, rating) => {

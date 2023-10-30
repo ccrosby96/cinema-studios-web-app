@@ -1,10 +1,25 @@
 import languageMap from "./languages-dictionary.json"
+import {toast} from "react-toastify";
 
 // server base api
 const CLIENT_URL = process.env.REACT_APP_CLIENT_BASE_URL;
 const videoBaseUrls = {
     "YouTube" : "https://www.youtube.com/watch?v=",
     "Vimeo" : "Vimeo: https://vimeo.com/"
+}
+function toastNotification (message) {
+    toast.success(message, {
+        position: 'top-right',
+        autoClose: 3000, // Notification will close after 3 seconds
+        hideProgressBar: false, // Show a progress bar
+        closeOnClick: true, // Close the notification when clicked
+        pauseOnHover: true, // Pause the timer on hover
+        draggable: true, // Allow dragging the notification
+        style: {
+            background: 'rgba(52, 58, 64, 1)',
+            color: "white",
+        },
+    });
 }
 function grabGenres(arr) {
 
@@ -174,4 +189,5 @@ export {grabGenres, grabRuntime, grabOriginalLanguage, calculateAge,
     extractOriginalLanguage, formatDate, grabSeriesCreators, convertScoreToPercent,
     generateImageUrl, extractLanguageName,
     generateTrailerUrl, grabPersonGender, extractMovieCertification,
-    extractSeriesNetworkData, formatReviewDate, truncateString, getDirectors, generateReviewShareLink}
+    extractSeriesNetworkData, formatReviewDate, truncateString
+    , getDirectors, generateReviewShareLink, toastNotification}

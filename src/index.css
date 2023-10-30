@@ -626,6 +626,9 @@ button-no-style {
 .color-yellow  {
   color: yellow;
 }
+.color-dark-yellow {
+  color: #E0AB28;
+}
 .color-grey {
   color: grey;
 }
@@ -660,7 +663,7 @@ color-white{
 }
 .follow-item {
   float: left;
-  width:  50px;
+  width:  60px;
   height: 60px;
   object-fit: cover;
   border-radius: 50%;

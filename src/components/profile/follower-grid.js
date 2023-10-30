@@ -7,13 +7,13 @@ function FollowingGrid({ data }) {
 
     return (
         <div className="container">
-            <div className="row row-cols-1 row-cols-md-4 g-4">
+            <div className="row row-cols-1 row-cols-md-4 g-4 m-0 p-0">
                 {data.map((follow, index) => (
-                    <div key={index} className="col">
+                    <div key={index} className="col m-0 p-0">
                         <Link className="text-decoration-none" to={`/profile/${follow.following.username}`}>
-                            <div className = "ms-0 me-0">
+                            <div className = "">
                                 <img
-                                    className=" rounded-2 mt-0 follow-item ms-0 me-0"
+                                    className="follow-item "
                                     src={follow.following.profilePic}
                                     alt={follow.following.username}
 

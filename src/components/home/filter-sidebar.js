@@ -190,8 +190,8 @@ function FilterSidebar () {
                     PG
                 </button>
                 <button
-                    onClick={() => handleRatingButtonClick('NC17')}
-                    className={ratingFilters['NC17'] ? 'btn btn-primary m-1' : 'btn btn-secondary m-1'}
+                    onClick={() => handleRatingButtonClick('NC-17')}
+                    className={ratingFilters['NC-17'] ? 'btn btn-primary m-1' : 'btn btn-secondary m-1'}
                 >
                     NC-17
                 </button>
