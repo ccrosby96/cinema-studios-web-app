@@ -23,6 +23,7 @@ import MovieReviewList from "../reviews/movie-review-list";
 import {deleteFromUserFavorites, deleteFromUserWatchList} from "../../services/users-service";
 import {addMovieFavoriteThunk, addMovieWatchlistThunk} from "../../thunks/users-thunks";
 import Slider from "../rating_scroll_bar/scrollable_bar";
+import {getUserMovieRating, postUserMovieRating} from "../../services/movie-rating-service";
 
 /*
 cinema studios - name idea by jake fredo
@@ -55,11 +56,14 @@ function IndividualMoviePage  () {
     }
     const handleSliderChange = (e) => {
         setRatingScore(e.target.value);
-        console.log("set moviereview score to ", ratingScore);
+        console.log("set movie review score to ", ratingScore);
     };
-    const handleRatingSubmission = () => {
-        setDisplayRatingBar(false)
-        setRatingSubmitted(true);
+    const handleRatingSubmission = async () => {
+        const response = await postUserRating();
+        if (response){
+            setDisplayRatingBar(false)
+            setRatingSubmitted(true);
+        }
     }
     const handleSetStatus = (property) => {
         setDataStatus((prevStatus) => ({
@@ -77,6 +81,47 @@ function IndividualMoviePage  () {
             else {
                 setInWatchList(false);
             }
+        }
+    }
+    const checkUserRating = async () => {
+        // upon loading of page if user logged in check if they rated this movie
+        if (currentUser) {
+            const userRating = await getUserMovieRating(currentUser._id, movieId);
+            // if user did write review for this movie update needed state in component
+            if (userRating && userRating.found) {
+                setRatingScore(userRating.rating.rating);
+                setRatingSubmitted(true);
+            }
+            else {
+                setRatingScore(5);
+                setRatingSubmitted(false);
+            }
+        }
+        else {
+            console.log("in checkUserRating with no currentUser")
+
+        }
+    }
+    const postUserRating = async () => {
+
+        if (!currentUser){
+            return
+        }
+        const rating = {
+            user: currentUser._id,
+            rating: ratingScore,
+            movieId: movieId
+        }
+        try {
+            const response = await postUserMovieRating(rating);
+            if (response && response.status === 200){
+                console.log('movie rating post was successful!')
+                return true;
+            }
+            return false;
+        }catch (error){
+            console.error("failed to post rating", error);
+            return false;
         }
     }
     const checkFavorites = () => {
@@ -217,6 +262,7 @@ function IndividualMoviePage  () {
         fetchData();
         checkWatchList();
         checkFavorites();
+        checkUserRating();
 
         window.scrollTo({ top: 0, behavior: 'smooth' });
 
@@ -291,7 +337,7 @@ function IndividualMoviePage  () {
                                         onClick={handleRatingsStarClick}
                                     ></i>
 
-                                    <span className = "white-font ms-1 nudge-up">{ratingSubmitted && !displayRatingBar ? ratingScore : "Rate"}</span>
+                                    <span className = "white-font ms-1 nudge-up">{ratingSubmitted && !displayRatingBar ? ratingScore : "Please Rate"}</span>
                                 </button>)}
                             {currentUser && displayRatingBar ? (
                                 <>
@@ -305,7 +351,7 @@ function IndividualMoviePage  () {
                                     <i className="fa-solid fa-star color-yellow me-1"></i>
                                     <span className="fw-bold white-font">{ratingScore} / 10</span>
                                     <button className = "btn btn-secondary ms-2"
-                                            onClick = {handleRatingSubmission}>Submit</button>
+                                            onClick = {handleRatingSubmission}>Submit Rating</button>
                                 </>
                             ) : null}
 
@@ -322,8 +368,9 @@ function IndividualMoviePage  () {
                         <div className = "row">
                             <div className = "col-2">
                                 <div className = "float-start me-3">
-                                    <p className="fw-bold a1-font-16px white-font mb-0 pb-0"> User Score </p>
-                                    <span className="white-font mt-0 pt-0">{convertScoreToPercent(details.vote_average)}%</span>
+                                    <p className="fw-bold a1-font-16px white-font mb-0 pb-0"> Popcorn Score </p>
+                                    <span className="white-font mt-0 pt-0">{details.vote_average.toPrecision(2)}</span>
+                                    <i className="fa-solid fa-star color-yellow ms-2 "></i>
                                 </div>
                             </div>
                            <div className = "col-10">

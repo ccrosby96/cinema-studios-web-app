@@ -106,7 +106,6 @@ function extractLanguageName(code) {
 
 }
 function generateTrailerUrl(trailers) {
-    console.log('trailers data in genTrailerurl', trailers);
     for (const obj of trailers) {
         if (obj.site === "YouTube"){
             return videoBaseUrls[obj.site] + obj.key
@@ -136,7 +135,6 @@ function extractMovieCertification(details) {
          return ""
      }
     const prodCountry = details.production_countries[0].iso_3166_1;
-    console.log('country found in movie details', prodCountry);
 
     // now iterate over release dates
     const releaseDates = details.release_dates.results;
