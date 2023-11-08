@@ -215,14 +215,18 @@ function ProfileScreen() {
                          </Link>
                      </li>
                      <li className="nav-item">
-                         <a className="grey-no-underline ms-3 me-3" href="#">
+                         <Link className = "text-decoration-none" to={`/profile/${username}/followers/1`}>
+                         <a className="grey-no-underline ms-3 me-3">
                              Followers
                          </a>
+                         </Link>
                      </li>
                      <li className="nav-item">
-                         <a className="grey-no-underline ms-3 me-3" href="#">
+                         <Link className = "text-decoration-none" to={`/profile/${username}/following/1`}>
+                         <a className="grey-no-underline ms-3 me-3">
                              Following
                          </a>
+                         </Link>
                      </li>
                  </ul>
 

@@ -6,6 +6,7 @@ import NavigationSidebar from "../navigation";
 import {getBaseProfileByUsername, getFavoritesByUsername} from "../../services/users-service";
 import ProfileFavoriteItem from "./profile-favorite-item";
 import LoadingScreen from "./loading-profile";
+import ProfilePageBar from "./profile-page-bar";
 function ProfileFavorites () {
     const { currentUser } = useSelector((state) => state.user);
     const [data,setData] = useState(null);
@@ -41,53 +42,7 @@ function ProfileFavorites () {
         <div className = "bg-landing-page m-0 p-0">
             <NavigationSidebar/>
             <div className = "container bg-dark mt-3 ">
-                <div className = "row">
-
-                    <ul className="nav nav-highlight justify-content-center border-secondary border-top-2 border-bottom-2 border-1 m-0 p-0">
-                        <li clasName = "nav-item float-start m-0 p-0">
-
-                            <img className="img-fluid avatar-top-bar p-3" src={data.profilePic} style = {{width: "100px",height: "100px"}}/>
-
-                        </li>
-
-                        <li className="nav-item mt-4 pt-2">
-                            <Link className = "text-decoration-none" to={`/profile/${username}`}>
-                                <a className="grey-no-underline ms-3 me-3">
-                                    Profile
-                                </a>
-                            </Link>
-                        </li>
-                        <li className="nav-item mt-4 pt-2">
-                            <Link className = "text-decoration-none" to={`/profile/${username}/reviews`}>
-                                <a className="grey-no-underline ms-3 me-3">
-                                    Reviews
-                                </a>
-                            </Link>
-                        </li>
-                        <li className="nav-item mt-4 pt-2">
-                            <Link className = "text-decoration-none" to={`/profile/${username}/watchlist`}>
-                                <a className="grey-no-underline ms-3 me-3">
-                                    Watchlist
-                                </a>
-                            </Link>
-                        </li>
-                        <li className="nav-item mt-4 pt-2">
-                            <a className="grey-underline ms-3 me-3" href="#">
-                                Favorites
-                            </a>
-                        </li>
-                        <li className="nav-item mt-4 pt-2">
-                            <a className="grey-no-underline ms-3 me-3" href="#">
-                                Followers
-                            </a>
-                        </li>
-                        <li className="nav-item mt-4 pt-2">
-                            <a className="grey-no-underline ms-3 me-3" href="#">
-                                Following
-                            </a>
-                        </li>
-                    </ul>
-                </div>
+                <ProfilePageBar username={username} profilePic={data.profilePic} section={"favorites"}/>
                 <div className="row">
                     <h5 className = "white-font">{data.username}'s Favorite Movies</h5>
                     {data.favoriteMovies.map((element, index) => (

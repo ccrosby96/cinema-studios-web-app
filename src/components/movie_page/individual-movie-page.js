@@ -315,7 +315,7 @@ function IndividualMoviePage  () {
                                 <button className="bg-dark ms-2" onClick={watchlistClickHandler}>
                                     <i className={`fa-solid ${inWatchList ? 'fa-check' : 'fa-plus'} fa-2x trailer-icon`} style={{ color: "#f5f5f5" }}></i>
                                     <span className={`white-text nudge-up${inWatchList ? ' in-watchlist' : ''}`}>
-                                    {inWatchList ? 'In Watchlist' : 'Watchlist'}
+                                    {inWatchList ? ' In Watchlist' : ' Watchlist'}
                                   </span>
                                 </button>
                             )}
@@ -327,7 +327,7 @@ function IndividualMoviePage  () {
                                         onClick = {favoritesClickHandler}>
 
                                     </i>
-                                    <span className="white-text nudge-up ms-1">{inFavorites ? "In Favorites" : "Favorite"}</span>
+                                    <span className="white-text nudge-up ms-1">{inFavorites ? " In Favorites" : "Favorite"}</span>
                                 </button>)}
                             {currentUser && (
                                 <button className = "bg-dark ms-2">

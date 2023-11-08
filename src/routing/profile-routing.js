@@ -4,6 +4,8 @@ import ProfileScreen from "../components/profile/profile-screen";
 import ProfileReviews from "../components/profile/profile-reviews";
 import ProfileWatchlist from "../components/profile/profile-watchlist";
 import ProfileFavorites from "../components/profile/profile-favorites";
+import ProfileFollowers from "../components/profile/profile-followers";
+import ProfileFollowing from "../components/profile/profile-following";
 function ProfileRouting(){
     return (
         <Routes>
@@ -13,6 +15,8 @@ function ProfileRouting(){
             <Route path = {"/:username/reviews/"} element={<ProfileReviews/>}/>
             <Route path = {"/:username/watchlist"} element = {<ProfileWatchlist/>}/>
             <Route path = {"/:username/favorites"} element = {<ProfileFavorites/>}/>
+            <Route path = {"/:username/followers/:page"} element={<ProfileFollowers/>}/>
+            <Route path = {"/:username/following/:page"} element={<ProfileFollowing/>}/>
         </Routes>
     )
 }

@@ -223,6 +223,25 @@ export const getFollowersList = async (userId) => {
         throw error;
     }
 };
+export const getFollowersPageByUsername = async (username, pageNumber) => {
+    try {
+        const response = await api.get(`${USER_API}/${username}/followers/${pageNumber}`);
+        return response.data;
+    }catch (error) {
+        console.error("Error fetching follower list of username")
+        throw error;
+    }
+}
+export const getFollowsPageByUsername = async (username, pageNumber) => {
+    console.log('calling getFollowsPageByUsername', username, pageNumber);
+    try {
+        const response = await api.get(`${USER_API}/${username}/following/${pageNumber}`);
+        return response.data;
+    }catch (error) {
+        console.error("Error fetching follows list of username")
+        throw error;
+    }
+}
 export const getUserFollowingList = async (userId) => {
     try {
         const response = await api.get(`${USER_API}/${userId}/following`);

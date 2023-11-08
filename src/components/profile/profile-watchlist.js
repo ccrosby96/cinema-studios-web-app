@@ -10,6 +10,7 @@ import {getBaseProfileByUsername, getWatchlistByUsername} from "../../services/u
 import MovieWatchList from "./movie-watch-list";
 import {useDispatch} from "react-redux";
 import LoadingScreen from "./loading-profile";
+import ProfilePageBar from "./profile-page-bar";
 function ProfileWatchlist () {
     const { currentUser } = useSelector((state) => state.user);
     const [data,setData] = useState(null);
@@ -47,67 +48,7 @@ function ProfileWatchlist () {
         <div className = "bg-landing-page m-0 p-0">
             <NavigationSidebar/>
             <div className = "container bg-dark mt-3 ">
-                <div className = "row">
-
-                    <ul className="nav nav-highlight justify-content-center border-secondary border-top-2 border-bottom-2 border-1 m-0 p-0">
-                        <li clasName = "nav-item float-start m-0 p-0">
-
-                            <img
-                                className="img-fluid p-3"
-                                src={data.profilePic}
-                                style={{
-                                    width: "100px",
-                                    height: "100px",
-                                    objectFit: "cover", // Maintain aspect ratio while filling the box
-                                    borderRadius: "50%",
-                                    overflow: "hidden",
-                                }}
-                                alt="Profile Avatar"
-                            />
-
-
-
-                        </li>
-
-                        <li  className={`nav-item mt-4 pt-2 ${location.pathname === `/profile/${username}` ? 'active' : ''}`}>
-                            <Link className = "text-decoration-none" to={`/profile/${username}`}>
-                                <a className="grey-no-underline ms-3 me-3">
-                                    Profile
-                                </a>
-                            </Link>
-                        </li>
-                        <li className="nav-item mt-4 pt-2">
-                            <Link className = "text-decoration-none" to={`/profile/${username}/reviews`}>
-                                <a className="grey-no-underline ms-3 me-3">
-                                    Reviews
-                                </a>
-                            </Link>
-                        </li>
-                        <li className="nav-item mt-4 pt-2 active">
-                            <a className="grey-underline ms-3 me-3 " href="">
-                                Watchlist
-                            </a>
-                        </li>
-                        <li className="nav-item mt-4 pt-2">
-                            <Link className = "text-decoration-none" to={`/profile/${username}/favorites`}>
-                                <a className="grey-no-underline ms-3 me-3">
-                                    Favorites
-                                </a>
-                            </Link>
-                        </li>
-                        <li className="nav-item mt-4 pt-2">
-                            <a className="grey-no-underline ms-3 me-3" href="#">
-                                Followers
-                            </a>
-                        </li>
-                        <li className="nav-item mt-4 pt-2">
-                            <a className="grey-no-underline ms-3 me-3" href="#">
-                                Following
-                            </a>
-                        </li>
-                    </ul>
-
-                </div>
+                <ProfilePageBar username={username} profilePic={data.profilePic} section={"watchlist"}/>
                 <div className = "container mt-3">
                     <h5 className = "white-font">{data.username}'s Watchlist</h5>
                     <MovieWatchList movies={data.watchlist} profile={profile} username = {username} loggedInUser = {loggedInUser}/>
