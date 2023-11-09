@@ -1,7 +1,6 @@
 import {formatDate} from "../../helper_functions/helper_functions";
 import {truncateString} from "../../helper_functions/helper_functions";
 import {Link} from "react-router-dom";
-import {useSelector} from "react-redux";
 
 function WatchListItem ({movie,key,onRemove, profile,username,loggedInUser})  {
     const url = "https://image.tmdb.org/t/p/w500";
@@ -10,9 +9,7 @@ function WatchListItem ({movie,key,onRemove, profile,username,loggedInUser})  {
         // Call the onRemove prop to remove the movie by its ID
         onRemove(movie.movieId);
     };
-    console.log('username in watchlistitem', username)
-    console.log('profile in watchlistitem', profile)
-    console.log('loggedInUser in watchlistitem', loggedInUser)
+
     return (
         <div className = "list-group-item bg-dark m-1 rounded-3">
             <div className = "container p-0 m-0">

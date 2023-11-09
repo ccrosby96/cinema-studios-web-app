@@ -1,25 +1,19 @@
 import React, { useState } from "react";
 import WatchListItem from "./watch-list-item";
 import {useDispatch, useSelector} from "react-redux";
-import {deleteFromUserWatchList} from "../../services/users-service";
+
 
 import {updateUserThunk} from "../../thunks/users-thunks"
 
 function MovieWatchList({ movies, profile, username, loggedInUser}) {
-    // Sorting documents based on _id
+    // Sorting documents based on dateAdded Date field
     const movieArray = movies.slice().sort((a, b) => new Date(b.dateAdded) - new Date(a.dateAdded));
     // Create state to store the movies to be displayed
     const [displayedMovies, setDisplayedMovies] = useState(movieArray);
-    console.log('profile in movieWatchList', profile);
-    console.log('logged in user in movieWatchList', loggedInUser);
 
-    console.log('watchlist: ',movies)
     const dispatch = useDispatch();
     // Function to remove a movie from the displayed list
     // Assuming your array of documents is named 'documents'
-
-
-// Now, sortedDocuments contains the array sorted based on the _id field.
 
     const removeMovie =  async (movieId) => {
         try {
