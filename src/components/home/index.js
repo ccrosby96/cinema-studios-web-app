@@ -8,6 +8,7 @@ import {movieDiscoverSearch} from "../../services/movie-service";
 import {fetchMovieSearchResults} from "../../thunks/movie-thunks";
 import InitialMovies from "./initial-movies-display";
 import {Link} from "react-router-dom";
+import LoadingScreen from "../profile/loading-profile";
 function MovieHome() {
     const dispatch = useDispatch();
     const searchFilters = useSelector(state => state.filters)
@@ -44,7 +45,7 @@ function MovieHome() {
                         <div className = 'col-10'>
                             {loading === true ? (
                                 // Show that we're loading
-                                <span>Loading Results Holup</span>
+                                <LoadingScreen label={"Search Results"}/>
                             ) : searchResults.length === 1 ? (
                                 // No search done yet, load default popular and trending movies
                                 <InitialMovies/>
@@ -56,7 +57,7 @@ function MovieHome() {
                     </div>
                     <div className="row">
 
-                        Cinema Studios
+                        <span className = "white-font">Popcorn</span>
                     </div>
                 </div>
 

@@ -24,7 +24,6 @@ function SearchResults () {
 
         useEffect(() => {
                 // Check if the page number is not in the dictionary
-
                 if (!(pageNumber in searchResultsDict)) {
                         console.log("in SearchResults useEffect, calling fetchMovieSearchByPage with", pageNumber);
                         // Fetch data for the page
@@ -34,18 +33,16 @@ function SearchResults () {
                         };
                         dispatch(fetchMovieSearchByPage(searchParams));
                 }
-        }, [pageNumber]);
-
-        const handleNextPage = () => {
-                const searchParams = {
-                        currentPage: pageNumber,
-                        url: searchUrl
+                else {
+                        console.log(`page number ${pageNumber} already cached in searchResultsDict`);
                 }
-                console.log(searchParams);
-                dispatch(fetchMovieSearchNextPage(searchParams));
-
-        }
+        }, [pageNumber]);
         const handleNavigatePage = (page) => {
+                // if we already cached this page no need to call backend again
+                if (page in searchResultsDict){
+                        window.scrollTo({ top: 0, behavior: 'smooth' });
+                        return
+                }
                 const searchParams = {
                         requestedPage:page,
                         url: searchUrl
@@ -59,7 +56,6 @@ function SearchResults () {
         else if (Number.isNaN(pageNumber)){
                 return (<InitialMovies/>)
         }
-
         else if (pageNumber in searchResultsDict){
                 const currentPageResults = searchResultsDict[pageNumber]
                 return (

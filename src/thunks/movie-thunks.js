@@ -72,6 +72,7 @@ export const fetchMovieSearchNextPage = (searchParams) => {
 
 }
 export const fetchMovieSearchByPage = (searchParams) => {
+    console.log("called fetchMovieSearchByPage");
     return async (dispatch) =>{
         try {
             // Dispatch a loading action (optional)

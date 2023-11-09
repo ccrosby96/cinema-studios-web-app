@@ -2,15 +2,23 @@ import {useNavigate, useParams} from "react-router";
 import {
     getFollowsPageByUsername,
 } from "../../services/users-service";
-import {useEffect, useState} from "react";
+import React, {useEffect, useState} from "react";
 import ProfilePageBar from "./profile-page-bar";
 import LoadingScreen from "./loading-profile";
 import NavigationSidebar from "../navigation";
 import FollowList from "../following-list/follow-list";
+import PageButtons from "../page-buttons/page-buttons";
 function ProfileFollows () {
     const {username} = useParams()
     const {page} = useParams()
     const [data,setData] = useState(null);
+    const navigate = useNavigate()
+
+    const pageNumber = parseInt(page);
+
+    const handleNavigatePage = (pageNumber) => {
+        navigate(`/profile/${username}/following/${pageNumber}`);
+    };
 
     useEffect(() => {
         const fetchData = async () => {
@@ -42,6 +50,9 @@ function ProfileFollows () {
                     )}
                 </div>
 
+            </div>
+            <div className = "row">
+                <PageButtons currentPage={pageNumber} maxPage={data.maxPage} handleNavigatePage={handleNavigatePage}/>
             </div>
         </div>
     </div>)
