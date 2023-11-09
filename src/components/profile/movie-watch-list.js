@@ -7,7 +7,7 @@ import {updateUserThunk} from "../../thunks/users-thunks"
 
 function MovieWatchList({ movies, profile, username, loggedInUser}) {
     // Sorting documents based on _id
-    const movieArray = movies.slice().sort((a, b) => b._id - a._id);
+    const movieArray = movies.slice().sort((a, b) => new Date(b.dateAdded) - new Date(a.dateAdded));
     // Create state to store the movies to be displayed
     const [displayedMovies, setDisplayedMovies] = useState(movieArray);
     console.log('profile in movieWatchList', profile);
