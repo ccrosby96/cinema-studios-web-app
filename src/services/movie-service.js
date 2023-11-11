@@ -74,10 +74,18 @@ export const movieDiscoverSearchByPage = async (searchParams) => {
 
 export const findMovieDetailsById = async (mid) => {
     const response  = await api.get(`${Movies_URL}/details/${mid}`)
-    console.log("are we getting here? line 12 findmoviedetails service function")
     const ret = response.data
     console.log("findmoviebyId ret val", ret)
     return ret
+}
+export const findMovieDetailsByTitle = async (title) => {
+    try {
+        const response = await api.get(`${Movies_URL}/details/title/${title}`)
+        return response.data
+    }catch (error) {
+        console.error(error);
+        throw error;
+    }
 }
 
 export const findMovieCastById = async (mid) => {

@@ -44,6 +44,9 @@ const NavigationSidebar = (
                     <li className="nav-item">
                         <a className="nav-link text-light" href={currentUser ? `/profile/${currentUser.username}` : '/profile'}>Profile</a>
                     </li>
+                    <li className="nav-item">
+                        <a className="nav-link text-light" href={"/ai-search"}>AI</a>
+                    </li>
                     {currentUser ? (
                         <li className="nav-item ml-auto " onClick={() => {
                             dispatch(logoutThunk());

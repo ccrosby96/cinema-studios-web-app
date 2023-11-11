@@ -632,6 +632,12 @@ button-no-style {
 .color-grey {
   color: grey;
 }
+.color-dark-grey {
+  color: rgb(56,56,56);
+}
+.color-light-grey {
+  color: rgb(169,169,169);
+}
 color-white{
   color: white;
 }
@@ -644,6 +650,12 @@ color-white{
 }
 .bg-movie-card {
   background-color: rgba(72,72,72,0.5);
+}
+bg-dark-grey {
+  background-color: rgb(56,56,56) !important;
+}
+bg-light-grey {
+  background-color: rgb(169,169,169);
 }
 .list-group-item {
   background-color: #202020;

@@ -22,6 +22,7 @@ import multiSearchReducer from "./reducers/multi-search-reducer";
 import Login from "./components/login";
 import CreateAccount from "./components/login/create-account";
 import { ToastContainer } from 'react-toastify';
+import AiSearchPage from "./components/ai-search/ai-search-page";
 
 const rootReducer = combineReducers({
         filters: combineReducers({
@@ -50,6 +51,7 @@ function App() {
                 <Route path = "tv/*" element = {<TvRouting/>}/>
                 <Route path = "profile/*" element = {<ProfileRouting/>}/>
                 <Route path = "reviews/*" element = {<ReviewRouting/>}/>
+                <Route path = "ai-search/*" element={<AiSearchPage/>}/>
             </Routes>
               <ToastContainer/>
           </Provider>
