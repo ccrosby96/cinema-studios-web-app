@@ -5,8 +5,10 @@ import {useDispatch, useSelector} from "react-redux";
 import {profileThunk} from "../../thunks/users-thunks";
 import {aiSearchPostMessage} from "../../services/ai-search-service";
 import loadingGif from '../../images/loading.gif';
-import {findMovieDetailsByTitle} from "../../services/movie-service";
+import {findMovieDetailsByTitle, fetchMovieDetailsFromSuggestions} from "../../services/movie-service";
 import RecommendationsScrollBar from "../recommendations";
+import AiResultsDisplay from "./ai-results-display";
+import {toastNotification, toastInfoMessage, grabSuggestionsFromAIResponse} from "../../helper_functions/helper_functions";
 
 const AiSearchPage = () => {
     const [userInput, setUserInput] = useState('');
@@ -15,7 +17,7 @@ const AiSearchPage = () => {
     const [loggedinUser, setLoggedInUser] = useState(null);
     const [loading, setLoading] = useState(false);
     const [suggestions, setSuggestions] = useState("");
-    const [movieData, setMovieData] = useState([])
+    const [movieData, setMovieData] = useState(null);
     const dispatch = useDispatch();
     const handleInputChange = (event) => {
         setUserInput(event.target.value);
@@ -47,14 +49,25 @@ const AiSearchPage = () => {
     }
     const checkForTitle = async (message) => {
         const pattern = /"([^"]*)"/;
-
+        // extract movie title/year pairs from ai response
+        const movieMatches = grabSuggestionsFromAIResponse(message);
+        console.log("movie-year suggestions", movieMatches);
         // Find the first match of the pattern in the message
         const match = message.match(pattern);
-
+        console.log("title matches", match);
         // Extracted movie title (assuming there's only one title in the message)
         const movieTitle = match ? match[1] : null;
-
-        if (movieTitle) {
+        if (movieMatches.length > 0){
+            const requestObject = {
+                suggestions: movieMatches
+            }
+            const response = await fetchMovieDetailsFromSuggestions(requestObject);
+            if (response) {
+                console.log('got a response from server for multiple titles', response);
+                setMovieData(response.resultDict);
+            }
+        }
+        else if (movieTitle) {
             if (suggestions && suggestions === movieTitle){
                 return
             }
@@ -63,7 +76,8 @@ const AiSearchPage = () => {
             // query TMDB for movies matching this title
             const response = await findMovieDetailsByTitle(movieTitle);
             if (response) {
-                setMovieData(response.results);
+                const sortedMovies = response.results.slice().sort((a, b) => b.popularity - a.popularity);
+                setMovieData(sortedMovies);
             }
         } else {
             console.log('No movie title found in the message.');
@@ -73,6 +87,7 @@ const AiSearchPage = () => {
         console.log("called askAI helper func")
         if (userInput === "" || userInput === null){
             console.log('user input was empty')
+            toastInfoMessage("Type Something First I Can't Read Minds");
             return;
         }
         try {
@@ -97,7 +112,7 @@ const AiSearchPage = () => {
                 const aiMessage = {role: "assistant", content: response.message}
                 setConversationHistory([...conversation, aiMessage]);
                 // let's parse the message for a potential suggestion
-                checkForTitle(response.message);
+                await checkForTitle(response.message);
             }
         }catch (error){
             console.error(error.message)
@@ -110,7 +125,7 @@ const AiSearchPage = () => {
         // Perform actions with the user input, like making an API call to your GPT model
         askAI();
     };
-
+    console.log(movieData)
     return (
         <>
             <NavigationSidebar/>
@@ -158,11 +173,8 @@ const AiSearchPage = () => {
                         </div>
                     </div>
                     <div className = "row mt-3" >
-                        {suggestions !== "" && (
-                            <h4 className = "white-font" >Possible Matches For {suggestions}</h4>
-                        )}
-                        {movieData !== null && movieData.length > 0 && (
-                            <RecommendationsScrollBar data={movieData}/>
+                        {movieData !== null && (
+                            <AiResultsDisplay resultsDict={movieData}/>
                         )}
                     </div>
             </div>

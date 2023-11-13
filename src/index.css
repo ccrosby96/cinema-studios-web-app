@@ -692,3 +692,11 @@ bg-light-grey {
   /* Your custom styles here */
   border: 10px blue;
 }
+pre {
+  overflow-x: auto;
+  white-space: pre-wrap;
+  white-space: -moz-pre-wrap;
+  white-space: -pre-wrap;
+  white-space: -o-pre-wrap;
+  word-wrap: break-word;
+}

@@ -35,9 +35,10 @@ function ConversationItem({ message }) {
                             )}
 
                             <div className="review-body-container">
-                                <p className="white-font ms-3" style={{ wordWrap: 'break-word' }}>
+                                <pre className="white-font ms-3" style={{ overflowWrap: 'break-word' }}>
                                     {message.content}
-                                </p>
+                                </pre>
+
                             </div>
                         </div>
                 </div>

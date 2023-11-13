@@ -21,6 +21,20 @@ function toastNotification (message) {
         },
     });
 }
+function toastInfoMessage (message) {
+    toast.info(message, {
+        position: 'top-center',
+        autoClose: 3000, // Notification will close after 3 seconds
+        hideProgressBar: false, // Show a progress bar
+        closeOnClick: true, // Close the notification when clicked
+        pauseOnHover: true, // Pause the timer on hover
+        draggable: true, // Allow dragging the notification
+        style: {
+            background: 'rgba(52, 58, 64, 1)',
+            color: "white",
+        },
+    });
+}
 function grabGenres(arr) {
 
     const nameArray = arr.map(obj => obj.name);
@@ -182,10 +196,27 @@ function generateReviewShareLink(review) {
     let url = `${CLIENT_URL}/reviews/${reviewId}`;
     return url
 }
+function grabSuggestionsFromAIResponse(response){
+    const pattern = /"([^"]+)" \((\d{4})\)/g;
+// Initialize an array to store matches
+    const matches = [];
+
+// Find all matches of the pattern in the response
+    let match;
+    while ((match = pattern.exec(response)) !== null) {
+        const movieTitle = match[1];
+        const releaseYear = match[2];
+        matches.push({ movieTitle, releaseYear });
+    }
+// Output the extracted movie title-year pairs
+    console.log(matches);
+    return matches
+}
 
 export {grabGenres, grabRuntime, grabOriginalLanguage, calculateAge,
     extractOriginalLanguage, formatDate, grabSeriesCreators, convertScoreToPercent,
     generateImageUrl, extractLanguageName,
     generateTrailerUrl, grabPersonGender, extractMovieCertification,
     extractSeriesNetworkData, formatReviewDate, truncateString
-    , getDirectors, generateReviewShareLink, toastNotification}
+    , getDirectors, generateReviewShareLink, toastNotification, toastInfoMessage,
+    grabSuggestionsFromAIResponse}

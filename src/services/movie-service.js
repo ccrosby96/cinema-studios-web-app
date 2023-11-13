@@ -87,6 +87,16 @@ export const findMovieDetailsByTitle = async (title) => {
         throw error;
     }
 }
+export const fetchMovieDetailsFromSuggestions = async (suggestions) => {
+    console.log('called fetchMovieDetailsFromSuggestions', suggestions, `${Movies_URL}/details/suggestions`);
+    try {
+        const response = await api.post(`${Movies_URL}/details/suggestions`, suggestions)
+        return response.data
+    }catch (error) {
+        console.error(error)
+        throw error;
+    }
+}
 
 export const findMovieCastById = async (mid) => {
     const response = await api.get(`${Movies_URL}/cast/${mid}`)
