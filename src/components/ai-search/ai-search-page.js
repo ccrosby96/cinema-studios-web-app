@@ -5,6 +5,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {profileThunk} from "../../thunks/users-thunks";
 import {aiSearchPostMessage} from "../../services/ai-search-service";
 import loadingGif from '../../images/loading.gif';
+import magnifyGif from "../../images/magnify.gif";
 import {findMovieDetailsByTitle, fetchMovieDetailsFromSuggestions} from "../../services/movie-service";
 import RecommendationsScrollBar from "../recommendations";
 import AiResultsDisplay from "./ai-results-display";
@@ -16,6 +17,7 @@ const AiSearchPage = () => {
     const { currentUser } = useSelector((state) => state.user);
     const [loggedinUser, setLoggedInUser] = useState(null);
     const [loading, setLoading] = useState(false);
+    const [resultsLoading, setResultsLoading] = useState(false);
     const [suggestions, setSuggestions] = useState("");
     const [movieData, setMovieData] = useState(null);
     const dispatch = useDispatch();
@@ -51,35 +53,24 @@ const AiSearchPage = () => {
         const pattern = /"([^"]*)"/;
         // extract movie title/year pairs from ai response
         const movieMatches = grabSuggestionsFromAIResponse(message);
-        console.log("movie-year suggestions", movieMatches);
         // Find the first match of the pattern in the message
         const match = message.match(pattern);
-        console.log("title matches", match);
         // Extracted movie title (assuming there's only one title in the message)
         const movieTitle = match ? match[1] : null;
         if (movieMatches.length > 0){
             const requestObject = {
                 suggestions: movieMatches
             }
+            // search for matches from TMDB, set loading to true
+            setResultsLoading(true);
             const response = await fetchMovieDetailsFromSuggestions(requestObject);
             if (response) {
                 console.log('got a response from server for multiple titles', response);
                 setMovieData(response.resultDict);
             }
+            setResultsLoading(false);
         }
-        else if (movieTitle) {
-            if (suggestions && suggestions === movieTitle){
-                return
-            }
-            console.log(`The suggested movie title is: ${movieTitle}`);
-            setSuggestions(movieTitle)
-            // query TMDB for movies matching this title
-            const response = await findMovieDetailsByTitle(movieTitle);
-            if (response) {
-                const sortedMovies = response.results.slice().sort((a, b) => b.popularity - a.popularity);
-                setMovieData(sortedMovies);
-            }
-        } else {
+         else {
             console.log('No movie title found in the message.');
         }
     }
@@ -173,9 +164,25 @@ const AiSearchPage = () => {
                         </div>
                     </div>
                     <div className = "row mt-3" >
-                        {movieData !== null && (
-                            <AiResultsDisplay resultsDict={movieData}/>
+                        {resultsLoading ? (
+                            // Render loading indicator
+                            <div className="d-flex align-items-center justify-content-center">
+                                <img
+                                    src={magnifyGif}
+                                    style={{ height: "100px", width: "100px" }}
+                                    className="rounded-2"
+                                    alt="Loading"
+                                />
+                            </div>
+                        ) : (
+                            // Check if movieData is not null or undefined before rendering results
+                            movieData ? (
+                                <AiResultsDisplay resultsDict={movieData} />
+                            ) : (
+                                <></>
+                            )
                         )}
+
                     </div>
             </div>
         </>
