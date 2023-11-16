@@ -5,7 +5,7 @@ import {
     SET_MAX_PAGE, SET_CURRENT_PAGE, SET_SEARCH_URL, APPEND_TO_RESULTS,SET_MULTI_SEARCH_MOVIE_PAGE,
     SET_MULTI_SEARCH_RESULTS,SET_MULTI_SEARCH_PEOPLE_PAGE,SET_MULTI_SEARCH_TV_PAGE,
     APPEND_TO_PEOPLE_MULTI_SEARCH_RESULTS,APPEND_TO_MOVIE_MULTI_SEARCH_RESULTS,APPEND_TO_TV_MULTI_SEARCH_RESULTS,
-    CLEAR_MULTI_SEARCH_RESULTS
+    CLEAR_MULTI_SEARCH_RESULTS, SET_AI_RESULTS
 } from "./actionTypes";
 
 export const toggleGenreFilter = (genre) => ({
@@ -90,3 +90,9 @@ export const appendToPeopleMultiSearchResults = (peopleData) => ({
     type: APPEND_TO_PEOPLE_MULTI_SEARCH_RESULTS,
     payload: peopleData,
 })
+
+// FOR AI REDUCER
+export const setAiResults = (results) => ({
+    type: SET_AI_RESULTS,
+    payload: results,
+});

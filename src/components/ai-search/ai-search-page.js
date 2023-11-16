@@ -7,6 +7,7 @@ import {aiSearchPostMessage} from "../../services/ai-search-service";
 import loadingGif from '../../images/loading.gif';
 import magnifyGif from "../../images/magnify.gif";
 import {findMovieDetailsByTitle, fetchMovieDetailsFromSuggestions} from "../../services/movie-service";
+import {setSearchResults} from "../../thunks/ai-thunks";
 import RecommendationsScrollBar from "../recommendations";
 import AiResultsDisplay from "./ai-results-display";
 import {toastNotification, toastInfoMessage, grabSuggestionsFromAIResponse} from "../../helper_functions/helper_functions";
@@ -14,6 +15,7 @@ import {toastNotification, toastInfoMessage, grabSuggestionsFromAIResponse} from
 const AiSearchPage = () => {
     const [userInput, setUserInput] = useState('');
     const [conversationHistory, setConversationHistory] = useState([])
+    const { results } = useSelector((state) => state.aiSearchResults);
     const { currentUser } = useSelector((state) => state.user);
     const [loggedinUser, setLoggedInUser] = useState(null);
     const [loading, setLoading] = useState(false);
@@ -24,10 +26,11 @@ const AiSearchPage = () => {
     const handleInputChange = (event) => {
         setUserInput(event.target.value);
     };
+
     useEffect(() => {
         const fetchData = async () => {
             try {
-                // this is really important somehow
+                // this is really important somehow for making user appear logged in...
                 const {loggedUser} = await dispatch(profileThunk())
                 setLoggedInUser(loggedUser)
 
@@ -63,10 +66,12 @@ const AiSearchPage = () => {
             }
             // search for matches from TMDB, set loading to true
             setResultsLoading(true);
-            const response = await fetchMovieDetailsFromSuggestions(requestObject);
+            const response = await dispatch(setSearchResults(requestObject))
+
+            console.log('Data:', response.payload);
             if (response) {
                 console.log('got a response from server for multiple titles', response);
-                setMovieData(response.resultDict);
+                setMovieData(response.payload);
             }
             setResultsLoading(false);
         }
@@ -75,9 +80,7 @@ const AiSearchPage = () => {
         }
     }
     const askAI = async () => {
-        console.log("called askAI helper func")
         if (userInput === "" || userInput === null){
-            console.log('user input was empty')
             toastInfoMessage("Type Something First I Can't Read Minds");
             return;
         }
@@ -85,10 +88,9 @@ const AiSearchPage = () => {
 
             const newMessage = [{role: 'user', content: userInput}];
             setUserInput('');
-            console.log('newMessage', newMessage)
+
             // we'll pass this to the api endpoint
             const conversation = [...conversationHistory, ...newMessage]
-            console.log(conversation)
             // can set it for front end too
             setConversationHistory([...conversation])
             const request = {
@@ -97,7 +99,6 @@ const AiSearchPage = () => {
             setLoading(true);
             const response = await aiSearchPostMessage(request);
 
-            console.log(response)
             if (response.success){
                 // if we got a good response back update conversation
                 const aiMessage = {role: "assistant", content: response.message}
@@ -117,6 +118,7 @@ const AiSearchPage = () => {
         askAI();
     };
     console.log(movieData)
+    console.log('cached data in redux for ai results', results);
     return (
         <>
             <NavigationSidebar/>
@@ -176,8 +178,8 @@ const AiSearchPage = () => {
                             </div>
                         ) : (
                             // Check if movieData is not null or undefined before rendering results
-                            movieData ? (
-                                <AiResultsDisplay resultsDict={movieData} />
+                            Object.keys(results).length > 0 ? (
+                                <AiResultsDisplay resultsDict={results} />
                             ) : (
                                 <></>
                             )
@@ -189,5 +191,4 @@ const AiSearchPage = () => {
 
     );
 };
-
 export default AiSearchPage;

@@ -16,6 +16,7 @@ import releaseYearsReducer from "./reducers/filter-release-years-reducer";
 import audienceScoreReducer from "./reducers/filter-score-reducer";
 import searchResultsReducer from "./reducers/search-results-reducer";
 import usersReducer from "./reducers/users-reducer";
+import aiSearchResultsReducer from "./reducers/ai-results-reducer";
 import {configureStore} from "@reduxjs/toolkit";
 import {Provider} from "react-redux";
 import multiSearchReducer from "./reducers/multi-search-reducer";
@@ -33,7 +34,8 @@ const rootReducer = combineReducers({
         }),
         searchResults: searchResultsReducer,
         multiSearch: multiSearchReducer,
-        user: usersReducer
+        user: usersReducer,
+        aiSearchResults: aiSearchResultsReducer
     }
 );
 const store = configureStore({reducer: rootReducer})
