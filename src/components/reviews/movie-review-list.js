@@ -1,4 +1,3 @@
-
 import MovieReviewItem from "./movie-review";
 import {useEffect, useState} from "react";
 import {deleteMovieReview} from "../../services/movie-review-service";
@@ -31,7 +30,6 @@ function MovieReviewList ({reviews, movieId}) {
     return (
         <>
             <div className="container bg-dark nudge-up mt-0 rounded-3">
-
                 <div className = "row">
                     <ul className = "list-group bg-dark no-bullets ms-1 mt-4">
                         {
