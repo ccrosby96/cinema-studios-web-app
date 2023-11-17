@@ -165,7 +165,7 @@ const AiSearchPage = () => {
 
                         </div>
                     </div>
-                    <div className = "row mt-3" >
+                    <div className = "row mt-3 d-flex flex-row align-items-center justify-content-center" >
                         {resultsLoading ? (
                             // Render loading indicator
                             <div className="d-flex align-items-center justify-content-center">
